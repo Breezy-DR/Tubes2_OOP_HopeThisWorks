@@ -45,12 +45,9 @@ public class Menu extends JFrame implements MenuListener {
 
         // Tabbed Pane
         tab = new JTabbedPane();
-        tab.setPreferredSize(new Dimension(720, 720));
+        tab.setPreferredSize(new Dimension(800, 800));
         tab.setFocusable(false);
-        JPanel mainPanel = new JPanel();
-        mainPanel.setPreferredSize(new Dimension(720,720));
-        mainPanel.setLayout(new BorderLayout());
-        tab.add("Halaman Utama", mainPanel);
+        tab.add("Halaman Utama", new MainPanel());
         tab.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -82,7 +79,7 @@ public class Menu extends JFrame implements MenuListener {
         // Frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(720, 720));
+        setPreferredSize(new Dimension(800, 800));
         setTitle("Point of Sales");
         setIconImage(icon.getImage());
         setJMenuBar(menuBar);
@@ -95,14 +92,7 @@ public class Menu extends JFrame implements MenuListener {
     @Override
     public void menuSelected(MenuEvent e) {
         if (e.getSource() == halamanUtama) {
-            /* --------------- DUMMY --------------- */
-            JPanel mainPanel = new JPanel();
-            mainPanel.setPreferredSize(new Dimension(720, 720));
-            mainPanel.setLayout(new BorderLayout());
-            /* ------------------------------------- */
-
-            // TO DO implement panel halaman utama
-            tab.add("Halaman Utama", mainPanel);
+            tab.add("Halaman Utama", new MainPanel());
         }
         else if (e.getSource() == halamanSetting) {
             tab.add("Setting", new SettingPanel());

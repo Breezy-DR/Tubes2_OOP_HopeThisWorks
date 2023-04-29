@@ -53,7 +53,7 @@ public class SettingPanel extends JPanel implements ActionListener {
         JPanel panel1 = new JPanel();
         panel1.setBounds(100, 50, 500, 65);
         panel1.setBackground(Color.gray);
-        panel1.setLayout(new BorderLayout(0,0));
+        panel1.setLayout(new BorderLayout(0,10));
         panel1.add(pathLabel, BorderLayout.NORTH);
         panel1.add(subPanel1, BorderLayout.SOUTH);
 
@@ -94,7 +94,7 @@ public class SettingPanel extends JPanel implements ActionListener {
         JPanel panel2 = new JPanel();
         panel2.setBounds(100, 190, 500, 65);
         panel2.setBackground(Color.gray);
-        panel2.setLayout(new BorderLayout(0,0));
+        panel2.setLayout(new BorderLayout(0,10));
         panel2.add(formatLabel, BorderLayout.NORTH);
         panel2.add(subPanel2, BorderLayout.SOUTH);
 
@@ -136,7 +136,7 @@ public class SettingPanel extends JPanel implements ActionListener {
         // Center panel
         JPanel centerPanel = new JPanel();
         centerPanel.setPreferredSize(new Dimension(100,100));
-        centerPanel.setLayout(null);
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 75));
         centerPanel.setBackground(Color.GRAY);
         centerPanel.add(panel1);
         centerPanel.add(panel2);
@@ -144,7 +144,7 @@ public class SettingPanel extends JPanel implements ActionListener {
 
 
         // Main Panel
-        setPreferredSize(new Dimension(720,720));
+        setPreferredSize(new Dimension(800,800));
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
