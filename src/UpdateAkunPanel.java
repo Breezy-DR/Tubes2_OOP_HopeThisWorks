@@ -2,13 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateAkunPanel extends JPanel implements ActionListener {
     private final JTextArea namaText;
     private final JTextArea nomorTeleponText;
-    private final JComboBox opsiAkun;
-    private final JComboBox status;
+    private final JComboBox<Integer> opsiAkun;
+    private final JComboBox<String> status;
     private final JButton saveButton;
+    private List<RegisteredCustomer> listAkun = new ArrayList<>();
 
     public UpdateAkunPanel() {
         // Bagian Atas
@@ -37,7 +40,19 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         idLabel.setOpaque(false);
         idLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
         // Opsi Akun
-        Integer[] opsi = {};
+        /* ----------------------- DUMMY ----------------------- */
+        UnregisteredCustomer a = new UnregisteredCustomer();
+        UnregisteredCustomer b = new UnregisteredCustomer();
+        UnregisteredCustomer c = new UnregisteredCustomer();
+        a.pesan(1, 10);
+        b.pesan(1, 10);
+        c.pesan(1, 10);
+        RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
+        RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
+        listAkun.add(d);
+        listAkun.add(e);
+        /* ----------------------------------------------------- */
+        Integer[] opsi = {d.getId(), e.getId()};
         opsiAkun = new JComboBox<>(opsi);
         opsiAkun.addActionListener(this);
         opsiAkun.setFocusable(false);
@@ -64,7 +79,7 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         namaLabel.setFont(new Font(namaLabel.getFont().getName(), namaLabel.getFont().getStyle(), 15));
         namaLabel.setPreferredSize(new Dimension(300,20));
         // Text
-        namaText = new JTextArea("Irfan Bahdim");
+        namaText = new JTextArea();
         namaText.setBorder(BorderFactory.createEmptyBorder(7, 7,7,7));
         // Sub-Panel 1
         JPanel subPanel1 = new JPanel();
@@ -87,7 +102,7 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         nomorTeleponLabel.setFont(new Font(namaLabel.getFont().getName(), namaLabel.getFont().getStyle(), 15));
         nomorTeleponLabel.setPreferredSize(new Dimension(300,20));
         // Text
-        nomorTeleponText = new JTextArea("0812748302");
+        nomorTeleponText = new JTextArea();
         nomorTeleponText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
         // Sub-Panel 2
         JPanel subPanel2 = new JPanel();
@@ -128,6 +143,7 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         panel3.add(statusLabel, BorderLayout.NORTH);
         panel3.add(subPanel3, BorderLayout.SOUTH);
 
+
         // Bagian Save
         saveButton = new JButton("Save");
         saveButton.setFocusable(false);
@@ -163,12 +179,29 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int selectedIndex  = opsiAkun.getSelectedIndex();
         if (e.getSource() == saveButton) {
             // TO DO implement save field
+            listAkun.get(selectedIndex).setNama(namaText.getText());
+            listAkun.get(selectedIndex).setNomorTelepon(nomorTeleponText.getText());
+            if (status.getSelectedIndex() == 0) {
+                listAkun.get(selectedIndex).setMember();
+            }
+            else {
+                listAkun.get(selectedIndex).setVIP();
+            }
         }
         else if (e.getSource() == opsiAkun) {
             // To Do implement pilih akun
             // pilih akun meng-set fied sesuai akun
+            namaText.setText(listAkun.get(selectedIndex).getNama());
+            nomorTeleponText.setText(listAkun.get(selectedIndex).getNomorTelepon());
+            if (listAkun.get(selectedIndex).isVIP()) {
+                status.setSelectedIndex(1);
+            }
+            else {
+                status.setSelectedIndex(0);
+            }
         }
     }
 }

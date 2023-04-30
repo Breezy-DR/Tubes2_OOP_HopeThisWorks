@@ -1,12 +1,13 @@
-public class Member extends Customer {
-    private static int memberCount = 0;
+public class RegisteredCustomer extends Customer {
+    private static int registeredCustomerCount = 0;
+    private boolean vip; // jika vip == true, maka termasuk vip dan jika vip == false maka termasuk member
     private String nama;
     private String nomorTelepon;
     private int poin;
     private boolean aktif;
 
-    public Member(String nama, String nomorTelepon, Object transaksiTerakhir) {
-        super(++memberCount);
+    public RegisteredCustomer(String nama, String nomorTelepon, Object transaksiTerakhir) {
+        super(++registeredCustomerCount);
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
         this.poin = 0;
@@ -46,8 +47,21 @@ public class Member extends Customer {
         this.aktif = false;
     }
 
-    @Override
-    public void pesan() {
+    public boolean isVIP() {
+        return vip;
+    }
 
+    public void setVIP() {
+        this.vip = true;
+    }
+
+    public void setMember() {
+        this.vip = false;
+    }
+
+    @Override
+    public void pesan(Object historiTransaksi, int hargaTotal) {
+        addHistoriTransaksi(historiTransaksi);
+        this.poin = hargaTotal;
     }
 }
