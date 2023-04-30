@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 public class UpdateAkunPanel extends JPanel implements ActionListener {
     private final JTextArea namaText;
     private final JTextArea nomorTeleponText;
-    private JComboBox status;
+    private final JComboBox opsiAkun;
+    private final JComboBox status;
     private final JButton saveButton;
 
     public UpdateAkunPanel() {
@@ -22,6 +23,39 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         topPanel.setBackground(Color.DARK_GRAY);
         topPanel.setLayout(null);
         topPanel.add(title);
+
+
+        // Bagian Pilih Akun
+        // Label Pilih Akun
+        JLabel pilihAkunLabel = new JLabel("Pilih Akun");
+        pilihAkunLabel.setForeground(Color.BLACK);
+        pilihAkunLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
+        pilihAkunLabel.setPreferredSize(new Dimension(300,20));
+        // Label ID
+        JLabel idLabel = new JLabel("ID ");
+        idLabel.setForeground(Color.BLACK);
+        idLabel.setOpaque(false);
+        idLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
+        // Opsi Akun
+        Integer[] opsi = {};
+        opsiAkun = new JComboBox<>(opsi);
+        opsiAkun.addActionListener(this);
+        opsiAkun.setFocusable(false);
+        opsiAkun.addActionListener(this);
+        // Sub-Panel Akun
+        JPanel subPanelAkun = new JPanel();
+        subPanelAkun.setPreferredSize(new Dimension(300,30));
+        subPanelAkun.setOpaque(false);
+        subPanelAkun.setLayout(new BorderLayout(10,0));
+        subPanelAkun.add(idLabel, BorderLayout.WEST);
+        subPanelAkun.add(opsiAkun, BorderLayout.CENTER);
+        // Panel Akun
+        JPanel panelAkun = new JPanel();
+        panelAkun.setOpaque(false);
+        panelAkun.setBackground(Color.gray);
+        panelAkun.setLayout(new BorderLayout(0,10));
+        panelAkun.add(pilihAkunLabel, BorderLayout.NORTH);
+        panelAkun.add(subPanelAkun, BorderLayout.SOUTH);
 
 
         // Bagian Nama
@@ -41,7 +75,6 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         // Panel 1
         JPanel panel1 = new JPanel();
         panel1.setOpaque(false);
-        panel1.setBounds(100, 50, 300, 65);
         panel1.setBackground(Color.gray);
         panel1.setLayout(new BorderLayout(0,10));
         panel1.add(namaLabel, BorderLayout.NORTH);
@@ -65,7 +98,6 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         // Panel 2
         JPanel panel2 = new JPanel();
         panel2.setOpaque(false);
-        panel2.setBounds(100, 50, 300, 65);
         panel2.setBackground(Color.gray);
         panel2.setLayout(new BorderLayout(0,10));
         panel2.add(nomorTeleponLabel, BorderLayout.NORTH);
@@ -91,7 +123,6 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         // Panel 3
         JPanel panel3 = new JPanel();
         panel3.setOpaque(false);
-        panel3.setBounds(100, 50, 300, 65);
         panel3.setBackground(Color.gray);
         panel3.setLayout(new BorderLayout(0,10));
         panel3.add(statusLabel, BorderLayout.NORTH);
@@ -106,8 +137,9 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         // Field Panel
         JPanel fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.LIGHT_GRAY);
-        fieldPanel.setPreferredSize(new Dimension(450,450));
+        fieldPanel.setPreferredSize(new Dimension(500,570));
         fieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 45));
+        fieldPanel.add(panelAkun);
         fieldPanel.add(panel1);
         fieldPanel.add(panel2);
         fieldPanel.add(panel3);
@@ -118,7 +150,7 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.GRAY);
         centerPanel.setPreferredSize(new Dimension(800,800));
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 65));
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 30));
         centerPanel.add(fieldPanel);
 
 
@@ -133,6 +165,10 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveButton) {
             // TO DO implement save field
+        }
+        else if (e.getSource() == opsiAkun) {
+            // To Do implement pilih akun
+            // pilih akun meng-set fied sesuai akun
         }
     }
 }
