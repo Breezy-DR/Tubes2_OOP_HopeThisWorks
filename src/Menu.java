@@ -1,20 +1,28 @@
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Menu extends JFrame implements MenuListener {
+public class Menu extends JFrame implements ActionListener {
     private final JMenu halamanUtama;
     private final JMenu halamanSetting;
     private final JMenu halamanGudang;
-    private final JMenu halamanRegistrasi;
+    private final JMenu halamanAkun;
     private final JMenu halamanKasir;
     private final JMenu halamanRiwayat;
     private final JTabbedPane tab;
     private JPopupMenu popUpMenu;
     private JMenuItem delete;
+    private JMenuItem bukaHalamanUtama;
+    private JMenuItem bukaHalamanSetting;
+    private JMenuItem bukaHalamanGudang;
+    private JMenuItem bukaHalamanKasir;
+    private JMenuItem bukaHalamanRiwayat;
+    private JMenuItem bukaHalamanPendaftaran;
+    private JMenuItem bukaHalamanUpdate;
+    private JMenuItem bukaHalamanStatusAkun;
 
     public Menu() {
         // Icon
@@ -22,28 +30,53 @@ public class Menu extends JFrame implements MenuListener {
 
 
         // Menu bar
+        // Menu bar utama
         JMenuBar menuBar = new JMenuBar();
         halamanUtama = new JMenu("Halaman Utama");
         halamanSetting = new JMenu("Setting");
         halamanGudang = new JMenu("Gudang");
-        halamanRegistrasi = new JMenu("Registrasi");
+        halamanAkun = new JMenu("Akun");
         halamanKasir = new JMenu("Kasir");
         halamanRiwayat = new JMenu("Riwayat");
-        halamanUtama.addMenuListener(this);
-        halamanSetting.addMenuListener(this);
-        halamanGudang.addMenuListener(this);
-        halamanRegistrasi.addMenuListener(this);
-        halamanKasir.addMenuListener(this);
-        halamanRiwayat.addMenuListener(this);
         menuBar.add(halamanUtama);
         menuBar.add(halamanSetting);
         menuBar.add(halamanGudang);
-        menuBar.add(halamanRegistrasi);
+        menuBar.add(halamanAkun);
         menuBar.add(halamanKasir);
         menuBar.add(halamanRiwayat);
+        // Halaman Utama
+        bukaHalamanUtama = new JMenuItem("New");
+        bukaHalamanUtama.addActionListener(this);
+        halamanUtama.add(bukaHalamanUtama);
+        // Setting
+        bukaHalamanSetting = new JMenuItem("New");
+        bukaHalamanSetting.addActionListener(this);
+        halamanSetting.add(bukaHalamanSetting);
+        // Gudang
+        bukaHalamanGudang = new JMenuItem("New");
+        bukaHalamanGudang.addActionListener(this);
+        halamanGudang.add(bukaHalamanGudang);
+        // Akun
+        bukaHalamanPendaftaran = new JMenuItem("Daftar");
+        bukaHalamanUpdate = new JMenuItem("Update");
+        bukaHalamanStatusAkun = new JMenuItem("Aktivasi/Deaktivasi");
+        bukaHalamanPendaftaran.addActionListener(this);
+        bukaHalamanUpdate.addActionListener(this);
+        bukaHalamanStatusAkun.addActionListener(this);
+        halamanAkun.add(bukaHalamanPendaftaran);
+        halamanAkun.add(bukaHalamanUpdate);
+        halamanAkun.add(bukaHalamanStatusAkun);
+        // Kasir
+        bukaHalamanKasir = new JMenuItem("New");
+        bukaHalamanKasir.addActionListener(this);
+        halamanKasir.add(bukaHalamanKasir);
+        // Riwayat
+        bukaHalamanRiwayat = new JMenuItem("New");
+        bukaHalamanRiwayat.addActionListener(this);
+        halamanRiwayat.add(bukaHalamanRiwayat);
 
 
-        // Tabbed Pane
+        // Tab
         tab = new JTabbedPane();
         tab.setPreferredSize(new Dimension(800, 800));
         tab.setFocusable(false);
@@ -90,34 +123,30 @@ public class Menu extends JFrame implements MenuListener {
 
 
     @Override
-    public void menuSelected(MenuEvent e) {
-        if (e.getSource() == halamanUtama) {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == bukaHalamanUtama) {
             tab.add("Halaman Utama", new MainPanel());
         }
-        else if (e.getSource() == halamanSetting) {
+        else if (e.getSource() == bukaHalamanSetting) {
             tab.add("Setting", new SettingPanel());
         }
-        else if (e.getSource() == halamanGudang) {
+        else if (e.getSource() == bukaHalamanPendaftaran) {
+            // TO DO implement panel pendaftaran
+        }
+        else if (e.getSource() == bukaHalamanUpdate) {
+            // TO DO implement panel update
+        }
+        else if (e.getSource() == bukaHalamanStatusAkun) {
+            // TO DO implement panel aktivasi/deaktivasi
+        }
+        else if (e.getSource() == bukaHalamanGudang) {
             // TO DO implement panel gudang
-            tab.add("Gudang", new SettingPanel());
         }
-        else if (e.getSource() == halamanRegistrasi) {
-            // TO DO implement panel registrasi
-            tab.add("Registrasi", new SettingPanel());
-        }
-        else if (e.getSource() == halamanKasir) {
+        else if (e.getSource() == bukaHalamanKasir) {
             // TO DO implement panel kasir
-            tab.add("Kasir", new SettingPanel());
         }
-        else if (e.getSource() == halamanRiwayat) {
+        else if (e.getSource() == bukaHalamanRiwayat) {
             // TO DO implement panel riwayat
-            tab.add("Riwayat", new SettingPanel());
         }
     }
-
-    @Override
-    public void menuDeselected(MenuEvent e) {}
-
-    @Override
-    public void menuCanceled(MenuEvent e) {}
 }
