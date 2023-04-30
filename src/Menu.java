@@ -6,23 +6,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Menu extends JFrame implements ActionListener {
-    private final JMenu halamanUtama;
-    private final JMenu halamanSetting;
-    private final JMenu halamanGudang;
-    private final JMenu halamanAkun;
-    private final JMenu halamanKasir;
-    private final JMenu halamanRiwayat;
     private final JTabbedPane tab;
     private JPopupMenu popUpMenu;
     private JMenuItem delete;
-    private JMenuItem bukaHalamanUtama;
-    private JMenuItem bukaHalamanSetting;
-    private JMenuItem bukaHalamanGudang;
-    private JMenuItem bukaHalamanKasir;
-    private JMenuItem bukaHalamanRiwayat;
-    private JMenuItem bukaHalamanPendaftaran;
-    private JMenuItem bukaHalamanUpdate;
-    private JMenuItem bukaHalamanStatusAkun;
+    private final JMenuItem bukaHalamanUtama;
+    private final JMenuItem bukaHalamanSetting;
+    private final JMenuItem bukaHalamanGudang;
+    private final JMenuItem bukaHalamanKasir;
+    private final JMenuItem bukaHalamanRiwayat;
+    private final JMenuItem bukaHalamanPendaftaran;
+    private final JMenuItem bukaHalamanUpdate;
+    private final JMenuItem bukaHalamanStatusAkun;
 
     public Menu() {
         // Icon
@@ -32,12 +26,12 @@ public class Menu extends JFrame implements ActionListener {
         // Menu bar
         // Menu bar utama
         JMenuBar menuBar = new JMenuBar();
-        halamanUtama = new JMenu("Halaman Utama");
-        halamanSetting = new JMenu("Setting");
-        halamanGudang = new JMenu("Gudang");
-        halamanAkun = new JMenu("Akun");
-        halamanKasir = new JMenu("Kasir");
-        halamanRiwayat = new JMenu("Riwayat");
+        JMenu halamanUtama = new JMenu("Halaman Utama");
+        JMenu halamanSetting = new JMenu("Setting");
+        JMenu halamanGudang = new JMenu("Gudang");
+        JMenu halamanAkun = new JMenu("Akun");
+        JMenu halamanKasir = new JMenu("Kasir");
+        JMenu halamanRiwayat = new JMenu("Riwayat");
         menuBar.add(halamanUtama);
         menuBar.add(halamanSetting);
         menuBar.add(halamanGudang);
@@ -135,6 +129,7 @@ public class Menu extends JFrame implements ActionListener {
         }
         else if (e.getSource() == bukaHalamanUpdate) {
             // TO DO implement panel update
+            tab.add("Update Akun", new UpdateAkunPanel());
         }
         else if (e.getSource() == bukaHalamanStatusAkun) {
             // TO DO implement panel aktivasi/deaktivasi

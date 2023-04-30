@@ -114,7 +114,7 @@ public class SettingPanel extends JPanel implements ActionListener {
                 1. Plugin Chart
                 2. Plugin Uang
                 """);
-        pluginText.setBorder(BorderFactory.createLoweredBevelBorder());
+        pluginText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
         pluginText.setEditable(false);
         pluginText.setPreferredSize(new Dimension(500,100));
         // Sub-panel 3
