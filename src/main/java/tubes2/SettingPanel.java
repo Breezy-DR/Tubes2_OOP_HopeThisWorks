@@ -1,3 +1,4 @@
+package tubes2;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -110,10 +111,7 @@ public class SettingPanel extends JPanel implements ActionListener {
         pluginButton.addActionListener(this);
         pluginButton.setFocusable(false);
         // Text
-        JTextArea pluginText = new JTextArea("""
-                1. Plugin Chart
-                2. Plugin Uang
-                """);
+        JTextArea pluginText = new JTextArea(" 1. Plugin Chart\n 2. Plugin Uang");
         pluginText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
         pluginText.setEditable(false);
         pluginText.setPreferredSize(new Dimension(500,100));

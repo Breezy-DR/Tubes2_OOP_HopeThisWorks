@@ -1,3 +1,4 @@
+package tubes2;
 public class UnregisteredCustomer extends Customer {
     private static int unregisteredCustomerCount = 0;
     public UnregisteredCustomer() {

@@ -1,3 +1,4 @@
+package tubes2;
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,12 +28,7 @@ public class MainPanel extends JPanel {
 
         // Text Nama dan NIM
         JTextArea namaNIM = new JTextArea();
-        namaNIM.setText("""
-                1. Muhammad Equilibrie Fajria - 13521047
-                2. M. Farrel Danendra Rachim - 13521048
-                3. Fazel Ginanda - 13521098
-                4. Haidar Hamda - 13521105
-                5. Edia Zaki Naufal Ilman - 13521141""");
+        namaNIM.setText("1. Muhammad Equilibrie Fajria - 13521047\n 2. M. Farrel Danendra Rachim - 13521048\n 3. Fazel Ginanda - 13521098\n 4. Haidar Hamda - 13521105\n 5. Edia Zaki Naufal Ilman - 13521141");
         namaNIM.setFont(new Font(namaNIM.getFont().getName(), namaNIM.getFont().getStyle(), 25));
         namaNIM.setEditable(false);
         namaNIM.setBackground(Color.LIGHT_GRAY);

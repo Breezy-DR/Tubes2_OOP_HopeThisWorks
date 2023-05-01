@@ -1,3 +1,4 @@
+package tubes2;
 public class RegisteredCustomer extends Customer {
     private static int registeredCustomerCount = 0;
     private boolean vip; // jika vip == true, maka termasuk vip dan jika vip == false maka termasuk member

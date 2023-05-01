@@ -1,3 +1,4 @@
+package tubes2;
 public class Barang {
     private int idBarang;
     private int stok;
