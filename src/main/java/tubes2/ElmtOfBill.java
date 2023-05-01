@@ -1,3 +1,4 @@
+package tubes2;
 public class ElmtOfBill {
     private String barang;
     private int jumlahBarang;
