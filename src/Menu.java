@@ -133,6 +133,7 @@ public class Menu extends JFrame implements ActionListener {
         }
         else if (e.getSource() == bukaHalamanStatusAkun) {
             // TO DO implement panel aktivasi/deaktivasi
+            tab.add("Aktivasi/Deaktivasi Akun", new DeaktivasiPanel());
         }
         else if (e.getSource() == bukaHalamanGudang) {
             // TO DO implement panel gudang

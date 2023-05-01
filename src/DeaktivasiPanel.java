@@ -5,18 +5,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpdateAkunPanel extends JPanel implements ActionListener {
-    private final JTextArea namaText;
-    private final JTextArea nomorTeleponText;
+public class DeaktivasiPanel extends JPanel implements ActionListener {
     private final JComboBox<Integer> opsiAkun;
-    private final JComboBox<String> status;
-    private final JButton saveButton;
+    private final JTextArea statusText;
+    private final JButton aktivasiButton;
+    private final JButton deaktivasiButton;
     private List<RegisteredCustomer> listAkun = new ArrayList<>();
 
-    public UpdateAkunPanel() {
+    public DeaktivasiPanel() {
         // Bagian Atas
         // Judul
-        JLabel title = new JLabel("Update Akun");
+        JLabel title = new JLabel("Aktivasi/Deaktivasi Akun");
         title.setForeground(Color.WHITE);
         title.setFont(new Font(title.getFont().getName(), title.getFont().getStyle(), 35));
         title.setBounds(30, 0, 500, 100);
@@ -38,7 +37,7 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         JLabel idLabel = new JLabel("ID ");
         idLabel.setForeground(Color.BLACK);
         idLabel.setOpaque(false);
-        idLabel.setFont(new Font(idLabel.getFont().getName(), idLabel.getFont().getStyle(), 15));
+        idLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
         // Opsi Akun
         /* ----------------------- DUMMY ----------------------- */
         UnregisteredCustomer a = new UnregisteredCustomer();
@@ -73,101 +72,70 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         panelAkun.add(subPanelAkun, BorderLayout.SOUTH);
 
 
-        // Bagian Nama
+        // Bagian Text Status (Aktif/Tidak Aktif)
         // Label
-        JLabel namaLabel = new JLabel("Nama");
-        namaLabel.setFont(new Font(namaLabel.getFont().getName(), namaLabel.getFont().getStyle(), 15));
-        namaLabel.setPreferredSize(new Dimension(300,20));
+        JLabel statusLabel = new JLabel("Status Keaktifan");
+        statusLabel.setFont(new Font(statusLabel.getFont().getName(), statusLabel.getFont().getStyle(), 15));
+        statusLabel.setPreferredSize(new Dimension(300,20));
         // Text
-        namaText = new JTextArea();
-        namaText.setBorder(BorderFactory.createEmptyBorder(7, 7,7,7));
+        statusText = new JTextArea("");
+        statusText.setBorder(BorderFactory.createEmptyBorder(7, 7,7,7));
+        statusText.setEditable(false);
         // Sub-Panel 1
         JPanel subPanel1 = new JPanel();
-        subPanel1.setPreferredSize(new Dimension(300,30));
+        subPanel1.setPreferredSize(new Dimension(100,30));
         subPanel1.setBackground(Color.gray);
         subPanel1.setLayout(new BorderLayout());
-        subPanel1.add(namaText, BorderLayout.CENTER);
+        subPanel1.add(statusText, BorderLayout.CENTER);
         // Panel 1
         JPanel panel1 = new JPanel();
         panel1.setOpaque(false);
         panel1.setBackground(Color.gray);
         panel1.setLayout(new BorderLayout(0,10));
-        panel1.add(namaLabel, BorderLayout.NORTH);
+        panel1.add(statusLabel, BorderLayout.NORTH);
         panel1.add(subPanel1, BorderLayout.SOUTH);
 
 
-        // Bagian Nomor Telepon
-        // Label
-        JLabel nomorTeleponLabel = new JLabel("Nomor Telepon");
-        nomorTeleponLabel.setFont(new Font(nomorTeleponLabel.getFont().getName(), nomorTeleponLabel.getFont().getStyle(), 15));
-        nomorTeleponLabel.setPreferredSize(new Dimension(300,20));
-        // Text
-        nomorTeleponText = new JTextArea();
-        nomorTeleponText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        // Bagian Aktivasi/Deaktivasi
+        // Tombol Aktivasi
+        aktivasiButton = new JButton("Aktivasi");
+        aktivasiButton.setFocusable(false);
+        aktivasiButton.addActionListener(this);
+        aktivasiButton.setPreferredSize(new Dimension(100, 35));
+        // Tombol Deaktivasi
+        deaktivasiButton = new JButton("Deaktivasi");
+        deaktivasiButton.setFocusable(false);
+        deaktivasiButton.addActionListener(this);
+        deaktivasiButton.setPreferredSize(new Dimension(100, 35));
         // Sub-Panel 2
         JPanel subPanel2 = new JPanel();
+        subPanel2.setOpaque(false);
         subPanel2.setPreferredSize(new Dimension(300,30));
-        subPanel2.setBackground(Color.gray);
-        subPanel2.setLayout(new BorderLayout());
-        subPanel2.add(nomorTeleponText, BorderLayout.CENTER);
+        subPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 0));
+        subPanel2.add(aktivasiButton);
+        subPanel2.add(deaktivasiButton);
         // Panel 2
         JPanel panel2 = new JPanel();
         panel2.setOpaque(false);
-        panel2.setBackground(Color.gray);
         panel2.setLayout(new BorderLayout(0,10));
-        panel2.add(nomorTeleponLabel, BorderLayout.NORTH);
         panel2.add(subPanel2, BorderLayout.SOUTH);
-
-
-        // Bagian Status (Member/VIP)
-        // Label
-        JLabel statusLabel = new JLabel("Status Membership");
-        statusLabel.setFont(new Font(statusLabel.getFont().getName(), statusLabel.getFont().getStyle(), 15));
-        statusLabel.setPreferredSize(new Dimension(300,20));
-        // Opsi
-        String[] option = {"Member", "VIP"};
-        status = new JComboBox<>(option);
-        status.addActionListener(this);
-        status.setFocusable(false);
-        // Sub-Panel 3
-        JPanel subPanel3 = new JPanel();
-        subPanel3.setPreferredSize(new Dimension(100,30));
-        subPanel3.setBackground(Color.gray);
-        subPanel3.setLayout(new BorderLayout());
-        subPanel3.add(status, BorderLayout.CENTER);
-        // Panel 3
-        JPanel panel3 = new JPanel();
-        panel3.setOpaque(false);
-        panel3.setBackground(Color.gray);
-        panel3.setLayout(new BorderLayout(0,10));
-        panel3.add(statusLabel, BorderLayout.NORTH);
-        panel3.add(subPanel3, BorderLayout.SOUTH);
-
-
-        // Bagian Save
-        saveButton = new JButton("Save");
-        saveButton.setFocusable(false);
-        saveButton.addActionListener(this);
-        saveButton.setPreferredSize(new Dimension(75, 35));
 
 
         // Field Panel
         JPanel fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.LIGHT_GRAY);
-        fieldPanel.setPreferredSize(new Dimension(500,570));
+        fieldPanel.setPreferredSize(new Dimension(500,400));
         fieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 45));
         fieldPanel.add(panelAkun);
         fieldPanel.add(panel1);
         fieldPanel.add(panel2);
-        fieldPanel.add(panel3);
-        fieldPanel.add(saveButton);
 
 
         // Center Panel
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(Color.GRAY);
         centerPanel.setPreferredSize(new Dimension(800,800));
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 30));
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 85));
         centerPanel.add(fieldPanel);
 
 
@@ -183,26 +151,31 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         int selectedIndex  = opsiAkun.getSelectedIndex();
         if (e.getSource() == opsiAkun) {
             // To Do implement pilih akun
-            // pilih akun meng-set fied sesuai akun
-            namaText.setText(listAkun.get(selectedIndex).getNama());
-            nomorTeleponText.setText(listAkun.get(selectedIndex).getNomorTelepon());
-            if (listAkun.get(selectedIndex).isVIP()) {
-                status.setSelectedIndex(1);
+            // pilih akun meng-set status keaktifan sesuai akun
+            if (listAkun.get(selectedIndex).isAktif()) {
+                statusText.setText("Aktif");
+                aktivasiButton.setEnabled(false);
+                deaktivasiButton.setEnabled(true);
             }
             else {
-                status.setSelectedIndex(0);
+                statusText.setText("Tidak Aktif");
+                aktivasiButton.setEnabled(true);
+                deaktivasiButton.setEnabled(false);
             }
         }
-        else if (e.getSource() == saveButton) {
-            // TO DO implement save field
-            listAkun.get(selectedIndex).setNama(namaText.getText());
-            listAkun.get(selectedIndex).setNomorTelepon(nomorTeleponText.getText());
-            if (status.getSelectedIndex() == 0) {
-                listAkun.get(selectedIndex).setMember();
-            }
-            else {
-                listAkun.get(selectedIndex).setVIP();
-            }
+        else if (e.getSource() == aktivasiButton) {
+            aktivasiButton.setEnabled(false);
+            deaktivasiButton.setEnabled(true);
+            statusText.setText("Aktif");
+            // To DO implement set status akun true ke database
+            listAkun.get(selectedIndex).aktivasiAkun();
+        }
+        else if (e.getSource() == deaktivasiButton) {
+            aktivasiButton.setEnabled(true);
+            deaktivasiButton.setEnabled(false);
+            statusText.setText("Tidak Aktif");
+            // To DO implement set status akun false ke database
+            listAkun.get(selectedIndex).deaktivasiAkun();
         }
     }
 }
