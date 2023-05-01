@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gudang {
-    private List<Object> listBarang;
+    private List<Barang> listBarang;
 
     public Gudang() {
         this.listBarang = new ArrayList<>();
     }
 
-    public void tambahBarang(Object barang) {
+    public void tambahBarang(Barang barang) {
         this.listBarang.add(barang);
     }
 
