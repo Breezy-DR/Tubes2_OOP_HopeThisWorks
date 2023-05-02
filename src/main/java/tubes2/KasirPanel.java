@@ -54,9 +54,11 @@ public class KasirPanel extends JPanel implements ActionListener {
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setBackground(Color.GRAY);
         
-        JButton payButton = new JButton("Tambah produk");
+        JButton payButton = new JButton("Tambah product");
         payButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		AddProductWindow add = new AddProductWindow();
+        		add.main();
         	}
         });
         payButton.setFont(new Font(payButton.getFont().getName(), payButton.getFont().getStyle(), 15));
