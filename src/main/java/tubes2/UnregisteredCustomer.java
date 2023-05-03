@@ -16,7 +16,7 @@ public class UnregisteredCustomer extends Customer {
     }
 
     @Override
-    public void pesan(Object historiTransaksi, int hargaTotal) {
+    public void pesan(FixedBill historiTransaksi, int hargaTotal) {
         this.addHistoriTransaksi(historiTransaksi);
     }
 }

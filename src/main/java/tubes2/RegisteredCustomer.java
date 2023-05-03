@@ -7,7 +7,7 @@ public class RegisteredCustomer extends Customer {
     private int poin;
     private boolean aktif;
 
-    public RegisteredCustomer(String nama, String nomorTelepon, Object transaksiTerakhir) {
+    public RegisteredCustomer(String nama, String nomorTelepon, FixedBill transaksiTerakhir) {
         super(++registeredCustomerCount);
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
@@ -61,7 +61,7 @@ public class RegisteredCustomer extends Customer {
     }
 
     @Override
-    public void pesan(Object historiTransaksi, int hargaTotal) {
+    public void pesan(FixedBill historiTransaksi, int hargaTotal) {
         addHistoriTransaksi(historiTransaksi);
         this.poin = hargaTotal;
     }

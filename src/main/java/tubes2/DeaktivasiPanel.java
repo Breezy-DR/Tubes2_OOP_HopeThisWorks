@@ -44,9 +44,9 @@ public class DeaktivasiPanel extends JPanel implements ActionListener {
         UnregisteredCustomer a = new UnregisteredCustomer();
         UnregisteredCustomer b = new UnregisteredCustomer();
         UnregisteredCustomer c = new UnregisteredCustomer();
-        a.pesan(1, 10);
-        b.pesan(1, 10);
-        c.pesan(1, 10);
+        a.pesan(new FixedBill(), 10);
+        b.pesan(new FixedBill(), 10);
+        c.pesan(new FixedBill(), 10);
         RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
         RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
         listAkun.add(d);
