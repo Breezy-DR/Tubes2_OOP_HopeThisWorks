@@ -3,13 +3,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kasir {
-    private List<Object> listBarang;
+    private List<Barang> listBarang;
 
     public Kasir() {
         this.listBarang = new ArrayList<>();
     }
 
-    public void tampilkanBarang() {
-        
+    public void addKasir(Barang barang) {
+        this.listBarang.add(barang);
     }
+
+    public Bill tampilkanBarang() {
+        Bill resultbill = new Bill();
+        for (Barang e : this.listBarang) {
+            resultbill.tambahBarang(e, e.getStok());
+        }
+        return resultbill;
+    }
+
 }

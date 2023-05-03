@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class Customer {
     private final int id;
-    private List<Object> historiTransaksi;
+    private List<FixedBill> historiTransaksi;
     public Customer(int id) {
         this.id = id;
         this.historiTransaksi = new ArrayList<>();
@@ -14,13 +14,13 @@ public abstract class Customer {
         return this.id;
     }
 
-    public void addHistoriTransaksi(Object historiTransaksi) {
+    public void addHistoriTransaksi(FixedBill historiTransaksi) {
         this.historiTransaksi.add(historiTransaksi);
     }
 
-    public List<Object> getHistoriTransaksi() {
+    public List<FixedBill> getHistoriTransaksi() {
         return this.historiTransaksi;
     }
 
-    public abstract void pesan(Object historiTransaksi, int hargaTotal);
+    public abstract void pesan(FixedBill historiTransaksi, int hargaTotal);
 }
