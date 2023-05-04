@@ -10,4 +10,8 @@ public class FixedBill {
     public FixedBill() {
         this.listBelanja = new ArrayList<>();
     }
+
+    public List<ElmtOfBill> getlistBelanja() {
+        return this.listBelanja;
+    }
 }

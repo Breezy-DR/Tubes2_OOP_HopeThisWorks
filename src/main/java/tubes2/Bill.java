@@ -9,6 +9,10 @@ public class Bill {
         this.listBelanja = new ArrayList<>();
     }
 
+    public List<ElmtOfBill> getListBelanja() {
+        return this.listBelanja;
+    }
+
     public void tambahBarang(Barang barang, int jumlah) {
         this.listBelanja.add(new ElmtOfBill(barang.getNamaBarang(), jumlah));
     }
