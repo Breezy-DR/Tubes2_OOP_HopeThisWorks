@@ -1,10 +1,6 @@
 package tubes2;
 import java.util.ArrayList;
 import java.util.List;
-
-import tubes2.ElmtOfBill;
-import tubes2.FixedBill;
-
 public class Kasir {
     private List<Barang> listBarang;
 
