@@ -1,7 +1,10 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
-
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UnregisteredCustomer extends Customer {
     private static int unregisteredCustomerCount = 0;
     public UnregisteredCustomer() {

@@ -1,9 +1,15 @@
 package tubes2;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({RegisteredCustomer.class,UnregisteredCustomer.class})
 public abstract class Customer {
+    @XmlElement
     private final int id;
+//    @XmlElementWrapper(name = "historiTransaksi")
+    @XmlElement(name = "historiTransaksi")
     private List<FixedBill> historiTransaksi;
     public Customer(int id) {
         this.id = id;
@@ -24,7 +30,6 @@ public abstract class Customer {
     public void addHistoriTransaksi(FixedBill historiTransaksi) {
         this.historiTransaksi.add(historiTransaksi);
     }
-
     public List<FixedBill> getHistoriTransaksi() {
         return this.historiTransaksi;
     }

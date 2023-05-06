@@ -1,13 +1,19 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RegisteredCustomer extends Customer {
     private static int registeredCustomerCount = 0;
     private boolean vip; // jika vip == true, maka termasuk vip dan jika vip == false maka termasuk member
     private String nama;
     private String nomorTelepon;
     private int poin;
+    @XmlElement
     private boolean aktif;
 
     public RegisteredCustomer(String nama, String nomorTelepon, FixedBill transaksiTerakhir) {
@@ -26,15 +32,15 @@ public class RegisteredCustomer extends Customer {
         this.poin=poin;
         this.aktif=aktif;
     }
-
+//    @XmlElement
     public String getNama() {
         return nama;
     }
-
+//    @XmlElement
     public String getNomorTelepon() {
         return nomorTelepon;
     }
-
+//    @XmlElement
     public int getPoin() {
         return poin;
     }
@@ -58,7 +64,7 @@ public class RegisteredCustomer extends Customer {
     public void deaktivasiAkun() {
         this.aktif = false;
     }
-
+//    @XmlElement
     public boolean isVIP() {
         return vip;
     }

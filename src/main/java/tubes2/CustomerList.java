@@ -1,14 +1,16 @@
 package tubes2;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name = "customerListClass")
 public class CustomerList {
     private List<Customer> customerList;
+
     public CustomerList(){
         this.customerList=new ArrayList<>();
     }
-
     public List<Customer> getCustomerList() {
         return customerList;
     }
