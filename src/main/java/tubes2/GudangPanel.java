@@ -8,14 +8,14 @@ import java.io.File;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class KasirPanel extends JPanel implements ActionListener {
+public class GudangPanel extends JPanel implements ActionListener {
     private String selectedOption;
-    public KasirPanel() {
+    public GudangPanel() {
         // Bagian Atas
         // Judul
     	// Bagian Atas
         // Judul
-        JLabel title = new JLabel("Kasir");
+        JLabel title = new JLabel("Gudang");
         title.setForeground(Color.WHITE);
         title.setFont(new Font(title.getFont().getName(), title.getFont().getStyle(), 35));
         title.setBounds(30, 0, 150, 100);

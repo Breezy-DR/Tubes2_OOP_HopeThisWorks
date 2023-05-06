@@ -138,10 +138,11 @@ public class Menu extends JFrame implements ActionListener {
         }
         else if (e.getSource() == bukaHalamanGudang) {
             // TO DO implement panel gudang
+            tab.add("Gudang", new GudangPanel());
         }
         else if (e.getSource() == bukaHalamanKasir) {
             // TO DO implement panel kasir
-        	tab.add("Kasir", new KasirPanel());
+        	
         }
         else if (e.getSource() == bukaHalamanRiwayat) {
             // TO DO implement panel riwayat
