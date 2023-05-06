@@ -19,6 +19,7 @@ public class Menu extends JFrame implements ActionListener {
     private final JMenuItem bukaHalamanUpdate;
     private final JMenuItem bukaHalamanStatusAkun;
 
+
     public Menu() {
         // Icon
         ImageIcon icon = new ImageIcon("src/logo.png");
@@ -66,6 +67,7 @@ public class Menu extends JFrame implements ActionListener {
         bukaHalamanKasir.addActionListener(this);
         halamanKasir.add(bukaHalamanKasir);
         // Riwayat
+
         bukaHalamanRiwayat = new JMenuItem("New");
         bukaHalamanRiwayat.addActionListener(this);
         halamanRiwayat.add(bukaHalamanRiwayat);
@@ -127,6 +129,7 @@ public class Menu extends JFrame implements ActionListener {
         }
         else if (e.getSource() == bukaHalamanPendaftaran) {
             // TO DO implement panel pendaftaran
+            tab.add("Daftar Akun", new RegistrasiPanel());
         }
         else if (e.getSource() == bukaHalamanUpdate) {
             // TO DO implement panel update
