@@ -1,0 +1,22 @@
+{
+  "barangList": [
+    {
+      "idBarang": 1,
+      "stok": 2,
+      "namaBarang": "barang",
+      "hargaJualBarang": 10,
+      "hargaBeliBarang": 9,
+      "kategori": "tes",
+      "gambar": "gambar"
+    },
+    {
+      "idBarang": 1,
+      "stok": 12,
+      "namaBarang": "barang",
+      "hargaJualBarang": 10,
+      "hargaBeliBarang": 9,
+      "kategori": "tes",
+      "gambar": "gambar"
+    }
+  ]
+}

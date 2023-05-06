@@ -9,7 +9,7 @@ import java.io.FileWriter;
 
 public class JSONDataStore implements IDataStore{
     private String filePath="src/main/java/tubes2/data";
-    private File JsonFile;
+
     @Override
     public String getFilePath() {
         return this.filePath;
@@ -22,7 +22,7 @@ public class JSONDataStore implements IDataStore{
 
     @Override
     public CustomerList readCustomer() {
-        try (FileReader reader=new FileReader(this.getFilePath()+"/tes.json")){
+        try (FileReader reader=new FileReader(this.getFilePath()+"/customer.json")){
             Gson gson=new GsonBuilder()
                     .registerTypeAdapter(Customer.class,new CustomerDeserializer())
                     .create();
@@ -37,7 +37,7 @@ public class JSONDataStore implements IDataStore{
     @Override
     public void writeCustomer(CustomerList customerList) {
         Gson gson=new GsonBuilder().setPrettyPrinting().create();
-        try(FileWriter fileWriter=new FileWriter(this.getFilePath()+"/tes.json")){
+        try(FileWriter fileWriter=new FileWriter(this.getFilePath()+"/customer.json")){
             gson.toJson(customerList,fileWriter);
         } catch (Exception e){
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class JSONDataStore implements IDataStore{
 
     @Override
     public BarangList readBarang() {
-        try(FileReader fileReader=new FileReader(this.getFilePath()+"/customer.json")){
+        try(FileReader fileReader=new FileReader(this.getFilePath()+"/barang.json")){
             Gson gson=new GsonBuilder()
                     .registerTypeAdapter(Barang.class,new BarangDeserializer())
                     .create();
