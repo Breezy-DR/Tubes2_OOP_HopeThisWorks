@@ -139,15 +139,12 @@ public class Menu extends JFrame implements ActionListener {
             tab.add("Setting", new SettingPanel());
         }
         else if (e.getSource() == bukaHalamanPendaftaran) {
-            // TO DO implement panel pendaftaran
             tab.add("Daftar Akun", new RegistrasiPanel());
         }
         else if (e.getSource() == bukaHalamanUpdate) {
-            // TO DO implement panel update
             tab.add("Update Akun", new UpdateAkunPanel());
         }
         else if (e.getSource() == bukaHalamanStatusAkun) {
-            // TO DO implement panel aktivasi/deaktivasi
             tab.add("Aktivasi/Deaktivasi Akun", new DeaktivasiPanel());
         }
         else if (e.getSource() == bukaHalamanGudang) {
@@ -172,12 +169,11 @@ public class Menu extends JFrame implements ActionListener {
             System.out.println(jarFile);
 
             // Load jar
-            JarClassLoader loader = new JarClassLoader();
             Object object;
             Object pluginInstance;
             System.out.println("This program will use SimpleClassLoader.");
             try {
-                object = (loader.loadJar(path.getSelectedFile().getAbsolutePath()));
+                object = JarClassLoader.loadJar(path.getSelectedFile().getAbsolutePath());
                 Class pluginClass = Class.forName(object.toString().substring(6));
                 pluginInstance = pluginClass.newInstance();
                 Method m = pluginClass.getDeclaredMethod("start", String.class);

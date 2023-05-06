@@ -10,7 +10,7 @@ import java.util.jar.JarInputStream;
 
 
 public class JarClassLoader extends ClassLoader {
-    public Class<?> loadJar(String path) {
+    public static Class<?> loadJar(String path) {
         try {
             return loadJarFile(path).get(0);
         } catch (Exception e) {
@@ -18,7 +18,7 @@ public class JarClassLoader extends ClassLoader {
         }
     }
 
-    private ArrayList<String> getClassNamesFromJar(String path) throws Exception {
+    private static ArrayList<String> getClassNamesFromJar(String path) throws Exception {
         JarInputStream jarFile = new JarInputStream(new FileInputStream(path));
         ArrayList<String> classNames = new ArrayList<>();
         try {
@@ -45,7 +45,7 @@ public class JarClassLoader extends ClassLoader {
 
 
     // get an arraylist of all the loaded classes in a jar file
-    private ArrayList<Class> loadJarFile(String filePath) throws Exception {
+    private static ArrayList<Class> loadJarFile(String filePath) throws Exception {
         ArrayList<Class> availableClasses = new ArrayList<>();
         ArrayList<String> classNames = getClassNamesFromJar(filePath);
         File f = new File(filePath);
@@ -54,7 +54,7 @@ public class JarClassLoader extends ClassLoader {
         URLClassLoader classLoader = new URLClassLoader(new URL[]{f.toURI().toURL()});
         for (String className : classNames) {
             try {
-                Class cc = loadClass("plugin."+className);
+                Class cc = classLoader.loadClass("plugin."+className);
                 availableClasses.add(cc);
             } catch (ClassNotFoundException e) {
             }
