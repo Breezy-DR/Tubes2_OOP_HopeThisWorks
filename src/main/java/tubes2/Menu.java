@@ -155,6 +155,7 @@ public class Menu extends JFrame implements ActionListener {
         }
         else if (e.getSource() == bukaHalamanKasir) {
             // TO DO implement panel kasir
+        	tab.add("Kasir", new KasirPanel());
         	
         }
         else if (e.getSource() == bukaHalamanRiwayat) {
