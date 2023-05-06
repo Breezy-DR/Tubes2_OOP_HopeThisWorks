@@ -44,6 +44,12 @@ public class JSONDataStore implements IDataStore{
         }
     }
 
+    @Override
+    public Customer getCustomer(int id) {
+        CustomerList customerList=readCustomer();
+        return customerList.getCustomer(id);
+    }
+
     public void addCustomer(Customer customer){
         CustomerList customerList=readCustomer();
         customerList.addCustomer(customer);
@@ -83,18 +89,22 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
-    public Barang getBarang(String idBarang) {
-        return null;
+    public Barang getBarang(int idBarang) {
+        BarangList barangList=readBarang();
+        return barangList.getBarang(idBarang);
     }
 
     @Override
     public void addBarang(Barang barang) {
-
+        BarangList barangList=readBarang();
+        barangList.addBarang(barang);
+        writeBarang(barangList);
     }
 
     @Override
     public void updateBarang(Barang barang) {
-
+        BarangList barangList=readBarang();
+        barangList.updateBarang(barang);
+        writeBarang(barangList);
     }
-
 }
