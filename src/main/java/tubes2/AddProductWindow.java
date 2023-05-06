@@ -9,12 +9,19 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class AddProductWindow {
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
+import javax.swing.BorderFactory;
+
+public class AddProductWindow implements ActionListener {
 
 	private JFrame frame;
+	private JButton pathButton;
+	private JTextArea pathText;
 
 	/**
 	 * Launch the application.
@@ -93,10 +100,6 @@ public class AddProductWindow {
 		textArea_1_2_1.setBounds(331, 182, 271, 37);
 		frame.getContentPane().add(textArea_1_2_1);
 		
-		JTextArea textArea_1_2_1_1 = new JTextArea();
-		textArea_1_2_1_1.setBounds(331, 300, 271, 37);
-		frame.getContentPane().add(textArea_1_2_1_1);
-		
 		JLabel lblGambar = new JLabel("Gambar");
 		lblGambar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblGambar.setBounds(331, 262, 203, 37);
@@ -110,5 +113,30 @@ public class AddProductWindow {
 		});
 		btnNewButton.setBounds(230, 387, 183, 61);
 		frame.getContentPane().add(btnNewButton);
+		
+		pathButton = new JButton("Pilih Gambar");
+		pathButton.setFocusable(false);
+		pathButton.setBounds(331, 300, 77, 30);
+		frame.getContentPane().add(pathButton);
+		pathButton.addActionListener(this);
+        pathButton.setFocusable(false);
+		
+		pathText = new JTextArea("                           ");
+		pathText.setEditable(false);
+		pathText.setBorder(BorderFactory.createLoweredBevelBorder());
+		pathText.setBounds(404, 300, 198, 30);
+		frame.getContentPane().add(pathText);
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == pathButton) {
+            JFileChooser path = new JFileChooser();
+            path.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "tif"));
+            path.showOpenDialog(null);
+            File folderPath = new File(path.getSelectedFile().getAbsolutePath());
+            pathText.setText(folderPath.toString());
+            System.out.println(folderPath);
+        }
+	}
+
 }
