@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.lang.reflect.Method;
 
 public class Menu extends JFrame implements ActionListener {
     private final JTabbedPane tab;
@@ -169,7 +170,24 @@ public class Menu extends JFrame implements ActionListener {
             path.showOpenDialog(null);
             File jarFile = new File(path.getSelectedFile().getAbsolutePath());
             System.out.println(jarFile);
-            addPanel(new SettingPanel(), "Plugin 1");
+
+            // Load jar
+            JarClassLoader loader = new JarClassLoader();
+            Object object;
+            Object pluginInstance;
+            System.out.println("This program will use SimpleClassLoader.");
+            try {
+                object = (loader.loadJar(path.getSelectedFile().getAbsolutePath()));
+                Class pluginClass = Class.forName(object.toString().substring(6));
+                pluginInstance = pluginClass.newInstance();
+                Method m = pluginClass.getDeclaredMethod("start", String.class);
+                m.invoke(pluginInstance, "none");
+            } catch (Exception l) {
+                System.out.println("Caught exception : "+l);
+            }
+
+            BasePlugin plugin = new BasePlugin();
+            addPanel(plugin.createPluginPanel(), "Plugin 1");
         }
     }
 
