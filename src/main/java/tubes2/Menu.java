@@ -159,7 +159,7 @@ public class Menu extends JFrame implements ActionListener {
         	
         }
         else if (e.getSource() == bukaHalamanRiwayat) {
-            // TO DO implement panel riwayat
+            tab.add("Riwayat", new RiwayatPanel());
         }
         else if (e.getSource() == tambahPlugin) {
             JFileChooser path = new JFileChooser();
