@@ -47,7 +47,7 @@ public class JSONDataStore implements IDataStore{
     @Override
     public Customer getCustomer(int id) {
         CustomerList customerList=readCustomer();
-        return customerList.getCustomer(id);
+        return customerList.getCustomerByID(id);
     }
 
     public void addCustomer(Customer customer){
