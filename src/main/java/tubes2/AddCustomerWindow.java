@@ -26,7 +26,7 @@ public class AddCustomerWindow implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -51,7 +51,7 @@ public class AddCustomerWindow implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public void initialize() {
+	private void initialize() {
 		frame = new JFrame("Tambah Customer");
 		frame.setBounds(100, 100, 554, 330);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

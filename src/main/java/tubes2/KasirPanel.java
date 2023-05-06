@@ -54,6 +54,12 @@ public class KasirPanel extends JPanel implements ActionListener {
         
         JButton customerButton = new JButton("Tambah customer");
         customerButton.setFont(new Font(customerButton.getFont().getName(), customerButton.getFont().getStyle(), 15));
+        customerButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AddCustomerWindow add = new AddCustomerWindow();
+        		add.main();
+        	}
+        });
         
         JLabel textDaftarProduk = new JLabel("Daftar Pembelian");
         textDaftarProduk.setForeground(new Color(255, 255, 255));
