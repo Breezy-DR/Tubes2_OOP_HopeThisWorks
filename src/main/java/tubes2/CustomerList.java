@@ -16,15 +16,7 @@ public class CustomerList {
     public void setCustomerList(List<Customer> customerList) {
         this.customerList = customerList;
     }
-    public Customer getCustomer(int id){
-        for (Customer c :
-                this.customerList) {
-            if (c.getId() == id) {
-                return c;
-            }
-        }
-        return null;
-    }
+
     public void addCustomer(Customer customer){
         this.customerList.add(customer);
     }
