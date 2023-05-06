@@ -1,4 +1,5 @@
 package tubes2;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -8,14 +9,15 @@ import java.io.File;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class GudangPanel extends JPanel implements ActionListener {
+public class KasirPanel extends JPanel implements ActionListener {
     private String selectedOption;
-    public GudangPanel() {
-        // Bagian Atas
+
+	public KasirPanel() {
+		// Bagian Atas
         // Judul
     	// Bagian Atas
         // Judul
-        JLabel title = new JLabel("Gudang");
+        JLabel title = new JLabel("Kasir");
         title.setForeground(Color.WHITE);
         title.setFont(new Font(title.getFont().getName(), title.getFont().getStyle(), 35));
         title.setBounds(30, 0, 150, 100);
@@ -25,17 +27,6 @@ public class GudangPanel extends JPanel implements ActionListener {
         topPanel.setBackground(Color.DARK_GRAY);
         topPanel.setLayout(null);
         topPanel.add(title);
-        // Sub-Panel 1
-        JPanel subPanel1 = new JPanel();
-        subPanel1.setPreferredSize(new Dimension(500,30));
-        subPanel1.setBackground(Color.gray);
-        subPanel1.setLayout(new BorderLayout());
-        // Panel 1
-        JPanel panel1 = new JPanel();
-        panel1.setBounds(100, 50, 500, 65);
-        panel1.setBackground(Color.gray);
-        panel1.setLayout(new BorderLayout(0,10));
-        panel1.add(subPanel1, BorderLayout.SOUTH);
         ButtonGroup optionGroup = new ButtonGroup();
         // Panel 2
         JPanel panel2 = new JPanel();
@@ -54,15 +45,6 @@ public class GudangPanel extends JPanel implements ActionListener {
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setBackground(Color.GRAY);
         
-        JButton payButton = new JButton("Tambah product");
-        payButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		AddProductWindow add = new AddProductWindow();
-        		add.main();
-        	}
-        });
-        payButton.setFont(new Font(payButton.getFont().getName(), payButton.getFont().getStyle(), 15));
-        
                 
         // Main Panel
         setPreferredSize(new Dimension(800,800));
@@ -70,44 +52,61 @@ public class GudangPanel extends JPanel implements ActionListener {
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         
-        JLabel textDaftarProduk = new JLabel("Daftar Produk");
+        JButton customerButton = new JButton("Tambah customer");
+        customerButton.setFont(new Font(customerButton.getFont().getName(), customerButton.getFont().getStyle(), 15));
+        
+        JLabel textDaftarProduk = new JLabel("Daftar Pembelian");
         textDaftarProduk.setForeground(new Color(255, 255, 255));
         textDaftarProduk.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        
+        JButton btnSaveBill = new JButton("Save bill");
+        btnSaveBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        
+        JButton btnSaveBill_1 = new JButton("Save Bill");
+        btnSaveBill_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         
         GroupLayout gl_centerPanel = new GroupLayout(centerPanel);
         gl_centerPanel.setHorizontalGroup(
         	gl_centerPanel.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addContainerGap(53, Short.MAX_VALUE)
-        			.addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-        			.addGap(26))
-        		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addGap(53)
-        			.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_centerPanel.createSequentialGroup()
+        					.addGroup(gl_centerPanel.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(gl_centerPanel.createSequentialGroup()
+        							.addContainerGap()
+        							.addComponent(btnSaveBill, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_centerPanel.createSequentialGroup()
+        							.addGap(53)
+        							.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+        							.addGap(316)))
+        					.addGap(22)
+        					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_centerPanel.createSequentialGroup()
+        					.addContainerGap(538, Short.MAX_VALUE)
+        					.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         gl_centerPanel.setVerticalGroup(
         	gl_centerPanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addGap(40)
-        			.addComponent(textDaftarProduk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
         			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(18)
-        					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE))
+        					.addGap(40)
+        					.addComponent(textDaftarProduk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(141)
-        					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addGap(54)
+        					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(433)
+        			.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+        			.addGap(66)
+        			.addComponent(btnSaveBill, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+        			.addGap(30))
         );
         centerPanel.setLayout(gl_centerPanel);
-    }
-
-
-    @Override
+	}
+	
+	@Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(selectedOption);
     
