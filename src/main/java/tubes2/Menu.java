@@ -171,19 +171,14 @@ public class Menu extends JFrame implements ActionListener {
             // Load jar
             Object object;
             Object pluginInstance;
-            System.out.println("This program will use SimpleClassLoader.");
             try {
                 object = JarClassLoader.loadJar(path.getSelectedFile().getAbsolutePath());
                 Class pluginClass = Class.forName(object.toString().substring(6));
                 pluginInstance = pluginClass.newInstance();
-                Method m = pluginClass.getDeclaredMethod("start", String.class);
-                m.invoke(pluginInstance, "none");
+                addPanel(((BasePlugin) pluginInstance).createPluginPanel(), "Plugin 1");
             } catch (Exception l) {
                 System.out.println("Caught exception : "+l);
             }
-
-            BasePlugin plugin = new BasePlugin();
-            addPanel(plugin.createPluginPanel(), "Plugin 1");
         }
     }
 

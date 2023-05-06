@@ -5,12 +5,26 @@ import java.awt.*;
 
 public class BasePlugin {
     private String name;
-    private JPanel mainPanel;
-    public BasePlugin() {
-        mainPanel = new BlankPage("Plugin");
+    protected JPanel mainPanel;
+
+    public String getName() {
+        return name;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public JPanel createBlankPage() {
+        return new BlankPage("Plugin 1");
     }
 
     public JPanel createPluginPanel() {
+        this.mainPanel = createBlankPage();
         return mainPanel;
     }
 
@@ -31,26 +45,9 @@ class BlankPage extends JPanel {
         topPanel.setLayout(null);
         topPanel.add(title);
 
-
-        // Sub-Panel
-        JPanel subPanel = new JPanel();
-        subPanel.setOpaque(false);
-        subPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
-        subPanel.setPreferredSize(new Dimension(1000, 500));
-
-
-        // Center Panel
-        JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(Color.GRAY);
-        centerPanel.setPreferredSize(new Dimension(800,800));
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 65));
-        centerPanel.add(subPanel);
-
-
         // Main Panel
         setPreferredSize(new Dimension(800,800));
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
-        add(centerPanel, BorderLayout.CENTER);
     }
 }

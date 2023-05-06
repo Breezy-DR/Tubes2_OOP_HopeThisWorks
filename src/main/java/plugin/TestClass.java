@@ -1,21 +1,22 @@
 package plugin;
 
-import tubes2.ILocalModule;
-
+import tubes2.BasePlugin;
+import javax.swing.*;
 import java.util.Random;
 import java.util.Vector;
 
-public class TestClass implements ILocalModule {
+public class TestClass extends BasePlugin {
     /*
      * This is an example of a class reference that will be resolved
      * at load time.
      */
     Vector v = new Vector();
     /** This is our start function */
-    public void start(String opt) {
+    @Override
+    public JPanel createPluginPanel() {
         /* This reference will be resolved at run time. */
         Random r;
-        System.out.println("Running the Test class, option was                   '"+opt+"'");
+        System.out.println("Running the Test class, option was");
         System.out.println("Now initializing a Random object.");
         r = new Random();
         for (int i = 0; i < 5; i++) {
@@ -28,5 +29,6 @@ public class TestClass implements ILocalModule {
             Integer z = (Integer)v.elementAt(i);
             System.out.println(i+": "+z);
         }
+        return new JPanel();
     }
 } 
