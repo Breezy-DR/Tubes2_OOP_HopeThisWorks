@@ -1,4 +1,7 @@
 package tubes2;
+
+import java.util.List;
+
 public class RegisteredCustomer extends Customer {
     private static int registeredCustomerCount = 0;
     private boolean vip; // jika vip == true, maka termasuk vip dan jika vip == false maka termasuk member
@@ -14,6 +17,14 @@ public class RegisteredCustomer extends Customer {
         this.poin = 0;
         this.aktif = true;
         this.addHistoriTransaksi(transaksiTerakhir);
+    }
+    public RegisteredCustomer(int id, List<FixedBill> historiTransaksi, boolean vip, String nama, String nomorTelepon,int poin,boolean aktif){
+        super(id,historiTransaksi);
+        this.vip=vip;
+        this.nama=nama;
+        this.nomorTelepon=nomorTelepon;
+        this.poin=poin;
+        this.aktif=aktif;
     }
 
     public String getNama() {

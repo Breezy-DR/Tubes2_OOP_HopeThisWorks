@@ -9,6 +9,10 @@ public abstract class Customer {
         this.id = id;
         this.historiTransaksi = new ArrayList<>();
     }
+    public Customer(int id, List<FixedBill> historiTransaksi){
+        this.id=id;
+        this.historiTransaksi=historiTransaksi;
+    }
 
     public int getId() {
         return this.id;

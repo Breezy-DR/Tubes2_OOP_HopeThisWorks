@@ -14,4 +14,6 @@ public class FixedBill {
     public List<ElmtOfBill> getlistBelanja() {
         return this.listBelanja;
     }
+    public void addListBelanja(ElmtOfBill elmtOfBill){this.listBelanja.add(elmtOfBill);}
+    public void clearListBelanja(){this.listBelanja.clear();}
 }
