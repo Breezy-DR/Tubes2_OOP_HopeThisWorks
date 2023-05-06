@@ -1,13 +1,18 @@
 package tubes2;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 public class Menu extends JFrame implements ActionListener {
     private final JTabbedPane tab;
+    private final JMenuBar menuBar;
+    private JMenu halamanPlugin;
+
     private JPopupMenu popUpMenu;
     private JMenuItem delete;
     private final JMenuItem bukaHalamanUtama;
@@ -18,28 +23,31 @@ public class Menu extends JFrame implements ActionListener {
     private final JMenuItem bukaHalamanPendaftaran;
     private final JMenuItem bukaHalamanUpdate;
     private final JMenuItem bukaHalamanStatusAkun;
+    private final JMenuItem tambahPlugin;
 
 
     public Menu() {
         // Icon
-        ImageIcon icon = new ImageIcon("src/logo.png");
+        ImageIcon icon = new ImageIcon("src/main/java/tubes2/logo.png");
 
 
         // Menu bar
         // Menu bar utama
-        JMenuBar menuBar = new JMenuBar();
+        menuBar = new JMenuBar();
         JMenu halamanUtama = new JMenu("Halaman Utama");
         JMenu halamanSetting = new JMenu("Setting");
         JMenu halamanGudang = new JMenu("Gudang");
         JMenu halamanAkun = new JMenu("Akun");
         JMenu halamanKasir = new JMenu("Kasir");
         JMenu halamanRiwayat = new JMenu("Riwayat");
+        halamanPlugin = new JMenu("Plugin");
         menuBar.add(halamanUtama);
         menuBar.add(halamanSetting);
         menuBar.add(halamanGudang);
         menuBar.add(halamanAkun);
         menuBar.add(halamanKasir);
         menuBar.add(halamanRiwayat);
+        menuBar.add(halamanPlugin);
         // Halaman Utama
         bukaHalamanUtama = new JMenuItem("New");
         bukaHalamanUtama.addActionListener(this);
@@ -67,10 +75,13 @@ public class Menu extends JFrame implements ActionListener {
         bukaHalamanKasir.addActionListener(this);
         halamanKasir.add(bukaHalamanKasir);
         // Riwayat
-
         bukaHalamanRiwayat = new JMenuItem("New");
         bukaHalamanRiwayat.addActionListener(this);
         halamanRiwayat.add(bukaHalamanRiwayat);
+        // Plugin
+        tambahPlugin = new JMenuItem("Tambah Plugin");
+        tambahPlugin.addActionListener(this);
+        halamanPlugin.add(tambahPlugin);
 
 
         // Tab
@@ -150,5 +161,21 @@ public class Menu extends JFrame implements ActionListener {
         else if (e.getSource() == bukaHalamanRiwayat) {
             // TO DO implement panel riwayat
         }
+        else if (e.getSource() == tambahPlugin) {
+            JFileChooser path = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("jar", "jar", "JAR");
+            path.setFileFilter(filter);
+            path.setFileSelectionMode( JFileChooser.FILES_ONLY);
+            path.showOpenDialog(null);
+            File jarFile = new File(path.getSelectedFile().getAbsolutePath());
+            System.out.println(jarFile.toString());
+            addPanel(new SettingPanel(), "Plugin 1");
+        }
+    }
+
+    public void addPanel(JPanel panel, String name) {
+        JMenuItem bukaPanel = new JMenuItem(name);
+        bukaPanel.addActionListener(e -> tab.add(name, panel));
+        halamanPlugin.add(bukaPanel);
     }
 }
