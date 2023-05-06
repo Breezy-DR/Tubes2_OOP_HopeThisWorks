@@ -19,6 +19,14 @@ public class CustomerList {
     public void addCustomer(Customer customer){
         this.customerList.add(customer);
     }
+    public void updateCustomer(Customer customer){
+        for (Customer c :
+                this.customerList) {
+            if (c.getId() == customer.getId()) {
+                c.setHistoriTransaksi(customer.getHistoriTransaksi());
+            }
+        }
+    }
     public Customer getCustomerByID(int id){
         return this.customerList.stream()
                 .filter(customer -> customer.getId()==id)

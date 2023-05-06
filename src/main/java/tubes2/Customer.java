@@ -17,6 +17,9 @@ public abstract class Customer {
     public int getId() {
         return this.id;
     }
+    public void setHistoriTransaksi(List<FixedBill> historiTransaksi){
+        this.historiTransaksi=historiTransaksi;
+    }
 
     public void addHistoriTransaksi(FixedBill historiTransaksi) {
         this.historiTransaksi.add(historiTransaksi);
