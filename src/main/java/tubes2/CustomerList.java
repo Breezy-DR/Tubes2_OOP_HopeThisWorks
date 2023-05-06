@@ -23,6 +23,7 @@ public class CustomerList {
                 return c;
             }
         }
+        return null;
     }
     public void addCustomer(Customer customer){
         this.customerList.add(customer);
