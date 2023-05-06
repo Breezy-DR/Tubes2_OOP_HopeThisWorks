@@ -10,8 +10,7 @@ import java.io.File;
 
 public class Menu extends JFrame implements ActionListener {
     private final JTabbedPane tab;
-    private final JMenuBar menuBar;
-    private JMenu halamanPlugin;
+    private final JMenu halamanPlugin;
 
     private JPopupMenu popUpMenu;
     private JMenuItem delete;
@@ -33,7 +32,7 @@ public class Menu extends JFrame implements ActionListener {
 
         // Menu bar
         // Menu bar utama
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         JMenu halamanUtama = new JMenu("Halaman Utama");
         JMenu halamanSetting = new JMenu("Setting");
         JMenu halamanGudang = new JMenu("Gudang");
@@ -168,7 +167,7 @@ public class Menu extends JFrame implements ActionListener {
             path.setFileSelectionMode( JFileChooser.FILES_ONLY);
             path.showOpenDialog(null);
             File jarFile = new File(path.getSelectedFile().getAbsolutePath());
-            System.out.println(jarFile.toString());
+            System.out.println(jarFile);
             addPanel(new SettingPanel(), "Plugin 1");
         }
     }
