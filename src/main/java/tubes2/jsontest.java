@@ -32,6 +32,6 @@ public class jsontest {
         Fee fee=new Fee(0.5f,0.5f,0.5f);
         DataStoreHub.updateFee(fee);
         Fee fee1=DataStoreHub.readFee();
-        System.out.println(fee1.discount);
+        System.out.println(fee1.getDiscount());
     }
 }

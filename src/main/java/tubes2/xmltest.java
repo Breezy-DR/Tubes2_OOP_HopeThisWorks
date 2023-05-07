@@ -28,5 +28,10 @@ public class xmltest {
 //        dataStore.updateBarang(barang);
 //        BarangList bl1=dataStore.readBarang();
 //        System.out.println(bl1.getBarangList().get(0).getStok());
+        Fee fee=new Fee(0.5f,0.5f,0.5f);
+        DataStoreHub.setDataStore(new XMLDataStore());
+        DataStoreHub.updateFee(fee);
+        Fee fee1=DataStoreHub.readFee();
+        System.out.println(fee1.getDiscount());
     }
 }

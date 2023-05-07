@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 
 public class XMLDataStore implements IDataStore {
@@ -124,6 +125,10 @@ public class XMLDataStore implements IDataStore {
             JSONObject jsonObject=XML.toJSONObject(fileReader);
             JsonObject jsonObject1=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
             System.out.println(jsonObject1.toString());
+            JsonObject jsonObject2=jsonObject1.getAsJsonObject("fee");
+            Gson gson=new GsonBuilder().registerTypeAdapter(Fee.class,new FeeDeserializer()).create();
+            Fee fee=gson.fromJson(jsonObject2.toString(),Fee.class);
+            return fee;
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -132,6 +137,13 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public void updateFee(String filePath, Fee fee) {
-
+        try {
+            JAXBContext jaxbContext =JAXBContext.newInstance(Fee.class);
+            Marshaller marshaller=jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(fee,new File(filePath+"/fee.xml"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
