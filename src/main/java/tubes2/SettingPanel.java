@@ -13,7 +13,9 @@ public class SettingPanel extends JPanel implements ActionListener {
     private final JRadioButton optionXML;
     private final JRadioButton optionOBJ;
     private final JTextArea pathText;
-    private String selectedOption;
+    private JPanel panel3;
+    private JPanel centerPanel;
+
     public SettingPanel() {
         // Bagian Atas
         // Judul
@@ -110,29 +112,24 @@ public class SettingPanel extends JPanel implements ActionListener {
         pluginButton = new JButton("Tambah Plugin");
         pluginButton.addActionListener(this);
         pluginButton.setFocusable(false);
-        // Text
-        JTextArea pluginText = new JTextArea(" 1. Plugin Chart\n 2. Plugin Uang");
-        pluginText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
-        pluginText.setEditable(false);
-        pluginText.setPreferredSize(new Dimension(500,100));
         // Sub-panel 3
         JPanel subPanel3 = new JPanel();
         subPanel3.setPreferredSize(new Dimension(100,35));
-        subPanel3.setBackground(Color.lightGray);
+        subPanel3.setBackground(Color.LIGHT_GRAY);
         subPanel3.setLayout(new FlowLayout());
         subPanel3.add(pluginButton);
+        subPanel3.setOpaque(false);
         // Panel 3
-        JPanel panel3 = new JPanel();
+        panel3 = new JPanel();
         panel3.setBounds(100,330, 500, 160);
-        panel3.setBackground(Color.gray);
+        panel3.setBackground(Color.GRAY);
         panel3.setLayout(new BorderLayout(0,15));
         panel3.add(pluginLabel, BorderLayout.NORTH);
-        panel3.add(pluginText, BorderLayout.CENTER);
         panel3.add(subPanel3, BorderLayout.SOUTH);
 
 
         // Center panel
-        JPanel centerPanel = new JPanel();
+        centerPanel = new JPanel();
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 75));
         centerPanel.setBackground(Color.GRAY);
@@ -158,30 +155,36 @@ public class SettingPanel extends JPanel implements ActionListener {
             File folderPath = new File(path.getSelectedFile().getAbsolutePath());
             pathText.setText(folderPath.toString());
             DataStoreHub.setFilePath(pathText.getText());
-            System.out.println(folderPath);
         }
         else if (e.getSource() == optionJSON) {
-            selectedOption = "JSON";
             DataStoreHub.setDataStore(new JSONDataStore());
         }
         else if (e.getSource() == optionXML) {
-            selectedOption = "XML";
             DataStoreHub.setDataStore(new XMLDataStore());
         }
         else if (e.getSource() == optionOBJ) {
-            selectedOption = "OBJ";
             DataStoreHub.setDataStore(new OBJDataStore());
         }
         else if (e.getSource() == pluginButton) {
-            JFileChooser path = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("jar", "jar", "JAR");
-            path.setFileFilter(filter);
-            path.setFileSelectionMode( JFileChooser.FILES_ONLY);
-            path.showOpenDialog(null);
-            File jarFile = new File(path.getSelectedFile().getAbsolutePath());
-            pathText.setText(jarFile.toString());
-            System.out.println(jarFile);
+            // Open jar file
+            String path = TambahPluginDialog.openJarFile();
+
+            // Load jar
+            Object object;
+            Object pluginInstance;
+            try {
+                object = JarClassLoader.loadJar(path);
+                Class pluginClass = Class.forName(object.toString().substring(6));
+                pluginInstance = pluginClass.newInstance();
+                JPanel panelTrial = ((SystemPlugin) pluginInstance).createPluginPanel();
+                panel3.add(panelTrial);
+                revalidate();
+
+//                centerPanel.add(panelTrial);
+//                add(centerPanel, BorderLayout.CENTER);
+            } catch (Exception l) {
+                System.out.println("Caught exception : "+l);
+            }
         }
-        System.out.println(selectedOption);
     }
 }

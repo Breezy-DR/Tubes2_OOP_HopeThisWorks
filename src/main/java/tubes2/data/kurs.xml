@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<kursListClass>
+    <kursList>
+        <namaMataUang>dummy</namaMataUang>
+        <kursToIDR>-1.0</kursToIDR>
+    </kursList>
+    <kursList>
+        <namaMataUang>dummy</namaMataUang>
+        <kursToIDR>-1.0</kursToIDR>
+    </kursList>
+    <kursList>
+        <namaMataUang>idr</namaMataUang>
+        <kursToIDR>1.0</kursToIDR>
+    </kursList>
+</kursListClass>

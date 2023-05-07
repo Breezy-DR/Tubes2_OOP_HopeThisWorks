@@ -16,7 +16,8 @@ public class DataStoreHub {
         return dataStore.readCustomer(filePath);
     }
     public static Customer getCustomer(int id){
-        return dataStore.getCustomer(filePath,id);
+        CustomerList customerList=dataStore.readCustomer(filePath);
+        return customerList.getCustomerByID(id);
     }
     public static void writeCustomer(CustomerList customerList){
         dataStore.writeCustomer(filePath,customerList);
@@ -28,26 +29,58 @@ public class DataStoreHub {
         dataStore.writeBarang(filePath,barangList);
     }
     public static Barang getBarang(int idBarang){
-        return dataStore.getBarang(filePath,idBarang);
+        BarangList barangList=dataStore.readBarang(filePath);
+        return barangList.getBarang(idBarang);
     }
     public static void updateCustomer(Customer customer){
-        dataStore.updateCustomer(filePath,customer);
+        CustomerList customerList=dataStore.readCustomer(filePath);
+        customerList.updateCustomer(customer);
+        dataStore.writeCustomer(filePath,customerList);
+    }
+    public static void addCustomer(Customer customer){
+        CustomerList customerList=dataStore.readCustomer(filePath);
+        customerList.addCustomer(customer);
+        dataStore.writeCustomer(filePath,customerList);
     }
     public static void addBarang(Barang barang){
-        dataStore.addBarang(filePath,barang);
+        BarangList barangList=dataStore.readBarang(filePath);
+        barangList.addBarang(barang);
+        dataStore.writeBarang(filePath,barangList);
     }
     public static void updateBarang(Barang barang){
-        dataStore.updateBarang(filePath,barang);
+        BarangList barangList=dataStore.readBarang(filePath);
+        barangList.updateBarang(barang);
+        dataStore.writeBarang(filePath,barangList);
     }
-
+    public static void deleteBarang(int idBarang) {
+        BarangList barangList=dataStore.readBarang(filePath);
+        barangList.deleteBarang(idBarang);
+        dataStore.writeBarang(filePath,barangList);
+    }
     public static Fee readFee(){
         return dataStore.readFee(filePath);
     }
     public static void updateFee(Fee fee){
         dataStore.updateFee(filePath,fee);
     }
-
-    public static void addCustomer(Customer customer){
-        dataStore.addCustomer(filePath,customer);
+    public static KursList readKurs(){
+        return dataStore.readKurs(filePath);
+    }
+    public static void writeKurs(KursList kursList){
+        dataStore.writeKurs(filePath,kursList);
+    }
+    public static void updateKurs(Kurs kurs){
+        KursList kursList=dataStore.readKurs(filePath);
+        kursList.updateKurs(kurs);
+        dataStore.writeKurs(filePath,kursList);
+    }
+    public static void addKurs(Kurs kurs){
+        KursList kursList=dataStore.readKurs(filePath);
+        kursList.addKurs(kurs);
+        dataStore.writeKurs(filePath,kursList);
+    }
+    public static Kurs getKursByName(String namaMataUang){
+        KursList kursList=dataStore.readKurs(filePath);
+        return kursList.getKursByName(namaMataUang);
     }
 }

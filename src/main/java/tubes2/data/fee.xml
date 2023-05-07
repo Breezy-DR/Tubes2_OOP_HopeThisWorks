@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<fee>
+    <discount>0.5</discount>
+    <serviceFee>0.5</serviceFee>
+    <tax>0.5</tax>
+</fee>

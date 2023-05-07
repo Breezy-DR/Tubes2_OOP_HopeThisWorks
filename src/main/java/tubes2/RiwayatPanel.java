@@ -9,7 +9,7 @@ import java.util.List;
 public class RiwayatPanel extends JPanel implements ActionListener {
     private final JComboBox<Integer> opsiAkun;
     private final JButton tampilkanRiwayatButton;
-    private List<Customer> listCustomer = new ArrayList<>();
+    private final CustomerList listCustomer = DataStoreHub.readCustomer();
 
     public RiwayatPanel() {
         // Bagian Atas
@@ -32,21 +32,23 @@ public class RiwayatPanel extends JPanel implements ActionListener {
         pilihAkunLabel.setForeground(Color.BLACK);
         pilihAkunLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
         pilihAkunLabel.setPreferredSize(new Dimension(300,20));
+
         // Label ID
         JLabel idLabel = new JLabel("ID ");
         idLabel.setForeground(Color.BLACK);
         idLabel.setOpaque(false);
         idLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
+
         // Opsi Akun
-        /* ----------------------- DUMMY ----------------------- */
-        UnregisteredCustomer a = new UnregisteredCustomer();
-        UnregisteredCustomer b = new UnregisteredCustomer();
-        a.pesan(new FixedBill(), 10);
-        b.pesan(new FixedBill(), 10);
-        listCustomer.add(a);
-        listCustomer.add(b);
-        /* ------------------------------------------------------ */
-        Integer[] opsi = {a.getId(), b.getId()};
+        Integer[] opsi = new Integer[0];
+        if (listCustomer != null) {
+            int sizeOfListCustomer = listCustomer.getCustomerList().size();
+            opsi = new Integer[sizeOfListCustomer];
+            for(int i = 0; i < sizeOfListCustomer; i++) {
+                opsi[i] =  listCustomer.getCustomerList().get(i).getId();
+            }
+        }
+        
         opsiAkun = new JComboBox<>(opsi);
         opsiAkun.addActionListener(this);
         opsiAkun.setFocusable(false);
@@ -108,6 +110,9 @@ public class RiwayatPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //TODO
+        int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
+        if (e.getSource() == tampilkanRiwayatButton) {
+            HistoriTransaksiSplitPane.main(selectedID);
+        }
     }
 }

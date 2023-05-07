@@ -31,12 +31,17 @@ public class objtest {
 //        BarangList bl1=dataStore.readBarang();
 //        System.out.println(bl1.getBarangList().get(0).getNamaBarang());
 //        System.out.println(bl1.getBarangList().get(0).getStok());
-        IDataStore objDataStore=new OBJDataStore();
-        DataStoreHub.setDataStore(objDataStore);
-        BarangList barangList=DataStoreHub.readBarang();
-        DataStoreHub.setFilePath("src/main/java/tubes2");
-        IDataStore jsonDataStore=new JSONDataStore();
-        DataStoreHub.setDataStore(jsonDataStore);
-        DataStoreHub.writeBarang(barangList);
+//        IDataStore objDataStore=new OBJDataStore();
+//        DataStoreHub.setDataStore(objDataStore);
+//        BarangList barangList=DataStoreHub.readBarang();
+//        DataStoreHub.setFilePath("src/main/java/tubes2");
+//        IDataStore jsonDataStore=new JSONDataStore();
+//        DataStoreHub.setDataStore(jsonDataStore);
+//        DataStoreHub.writeBarang(barangList);
+        DataStoreHub.setDataStore(new OBJDataStore());
+        Fee fee=new Fee(0.5f,0.5f,0.5f);
+        DataStoreHub.updateFee(fee);
+        Fee fee1=DataStoreHub.readFee();
+        System.out.println(fee1.getDiscount());
     }
 }

@@ -22,4 +22,12 @@ public class FixedBill implements Serializable {
     }
     public void addListBelanja(ElmtOfBill elmtOfBill){this.listBelanja.add(elmtOfBill);}
     public void clearListBelanja(){this.listBelanja.clear();}
+
+    public int getTotalTransaksi() {
+        int totalTransaksi = 0;
+        for (int i = 0; i < this.listBelanja.size(); i++) {
+            totalTransaksi += this.listBelanja.get(i).getHargaTotal();
+        }
+        return totalTransaksi;
+    }
 }

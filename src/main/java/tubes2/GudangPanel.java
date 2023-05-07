@@ -10,10 +10,20 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GudangPanel extends JPanel implements ActionListener {
     private String selectedOption;
+    
+    public static DefaultListModel model = new DefaultListModel();
+    public static JList list = new JList(model);
+
     public GudangPanel() {
-        // Bagian Atas
-        // Judul
-    	// Bagian Atas
+    	
+    	// Inisialisasi/retrieve data from datastore
+    	BarangList listofBarang = DataStoreHub.readBarang();
+    	for (int i = 1; i < listofBarang.getBarangList().size(); i++)
+    	      model.addElement("ID: " + listofBarang.getBarang(i).getIDBarang()
+    	    		  + ". Nama barang:" + listofBarang.getBarang(i).getNamaBarang() +
+    	    		  ", Stok: " + listofBarang.getBarang(i).getStok() +
+    	    		  ", Harga jual: " + listofBarang.getBarang(i).getHargaJual());
+
         // Judul
         JLabel title = new JLabel("Gudang");
         title.setForeground(Color.WHITE);
@@ -25,17 +35,6 @@ public class GudangPanel extends JPanel implements ActionListener {
         topPanel.setBackground(Color.DARK_GRAY);
         topPanel.setLayout(null);
         topPanel.add(title);
-        // Sub-Panel 1
-        JPanel subPanel1 = new JPanel();
-        subPanel1.setPreferredSize(new Dimension(500,30));
-        subPanel1.setBackground(Color.gray);
-        subPanel1.setLayout(new BorderLayout());
-        // Panel 1
-        JPanel panel1 = new JPanel();
-        panel1.setBounds(100, 50, 500, 65);
-        panel1.setBackground(Color.gray);
-        panel1.setLayout(new BorderLayout(0,10));
-        panel1.add(subPanel1, BorderLayout.SOUTH);
         ButtonGroup optionGroup = new ButtonGroup();
         // Panel 2
         JPanel panel2 = new JPanel();
@@ -63,6 +62,14 @@ public class GudangPanel extends JPanel implements ActionListener {
         });
         payButton.setFont(new Font(payButton.getFont().getName(), payButton.getFont().getStyle(), 15));
         
+        JButton btnUbahProduct = new JButton("Ubah product");
+        btnUbahProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnUbahProduct.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		UpdateProductWindow update = new UpdateProductWindow();
+        		update.main();
+        	}
+        });
                 
         // Main Panel
         setPreferredSize(new Dimension(800,800));
@@ -75,15 +82,23 @@ public class GudangPanel extends JPanel implements ActionListener {
         textDaftarProduk.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         
+        JScrollPane scrollPane = new JScrollPane(list);
+        list.setBackground(Color.LIGHT_GRAY);
+        
+        
+        
+        
         GroupLayout gl_centerPanel = new GroupLayout(centerPanel);
         gl_centerPanel.setHorizontalGroup(
-        	gl_centerPanel.createParallelGroup(Alignment.TRAILING)
+        	gl_centerPanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addContainerGap(53, Short.MAX_VALUE)
-        			.addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(50)
-        			.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-        			.addGap(25))
+        			.addGap(41)
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 529, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
+        				.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnUbahProduct, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
+        			.addGap(23))
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addGap(53)
         			.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
@@ -94,20 +109,17 @@ public class GudangPanel extends JPanel implements ActionListener {
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addGap(40)
         			.addComponent(textDaftarProduk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING, false)
+        				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 359, GroupLayout.PREFERRED_SIZE)
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(18)
-        					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(174)
-        					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(btnUbahProduct, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+        					.addGap(134)))
+        			.addContainerGap(156, Short.MAX_VALUE))
         );
-        
-        JList list = new JList((ListModel) null);
-        panel1.add(list, BorderLayout.CENTER);
         centerPanel.setLayout(gl_centerPanel);
-        list.setBackground(Color.LIGHT_GRAY);
     }
 
 
@@ -115,5 +127,22 @@ public class GudangPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         System.out.println(selectedOption);
     
+    }
+    
+    public static void addProduct(String namabarang, int stok, int hargajual) {
+    	BarangList listofBarang = DataStoreHub.readBarang();
+    	int sizelist = listofBarang.getBarangList().size();
+    	int index;
+    	if (sizelist == 0) {
+    		index = 1;
+    	} else {
+    		index = sizelist;
+    	}
+    	String addition = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	model.addElement(addition);
+    }
+    public static void updateProduct(int index, String namabarang, int stok, int hargajual) {
+    	String update = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	model.setElementAt(update, index - 1);
     }
 }
