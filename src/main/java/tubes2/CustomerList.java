@@ -39,4 +39,26 @@ public class CustomerList implements Serializable {
                 .findFirst()
                 .orElse(null);
     }
+    public void insertDummy(){
+        FixedBill fixedBill=new FixedBill();
+        ElmtOfBill elmtOfBill=new ElmtOfBill("dummy",-1);
+        fixedBill.addListBelanja(elmtOfBill);
+        fixedBill.addListBelanja(elmtOfBill);
+        List<FixedBill> fixedBillList=new ArrayList<>();
+        fixedBillList.add(fixedBill);
+        fixedBillList.add(fixedBill);
+        Customer customer=new RegisteredCustomer(-1,fixedBillList,false,"dummy","-",0,false);
+        this.customerList.add(0, customer);
+        this.customerList.add(0, customer);
+    }
+    public void removeDummy(){
+        List<Customer> newCustomerList=new ArrayList<>();
+        for (Customer c :
+                this.customerList) {
+            if (c.getId()!=-1){
+                newCustomerList.add(c);
+            }
+        }
+        this.customerList=newCustomerList;
+    }
 }

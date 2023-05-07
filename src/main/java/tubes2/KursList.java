@@ -1,5 +1,6 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,5 +37,20 @@ public class KursList implements Serializable {
                 .filter(kurs -> kurs.getNamaMataUang()==namaMataUang)
                 .findFirst()
                 .orElse(null);
+    }
+    public void insertDummy(){
+        Kurs kurs=new Kurs("dummy",-1);
+        this.kursList.add(0,kurs);
+        this.kursList.add(0,kurs);
+    }
+    public void removeDummy(){
+        List<Kurs> newKursList=new ArrayList<>();
+        for (Kurs k :
+                this.kursList) {
+            if (!k.getNamaMataUang().equals("dummy")) {
+                newKursList.add(k);
+            }
+        }
+        this.kursList=newKursList;
     }
 }

@@ -50,4 +50,20 @@ public class BarangList implements Serializable {
             }
         }
     }
+
+    public void insertDummy(){
+        Barang barang=new Barang(-1,-1,"dummy",-1,-1,"dummy","dummy");
+        this.barangList.add(0,barang);
+        this.barangList.add(0,barang);
+    }
+    public void removeDummy(){
+        List<Barang> newBarangList=new ArrayList<>();
+        for (Barang b :
+                this.barangList) {
+            if (b.getIDBarang()!=-1){
+                newBarangList.add(b);
+            }
+        }
+        this.barangList=newBarangList;
+    }
 }
