@@ -18,6 +18,8 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
 import tubes2.BasePlugin;
+import tubes2.DataStoreHub;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,17 +27,23 @@ import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.util.Map;
 
-public class PluginChart1 extends BasePlugin implements ActionListener {
+public class PluginChart1 extends BasePlugin implements ActionListener, Runnable {
     private JButton lineChartButton;
     private JButton barChartButton;
     private JPanel chartPanel;
     private CardLayout cardLayout;
+    private JPanel panel1;
+    private JPanel panel2;
+    private ChartPanel barPanel;
+    private ChartPanel linePanel;
+    private JFreeChart lineChart;
+    private JFreeChart barChart;
 
     private static CategoryDataset createCategoryDataset(Map<String, Integer> dataSource) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(Map.Entry<String, Integer> entry: dataSource.entrySet()){
             dataset.addValue(entry.getValue(), entry.getKey(), "");
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+            //System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         return dataset;
     }
@@ -57,14 +65,15 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         lineChartLabel.setFont(new Font(lineChartLabel.getFont().getName(), lineChartLabel.getFont().getStyle(), 15));
         lineChartLabel.setPreferredSize(new Dimension(500,20));
         // Line Chart
-        JFreeChart lineChart = createLineChart("Chart", null, null, createStatisticalCategoryDataset(soldItems()), PlotOrientation.VERTICAL, false, true, true);
+        lineChart = createLineChart("Chart", null, null, createStatisticalCategoryDataset(soldItems()), PlotOrientation.VERTICAL, false, true, true);
         // Panel 1
-        JPanel panel1 = new JPanel();
+        panel1 = new JPanel();
         panel1.setBounds(100, 50, 500, 65);
         panel1.setBackground(Color.gray);
         panel1.setLayout(new BorderLayout(0,10));
         panel1.add(lineChartLabel, BorderLayout.NORTH);
-        panel1.add(new ChartPanel(lineChart));
+        linePanel = new ChartPanel(lineChart);
+        panel1.add(linePanel);
 
 
         // Bagian Bar Chart
@@ -74,14 +83,15 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         barChartLabel.setFont(new Font(barChartLabel.getFont().getName(), barChartLabel.getFont().getStyle(), 15));
         barChartLabel.setPreferredSize(new Dimension(500,20));
         // Bar Chart
-        JFreeChart barChart = createBarChart("Jumlah Barang Terjual", "", "Jumlah", createCategoryDataset(soldItems()), PlotOrientation.VERTICAL, true, true, false);
+        barChart = createBarChart("Jumlah Barang Terjual", "", "Jumlah", createCategoryDataset(soldItems()), PlotOrientation.VERTICAL, true, true, false);
         // Panel 2
-        JPanel panel2 = new JPanel();
+        panel2 = new JPanel();
         panel2.setBounds(100, 50, 500, 65);
         panel2.setBackground(Color.gray);
         panel2.setLayout(new BorderLayout(0,10));
         panel2.add(barChartLabel, BorderLayout.NORTH);
-        panel2.add(new ChartPanel( barChart ));
+        barPanel = new ChartPanel( barChart );
+        panel2.add(barPanel);
 
         // Chart Container
         cardLayout = new CardLayout();
@@ -130,6 +140,7 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
 
         mainPanel = createBlankPage("Plugin 1");
         mainPanel.add(centerPanel);
+        setCharts();
         return this.mainPanel;
     }
 
@@ -164,6 +175,7 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         chart.getCategoryPlot().setRenderer(renderer);
         renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}", NumberFormat.getNumberInstance()));
         renderer.setBaseItemLabelsVisible(true);
+
         return chart;
     }
 
@@ -178,6 +190,34 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
             lineChartButton.setEnabled(true);
             barChartButton.setEnabled(false);
             this.cardLayout.show(chartPanel, "2");
+        }
+    }
+
+    public void setCharts() {
+        Thread pie = new Thread(this);
+        pie.start();
+    }
+    // Cardlayout <- chartPanel <- panel1 & panel2
+    @Override
+    public void run() {
+        while (true) {
+            datastore = new DataStoreHub();
+            panel1.remove(linePanel);
+            panel2.remove(barPanel);
+            lineChart = createLineChart("Chart", null, null, createStatisticalCategoryDataset(soldItems()), PlotOrientation.VERTICAL, false, true, true);
+            barChart = createBarChart("Jumlah Barang Terjual", "", "Jumlah", createCategoryDataset(soldItems()), PlotOrientation.VERTICAL, true, true, false);
+            linePanel = new ChartPanel(lineChart);
+            barPanel = new ChartPanel(barChart);
+            panel1.add(linePanel);
+            panel2.add(barPanel);
+            mainPanel.revalidate();
+
+            //System.out.println("OVERRIDE");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

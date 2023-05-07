@@ -17,7 +17,10 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.chart.ChartFactory;
 
-public class PluginChart2 extends BasePlugin{
+public class PluginChart2 extends BasePlugin implements Runnable{
+    private JFreeChart chart;
+    private ChartPanel chartPanel;
+    private JPanel centerPanel;
     private static PieDataset createDataset( Map<String, Integer> dataSource) {
         DefaultPieDataset dataset = new DefaultPieDataset( );
         for(Map.Entry<String, Integer> entry: dataSource.entrySet()){
@@ -75,22 +78,48 @@ public class PluginChart2 extends BasePlugin{
             panel2.add(graphLabel,BorderLayout.NORTH);
 
             Map<String, Integer> dataSource = soldItems();
-            JFreeChart chart = createChart("Jumlah Barang Terjual", createDataset(dataSource), true, true, false );
+            chart = createChart("Jumlah Barang Terjual", createDataset(dataSource), true, true, false );
+            chartPanel = new ChartPanel( chart );
             //return new ChartPanel( chart );
 
 
             // Center panel
-            JPanel centerPanel=new JPanel();
+            centerPanel=new JPanel();
             centerPanel.setPreferredSize(new Dimension(100,100));
             centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER,1000,35));
             centerPanel.setBackground(Color.GRAY);
             centerPanel.add(panel1);
             centerPanel.add(panel2);
-            centerPanel.add(new ChartPanel( chart ));
+            centerPanel.add(chartPanel);
 
 
             mainPanel=createBlankPage("Plugin 2");
             mainPanel.add(centerPanel);
+            setPieChart();
             return this.mainPanel;
+    }
+
+    public void setPieChart() {
+        Thread pie = new Thread(this);
+        pie.start();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            datastore = new DataStoreHub();
+            centerPanel.remove(chartPanel);
+            chart = createChart("Jumlah Barang Terjual", createDataset(soldItems()), true, true, false );
+            chartPanel = new ChartPanel( chart );
+            centerPanel.add(chartPanel);
+            mainPanel.revalidate();
+
+            //System.out.println("OVERRIDE");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
