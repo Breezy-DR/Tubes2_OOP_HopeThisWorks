@@ -10,9 +10,9 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
     private final JComboBox<Integer> opsiAkun;
     private final JButton saveButton;
     private final JComboBox<String> status;
-    private final JSONDataStore dataStore = new JSONDataStore();
+//    private final static DataStoreHub dataStore = new DataStoreHub();
 
-    private final CustomerList customers = dataStore.readCustomer();
+    private final CustomerList customers = DataStoreHub.readCustomer();
 
     public RegistrasiPanel(){
         // Judul
@@ -196,7 +196,7 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
         int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
         if (e.getSource() == saveButton) {
             // TO DO implement save field
-            RegisteredCustomer member = new RegisteredCustomer(namaText.getText(), nomorTeleponText.getText(), dataStore.getCustomer(selectedID).getHistoriTransaksi().get(0));
+            RegisteredCustomer member = new RegisteredCustomer(namaText.getText(), nomorTeleponText.getText(), DataStoreHub.getCustomer(selectedID).getHistoriTransaksi().get(0));
             if(status.getSelectedIndex()==0){
                 member.setMember();
             }else{
@@ -204,7 +204,7 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
             }
             customers.addCustomer(member);
             customers.getCustomerList().remove(customers.getCustomerByID(selectedID));
-            dataStore.writeCustomer(customers);
+            DataStoreHub.writeCustomer(customers);
         }
     }
 }

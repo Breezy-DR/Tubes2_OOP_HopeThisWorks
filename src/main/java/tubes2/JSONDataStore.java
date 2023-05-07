@@ -8,21 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 public class JSONDataStore implements IDataStore{
-    private String filePath="src/main/java/tubes2/data";
-
     @Override
-    public String getFilePath() {
-        return this.filePath;
-    }
-
-    @Override
-    public void setFilePath(String path) {
-        this.filePath=path;
-    }
-
-    @Override
-    public CustomerList readCustomer() {
-        try (FileReader reader=new FileReader(this.getFilePath()+"/customer.json")){
+    public CustomerList readCustomer(String filePath) {
+        try (FileReader reader=new FileReader(filePath+"/customer.json")){
             Gson gson=new GsonBuilder()
                     .registerTypeAdapter(Customer.class,new CustomerDeserializer())
                     .create();
@@ -35,9 +23,9 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
-    public void writeCustomer(CustomerList customerList) {
+    public void writeCustomer(String filePath,CustomerList customerList) {
         Gson gson=new GsonBuilder().setPrettyPrinting().create();
-        try(FileWriter fileWriter=new FileWriter(this.getFilePath()+"/customer.json")){
+        try(FileWriter fileWriter=new FileWriter(filePath+"/customer.json")){
             gson.toJson(customerList,fileWriter);
         } catch (Exception e){
             e.printStackTrace();
@@ -45,27 +33,27 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
-    public Customer getCustomer(int id) {
-        CustomerList customerList=readCustomer();
+    public Customer getCustomer(String filePath,int id) {
+        CustomerList customerList=readCustomer(filePath);
         return customerList.getCustomerByID(id);
     }
 
-    public void addCustomer(Customer customer){
-        CustomerList customerList=readCustomer();
+    public void addCustomer(String filePath,Customer customer){
+        CustomerList customerList=readCustomer(filePath);
         customerList.addCustomer(customer);
-        writeCustomer(customerList);
+        writeCustomer(filePath,customerList);
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
-        CustomerList customerList=readCustomer();
+    public void updateCustomer(String filePath,Customer customer) {
+        CustomerList customerList=readCustomer(filePath);
         customerList.updateCustomer(customer);
-        writeCustomer(customerList);
+        writeCustomer(filePath,customerList);
     }
 
     @Override
-    public BarangList readBarang() {
-        try(FileReader fileReader=new FileReader(this.getFilePath()+"/barang.json")){
+    public BarangList readBarang(String filePath) {
+        try(FileReader fileReader=new FileReader(filePath+"/barang.json")){
             Gson gson=new GsonBuilder()
                     .registerTypeAdapter(Barang.class,new BarangDeserializer())
                     .create();
@@ -78,8 +66,8 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
-    public void writeBarang(BarangList barangList) {
-        try(FileWriter fileWriter=new FileWriter(this.getFilePath()+"/barang.json")) {
+    public void writeBarang(String filePath,BarangList barangList) {
+        try(FileWriter fileWriter=new FileWriter(filePath+"/barang.json")) {
             Gson gson=new GsonBuilder().setPrettyPrinting().create();
 //            System.out.println(gson.toJson(barangList));
             gson.toJson(barangList,fileWriter);
@@ -89,22 +77,22 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
-    public Barang getBarang(int idBarang) {
-        BarangList barangList=readBarang();
+    public Barang getBarang(String filePath,int idBarang) {
+        BarangList barangList=readBarang(filePath);
         return barangList.getBarang(idBarang);
     }
 
     @Override
-    public void addBarang(Barang barang) {
-        BarangList barangList=readBarang();
+    public void addBarang(String filePath,Barang barang) {
+        BarangList barangList=readBarang(filePath);
         barangList.addBarang(barang);
-        writeBarang(barangList);
+        writeBarang(filePath,barangList);
     }
 
     @Override
-    public void updateBarang(Barang barang) {
-        BarangList barangList=readBarang();
+    public void updateBarang(String filePath,Barang barang) {
+        BarangList barangList=readBarang(filePath);
         barangList.updateBarang(barang);
-        writeBarang(barangList);
+        writeBarang(filePath,barangList);
     }
 }

@@ -12,12 +12,12 @@ public class pdftest {
 //        } catch (Exception e){
 //            e.printStackTrace();
 //        }
-        try{
-            IDataStore dataStore=new JSONDataStore();
-            CustomerList customerList=dataStore.readCustomer();
-            PDFPrinter.printLaporanPenjualan(customerList,"src/main/java/tubes2/data","laporan.pdf");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            IDataStore dataStore=new JSONDataStore();
+//            CustomerList customerList=dataStore.readCustomer();
+//            PDFPrinter.printLaporanPenjualan(customerList,"src/main/java/tubes2/data","laporan.pdf");
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 }
