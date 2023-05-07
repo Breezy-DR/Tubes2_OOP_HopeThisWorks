@@ -6,20 +6,24 @@
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <historiTransaksi>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <vip>false</vip>
@@ -34,20 +38,24 @@
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <historiTransaksi>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>dummy</barang>
                 <jumlahBarang>-1</jumlahBarang>
+                <hargaTotal>-1</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <vip>false</vip>
@@ -62,30 +70,36 @@
             <listBelanja>
                 <barang>barang</barang>
                 <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>barang</barang>
                 <jumlahBarang>1</jumlahBarang>
-            </listBelanja>
-        </historiTransaksi>
-        <historiTransaksi>
-            <listBelanja>
-                <barang>barang</barang>
-                <jumlahBarang>1</jumlahBarang>
-            </listBelanja>
-            <listBelanja>
-                <barang>barang</barang>
-                <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <historiTransaksi>
             <listBelanja>
                 <barang>barang</barang>
                 <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
             </listBelanja>
             <listBelanja>
                 <barang>barang</barang>
                 <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
+            </listBelanja>
+        </historiTransaksi>
+        <historiTransaksi>
+            <listBelanja>
+                <barang>barang</barang>
+                <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
+            </listBelanja>
+            <listBelanja>
+                <barang>barang</barang>
+                <jumlahBarang>1</jumlahBarang>
+                <hargaTotal>1000</hargaTotal>
             </listBelanja>
         </historiTransaksi>
         <vip>false</vip>

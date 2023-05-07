@@ -41,7 +41,7 @@ public class CustomerList implements Serializable {
     }
     public void insertDummy(){
         FixedBill fixedBill=new FixedBill();
-        ElmtOfBill elmtOfBill=new ElmtOfBill("dummy",-1);
+        ElmtOfBill elmtOfBill=new ElmtOfBill("dummy",-1,-1);
         fixedBill.addListBelanja(elmtOfBill);
         fixedBill.addListBelanja(elmtOfBill);
         List<FixedBill> fixedBillList=new ArrayList<>();

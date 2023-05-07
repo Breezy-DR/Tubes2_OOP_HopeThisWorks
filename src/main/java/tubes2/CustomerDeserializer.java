@@ -31,7 +31,8 @@ public class CustomerDeserializer implements JsonDeserializer<Customer> {
                 elmtofBillJson=je2.getAsJsonObject();
                 String barang=elmtofBillJson.get("barang").getAsString();
                 int jumlahBarang=elmtofBillJson.get("jumlahBarang").getAsInt();
-                fixedBill.addListBelanja(new ElmtOfBill(barang,jumlahBarang));
+                int hargaTotal=elmtofBillJson.get("hargaTotal").getAsInt();
+                fixedBill.addListBelanja(new ElmtOfBill(barang,jumlahBarang,hargaTotal));
             }
             fixedBillList.add(fixedBill);
         }
