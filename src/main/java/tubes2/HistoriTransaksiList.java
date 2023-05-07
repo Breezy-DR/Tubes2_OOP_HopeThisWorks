@@ -15,11 +15,40 @@ public class HistoriTransaksiList {
 	 */
 	public HistoriTransaksiList(int customerID) {
         // Create the list of total transaksi and put it in a scroll pane
-        Integer[] totalTransaksi = new Integer[listCustomer.getCustomerByID(customerID).getHistoriTransaksi().size()];
-        for(int i = 0; i < listCustomer.getCustomerByID(customerID).getHistoriTransaksi().size(); i++) {
-            totalTransaksi[i] = listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getTotalTransaksi();
+        // Count number of fixed bill of one customer
+        int sizeOfHistoriTransaksi = listCustomer.getCustomerByID(customerID).getHistoriTransaksi().size();
+        int numOfFixedBill = 0;
+        for(int i = 0; i < sizeOfHistoriTransaksi; i++) {
+            numOfFixedBill = numOfFixedBill + listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getlistBelanja().size();
         }
-        JList<Integer> list = new JList<Integer>(totalTransaksi);
+
+        // Find number of element of HistoriTransaksiList
+        int numOfTransaksiListElmt = sizeOfHistoriTransaksi + numOfFixedBill + sizeOfHistoriTransaksi - 1;
+
+        // Create and Initialize HistoriTransaksiList
+        Object[] historiTransaksi = new Object[numOfTransaksiListElmt];
+        int currTransaksi = 0;
+        int currElmt = 0;
+        while(currTransaksi < sizeOfHistoriTransaksi) {
+            historiTransaksi[currElmt] = "Transaksi " + (currTransaksi + 1);
+            currElmt = currElmt + 1;
+            for(int i = 0; i < listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(currTransaksi).getlistBelanja().size(); i ++) {
+                historiTransaksi[currElmt] = listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(currTransaksi).getlistBelanja().get(i).getHargaTotal();
+                currElmt = currElmt + 1;
+            }
+            if (currTransaksi < sizeOfHistoriTransaksi - 1) {
+                historiTransaksi[currElmt] = "";
+                currElmt = currElmt + 1;
+            }
+            currTransaksi = currTransaksi + 1;
+        }
+
+        // for(int i = 0; i < numOfTransaksiListElmt; i++) {
+        //     for (int j = 0; j < listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getlistBelanja().size(); j++) {
+        //         totalTransaksi[i] = listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getlistBelanja().get(j).getHargaTotal();
+        //     }    
+        // }
+        JList<Object> list = new JList<Object>(historiTransaksi);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
         listScrollPane = new JScrollPane(list);
