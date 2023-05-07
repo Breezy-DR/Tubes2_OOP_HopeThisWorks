@@ -30,7 +30,7 @@ public class GudangPanel extends JPanel implements ActionListener {
 //    	}
         for (Barang b :
                 listofBarang.getBarangList()) {
-            model.addElement("ID: " + b.getIDBarang()+". \nNama barang: "+b.getNamaBarang());
+            model.addElement("ID: " + b.getIDBarang()+". Nama barang: " +b.getNamaBarang() + ", Stok: " + b.getStok() + ", Harga jual: " + b.getHargaJual());
         }
 
         // Judul
@@ -94,6 +94,15 @@ public class GudangPanel extends JPanel implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(list);
         list.setBackground(Color.LIGHT_GRAY);
         
+        JButton btnDeleteProduct = new JButton("Delete product");
+        btnDeleteProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnDeleteProduct.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		RemoveProductWindow remove = new RemoveProductWindow();
+        		remove.main();
+        	}
+        });
+        
         
         
         
@@ -106,7 +115,8 @@ public class GudangPanel extends JPanel implements ActionListener {
         			.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
         			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
         				.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnUbahProduct, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(btnUbahProduct, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnDeleteProduct, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE))
         			.addGap(23))
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addGap(53)
@@ -125,7 +135,8 @@ public class GudangPanel extends JPanel implements ActionListener {
         					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addComponent(btnUbahProduct, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-        					.addGap(134)))
+        					.addGap(48)
+        					.addComponent(btnDeleteProduct, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap(156, Short.MAX_VALUE))
         );
         centerPanel.setLayout(gl_centerPanel);
@@ -135,15 +146,6 @@ public class GudangPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(selectedOption);
-        int index = list.getSelectedIndex();
-        String x = (String) model.getElementAt(index);
-        x = x.substring(x.indexOf(":") + 1);
-        x = x.substring(0, x.indexOf("."));
-        int id = Integer.parseInt(x);
-        if (index != -1) {
-            model.remove(index);
-            DataStoreHub.deleteBarang(id);
-        }
     }
     
     public static void addProduct(String namabarang, int stok, int hargajual) {
@@ -155,11 +157,20 @@ public class GudangPanel extends JPanel implements ActionListener {
     	} else {
     		index = sizelist;
     	}
-    	String addition = "ID:" + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	String addition = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
     	model.addElement(addition);
     }
     public static void updateProduct(int index, String namabarang, int stok, int hargajual) {
-    	String update = "ID:" + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	String update = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
     	model.setElementAt(update, index - 1);
+    }
+    public static void refreshList() {
+    	BarangList listofBarang = DataStoreHub.readBarang();
+    	model.removeAllElements();
+    	for (Barang b :
+            listofBarang.getBarangList()) {
+        model.addElement("ID: " + b.getIDBarang()+". Nama barang: " +b.getNamaBarang() + ", Stok: " + b.getStok() + ", Harga jual: " + b.getHargaJual());
+    }
+
     }
 }
