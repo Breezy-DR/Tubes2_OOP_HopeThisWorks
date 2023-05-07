@@ -59,12 +59,12 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         pilihAkunLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
         pilihAkunLabel.setPreferredSize(new Dimension(300,10));
         JPanel listBillPanel=new JPanel();
-        listBillPanel.setSize(new Dimension(300,20));
+        listBillPanel.setSize(new Dimension(300,10));
         listBillPanel.add(list);
 
         // Sub-Panel Akun
         JPanel subPanelAkun = new JPanel();
-        subPanelAkun.setPreferredSize(new Dimension(300,30));
+        subPanelAkun.setPreferredSize(new Dimension(300,10));
         subPanelAkun.setOpaque(false);
         subPanelAkun.setLayout(new BorderLayout(10,0));
         subPanelAkun.add(textPilihCustomer,BorderLayout.NORTH);
@@ -81,13 +81,13 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         // Label
         JLabel namaLabel = new JLabel("kuantitas");
         namaLabel.setFont(new Font(namaLabel.getFont().getName(), namaLabel.getFont().getStyle(), 15));
-        namaLabel.setPreferredSize(new Dimension(300,15));
+        namaLabel.setPreferredSize(new Dimension(300,10));
         // Text
         kuantitas = new JTextArea();
         kuantitas.setBorder(BorderFactory.createEmptyBorder(7, 7,7,7));
         // Sub-Panel 1
         JPanel subPanel1 = new JPanel();
-        subPanel1.setPreferredSize(new Dimension(300,30));
+        subPanel1.setPreferredSize(new Dimension(300,10));
         subPanel1.setBackground(Color.gray);
         subPanel1.setLayout(new BorderLayout());
         subPanel1.add(kuantitas, BorderLayout.CENTER);
@@ -249,6 +249,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
             model.addElement("nama Barang: "+namaBarang+"jumlah: "+jumlahBarang+"\n harga: "+jumlahBarang*target.getHargaJual());
             bill.tambahBarang(namaBarang,jumlahBarang,jumlahBarang*target.getHargaJual());
         } else if (actionEvent.getSource().equals(saveBillButton)){
+            System.out.println("saved");
             FixedBill newFixedBill=new FixedBill(bill);
             CustomerList customerList=DataStoreHub.readCustomer();
             String selectedAccount=(String) opsiAkun.getSelectedItem();
@@ -256,6 +257,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
             fixedBillList.add(newFixedBill);
             if (selectedAccount.equals("Guest")){
                 Customer c= new UnregisteredCustomer(fixedBillList);
+                DataStoreHub.addCustomer(c);
             } else {
                 Customer target;
                 for (Customer customer:
