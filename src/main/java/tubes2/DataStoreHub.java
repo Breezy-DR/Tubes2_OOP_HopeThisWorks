@@ -52,7 +52,7 @@ public class DataStoreHub {
         barangList.updateBarang(barang);
         dataStore.writeBarang(filePath,barangList);
     }
-    public void deleteBarang(String filePath, int idBarang) {
+    public void deleteBarang(int idBarang) {
         BarangList barangList=dataStore.readBarang(filePath);
         barangList.deleteBarang(idBarang);
         dataStore.writeBarang(filePath,barangList);
