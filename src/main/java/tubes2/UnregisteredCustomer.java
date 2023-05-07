@@ -26,6 +26,9 @@ public class UnregisteredCustomer extends Customer implements Serializable {
     public UnregisteredCustomer(int id, List<FixedBill> historiTransaksi){
         super(id,historiTransaksi);
     }
+    public UnregisteredCustomer(List<FixedBill> historiTransaksi){
+        super(++unregisteredCustomerCount,historiTransaksi);
+    }
 
     public RegisteredCustomer daftarMember(String nama, String nomorTelepon) {
         return new RegisteredCustomer(nama, nomorTelepon, getHistoriTransaksi().get(0));

@@ -16,6 +16,13 @@ public class FixedBill implements Serializable {
     public FixedBill() {
         this.listBelanja = new ArrayList<>();
     }
+    public FixedBill(Bill bill){
+        this.listBelanja=new ArrayList<>();
+        for (ElmtOfBill e :
+                bill.getListBelanja()) {
+            this.listBelanja.add(e);
+        }
+    }
 
     public List<ElmtOfBill> getlistBelanja() {
         return this.listBelanja;
