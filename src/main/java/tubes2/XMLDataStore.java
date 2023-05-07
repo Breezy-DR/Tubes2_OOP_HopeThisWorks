@@ -27,8 +27,8 @@ public class XMLDataStore implements IDataStore {
                     .registerTypeAdapter(Customer.class,new CustomerDeserializer())
                     .create();
             JSONObject jsonObject= XML.toJSONObject(reader);
-            JsonParser parser=new JsonParser();
-            JsonObject root=parser.parse(jsonObject.toString()).getAsJsonObject();
+//            JsonParser parser=new JsonParser();
+            JsonObject root=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
 //            System.out.println(root);
             JsonObject customlist=root.getAsJsonObject("customerListClass");
 //            System.out.println(customlist);
@@ -66,8 +66,8 @@ public class XMLDataStore implements IDataStore {
                     .registerTypeAdapter(Barang.class,new BarangDeserializer())
                     .create();
             JSONObject jsonObject= XML.toJSONObject(reader);
-            JsonParser parser=new JsonParser();
-            JsonObject root=parser.parse(jsonObject.toString()).getAsJsonObject();
+//            JsonParser parser=new JsonParser();
+            JsonObject root=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
 //            System.out.println(root);
             JsonObject baranglist=root.getAsJsonObject("barangListClass");
 //            System.out.println(customlist);
