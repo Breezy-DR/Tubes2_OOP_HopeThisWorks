@@ -5,6 +5,7 @@ public interface IDataStore {
     public void setFilePath(String path);
     public Customer getCustomer(int id);
     public CustomerList readCustomer();
+    public void addCustomer(Customer customer);
     public void writeCustomer(CustomerList customerList);
     public BarangList readBarang();
     public void writeBarang(BarangList barangList);

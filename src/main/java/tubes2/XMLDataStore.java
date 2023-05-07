@@ -27,7 +27,8 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public Customer getCustomer(int id) {
-        return null;
+        CustomerList customerList=this.readCustomer();
+        return customerList.getCustomerByID(id);
     }
 
     @Override
@@ -48,6 +49,13 @@ public class XMLDataStore implements IDataStore {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void addCustomer(Customer customer) {
+        CustomerList cl=this.readCustomer();
+        cl.addCustomer(customer);
+        this.writeCustomer(cl);
     }
 
     @Override
@@ -96,21 +104,28 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public Barang getBarang(int idBarang) {
-        return null;
+        BarangList barangList=this.readBarang();
+        return barangList.getBarang(idBarang);
     }
 
     @Override
     public void updateCustomer(Customer customer) {
-
+        CustomerList customerList=this.readCustomer();
+        customerList.updateCustomer(customer);
+        this.writeCustomer(customerList);
     }
 
     @Override
     public void addBarang(Barang barang) {
-
+        BarangList barangList=this.readBarang();
+        barangList.addBarang(barang);
+        this.writeBarang(barangList);
     }
 
     @Override
     public void updateBarang(Barang barang) {
-
+        BarangList barangList=this.readBarang();
+        barangList.updateBarang(barang);
+        this.writeBarang(barangList);
     }
 }
