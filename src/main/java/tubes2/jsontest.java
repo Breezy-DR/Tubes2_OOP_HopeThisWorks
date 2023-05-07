@@ -4,7 +4,7 @@ public class jsontest {
     public static void main(String[] args){
 //        IDataStore dataStore=new JSONDataStore();
         FixedBill fixedBill=new FixedBill();
-        ElmtOfBill elmtOfBill=new ElmtOfBill("barang",1);
+        ElmtOfBill elmtOfBill=new ElmtOfBill("barang",1,1000);
         fixedBill.addListBelanja(elmtOfBill);
         fixedBill.addListBelanja(elmtOfBill);
         Customer customer=new RegisteredCustomer("tes","no",fixedBill);

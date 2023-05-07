@@ -12,11 +12,13 @@
           "listBelanja": [
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             },
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             }
           ]
         },
@@ -24,11 +26,13 @@
           "listBelanja": [
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             },
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             }
           ]
         },
@@ -36,11 +40,13 @@
           "listBelanja": [
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             },
             {
               "barang": "barang",
-              "jumlahBarang": 1
+              "jumlahBarang": 1,
+              "hargaTotal": 1000
             }
           ]
         }
