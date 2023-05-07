@@ -81,9 +81,9 @@ public class GudangPanel extends JPanel implements ActionListener {
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addContainerGap(53, Short.MAX_VALUE)
         			.addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-        			.addGap(26))
+        			.addGap(50)
+        			.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
+        			.addGap(25))
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addGap(53)
         			.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
@@ -99,11 +99,15 @@ public class GudangPanel extends JPanel implements ActionListener {
         					.addGap(18)
         					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(141)
-        					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(174)
+        					.addComponent(payButton, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        
+        JList list = new JList((ListModel) null);
+        panel1.add(list, BorderLayout.CENTER);
         centerPanel.setLayout(gl_centerPanel);
+        list.setBackground(Color.LIGHT_GRAY);
     }
 
 

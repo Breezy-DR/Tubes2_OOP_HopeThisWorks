@@ -11,6 +11,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class KasirPanel extends JPanel implements ActionListener {
     private String selectedOption;
+    private JList list;
+
+    private DefaultListModel model;
 
 	public KasirPanel() {
 		// Bagian Atas
@@ -27,18 +30,6 @@ public class KasirPanel extends JPanel implements ActionListener {
         topPanel.setBackground(Color.DARK_GRAY);
         topPanel.setLayout(null);
         topPanel.add(title);
-        ButtonGroup optionGroup = new ButtonGroup();
-        // Panel 2
-        JPanel panel2 = new JPanel();
-        panel2.setBounds(100, 190, 500, 65);
-        panel2.setBackground(Color.gray);
-        panel2.setLayout(new BorderLayout(0,10));
-        // Panel 3
-        JPanel panel3 = new JPanel();
-        panel3.setBounds(100,330, 500, 160);
-        panel3.setBackground(Color.gray);
-        panel3.setLayout(new BorderLayout(0,15));
-
 
         // Center panel
         JPanel centerPanel = new JPanel();
@@ -71,40 +62,48 @@ public class KasirPanel extends JPanel implements ActionListener {
         JButton btnTambahBarang = new JButton("Tambah barang");
         btnTambahBarang.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
+        model = new DefaultListModel();
+        list = new JList(model);
+        
+        JScrollPane scrollPane = new JScrollPane(list);
+        list.setBackground(Color.LIGHT_GRAY);
+        
         
         GroupLayout gl_centerPanel = new GroupLayout(centerPanel);
         gl_centerPanel.setHorizontalGroup(
         	gl_centerPanel.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.TRAILING)
+        			.addGap(53)
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(53)
         					.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-        					.addGap(338)
-        					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE))
+        					.addGap(338))
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addContainerGap(538, Short.MAX_VALUE)
-        					.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addContainerGap(554, Short.MAX_VALUE)
-        					.addComponent(btnTambahBarang, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)))
+        					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
+        				.addComponent(customerButton, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(Alignment.TRAILING, gl_centerPanel.createParallelGroup(Alignment.LEADING, false)
+        					.addComponent(btnSaveBill_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(btnTambahBarang, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)))
         			.addContainerGap())
         );
         gl_centerPanel.setVerticalGroup(
         	gl_centerPanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(40)
-        					.addComponent(textDaftarProduk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGap(54)
-        					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(54)
+        			.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(btnTambahBarang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-        			.addGap(387)
+        			.addGap(252)
         			.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-        			.addGap(122))
+        			.addGap(155))
+        		.addGroup(gl_centerPanel.createSequentialGroup()
+        			.addGap(40)
+        			.addComponent(textDaftarProduk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
+        			.addGap(126))
         );
         centerPanel.setLayout(gl_centerPanel);
 	}
