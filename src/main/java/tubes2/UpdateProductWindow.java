@@ -16,8 +16,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
+import java.awt.FlowLayout;
 
-public class AddProductWindow implements ActionListener {
+
+public class UpdateProductWindow implements ActionListener {
 
 	private JFrame frame;
 	private JButton pathButton;
@@ -30,13 +32,16 @@ public class AddProductWindow implements ActionListener {
 	private JTextArea kategoritext;
 	private String gambartext;
 
-	
+	private int index;
 	private int stok;
 	private String NamaBarang;
 	private int hargabeli;
 	private int hargajual;
 	private String kategori;
 	private String gambar;
+	private JLabel lblUbahDiNomor;
+	private JTextArea ubahtext;
+
 
 	/**
 	 * Launch the application.
@@ -45,7 +50,7 @@ public class AddProductWindow implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddProductWindow window = new AddProductWindow();
+					UpdateProductWindow window = new UpdateProductWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,17 +60,15 @@ public class AddProductWindow implements ActionListener {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
-	public AddProductWindow() {
+	
+	public UpdateProductWindow() {
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
-		frame = new JFrame("Tambah Produk");
+		frame = new JFrame("Update Produk");
 		frame.setBounds(100, 100, 661, 536);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -123,7 +126,7 @@ public class AddProductWindow implements ActionListener {
 		submit = new JButton("Submit");
 		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		submit.addActionListener(this);
-		submit.setBounds(230, 387, 183, 61);
+		submit.setBounds(419, 386, 183, 61);
 		frame.getContentPane().add(submit);
 		
 		pathButton = new JButton("Pilih Gambar");
@@ -138,10 +141,19 @@ public class AddProductWindow implements ActionListener {
 		pathText.setBorder(BorderFactory.createLoweredBevelBorder());
 		pathText.setBounds(404, 300, 198, 30);
 		frame.getContentPane().add(pathText);
+		
+		lblUbahDiNomor = new JLabel("Ubah di ID...");
+		lblUbahDiNomor.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblUbahDiNomor.setBounds(26, 372, 203, 37);
+		frame.getContentPane().add(lblUbahDiNomor);
+		
+		ubahtext = new JTextArea();
+		ubahtext.setBounds(26, 410, 271, 37);
+		frame.getContentPane().add(ubahtext);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == pathButton) {
+		if (e.getSource() == pathButton) {
             JFileChooser path = new JFileChooser();
             path.addChoosableFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "tif"));
             path.showOpenDialog(null);
@@ -150,44 +162,21 @@ public class AddProductWindow implements ActionListener {
             gambartext = folderPath.toString();
             System.out.println(folderPath);
         }
-        if (e.getSource() == submit) {
+		if (e.getSource() == submit) {
+			index = Integer.parseInt(ubahtext.getText());
         	stok = Integer.parseInt(stoktext.getText());
         	NamaBarang = namatext.getText();
         	hargabeli = Integer.parseInt(hargabelitext.getText());
         	hargajual = Integer.parseInt(hargajualtext.getText());
         	kategori = kategoritext.getText();
         	gambar = gambartext;
-        	GudangPanel.addProduct(NamaBarang, stok, hargajual);
-        	DataStoreHub.addBarang(
-					new Barang(DataStoreHub.readBarang().getBarangList().size(),
+        	GudangPanel.updateProduct(index, NamaBarang, stok, hargajual);
+        	DataStoreHub.updateBarang(
+					new Barang(index,
 							stok,NamaBarang,hargabeli,hargajual,kategori,gambar));
-        	
        }
-	}
-	
-	public int getstok() {
-		return this.stok;
-	}
-	
-	public String getNamaBarang() {
-		return NamaBarang;
-	}
-	
-	public int gethargabeli() {
-		return hargabeli;
-	}
-	
-	public int gethargajual() {
-		return hargajual;
-	}
-	
-	public String getKategori() {
-		return kategori;
-	}
-	
-	public String getgambar() {
-		return gambar;
-	}
 
+
+	}
 
 }

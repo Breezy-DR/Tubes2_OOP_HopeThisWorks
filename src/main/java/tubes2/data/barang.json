@@ -2,15 +2,6 @@
   "barangList": [
     {
       "idBarang": 1,
-      "stok": 2,
-      "namaBarang": "barang",
-      "hargaJualBarang": 10,
-      "hargaBeliBarang": 9,
-      "kategori": "tes",
-      "gambar": "gambar"
-    },
-    {
-      "idBarang": 1,
       "stok": 12,
       "namaBarang": "barang",
       "hargaJualBarang": 10,
@@ -19,22 +10,112 @@
       "gambar": "gambar"
     },
     {
-      "idBarang": 2,
-      "stok": 10,
-      "namaBarang": "tesdarigui",
-      "hargaJualBarang": 9,
-      "hargaBeliBarang": 100,
-      "kategori": "tes",
-      "gambar": "/home/suisei/Pictures/Screenshot from 2023-02-17 22-22-53.png"
+      "idBarang": 12,
+      "stok": 5,
+      "namaBarang": "Polss",
+      "hargaJualBarang": 900,
+      "hargaBeliBarang": 900,
+      "kategori": "Makan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
-      "idBarang": 3,
-      "stok": 10,
-      "namaBarang": "papope",
-      "hargaJualBarang": 11111,
-      "hargaBeliBarang": 90000,
-      "kategori": "kekeke",
-      "gambar": "/home/suisei/Pictures/Screenshot from 2023-02-17 22-23-12.png"
+      "idBarang": 13,
+      "stok": 5,
+      "namaBarang": "Polss",
+      "hargaJualBarang": 900,
+      "hargaBeliBarang": 900,
+      "kategori": "Makan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 14,
+      "stok": 5,
+      "namaBarang": "Polss",
+      "hargaJualBarang": 900,
+      "hargaBeliBarang": 900,
+      "kategori": "Makan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 16,
+      "stok": 20,
+      "namaBarang": "Kol",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 20,
+      "kategori": "Makanan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 15,
+      "stok": 90,
+      "namaBarang": "Hati",
+      "hargaJualBarang": 900,
+      "hargaBeliBarang": 900,
+      "kategori": "Makanan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 17,
+      "stok": 20,
+      "namaBarang": "Kol",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 23,
+      "kategori": "Makanan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 18,
+      "stok": 20,
+      "namaBarang": "Kol",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 23,
+      "kategori": "Makanan",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 19,
+      "stok": 90,
+      "namaBarang": "malak",
+      "hargaJualBarang": 9000,
+      "hargaBeliBarang": 10000,
+      "kategori": "Moko",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 20,
+      "stok": 90,
+      "namaBarang": "malak",
+      "hargaJualBarang": 9000,
+      "hargaBeliBarang": 10000,
+      "kategori": "Moko",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 10,
+      "stok": 6,
+      "namaBarang": "ajaj",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 45,
+      "kategori": "Mk",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 11,
+      "stok": 6,
+      "namaBarang": "ajaj",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 45,
+      "kategori": "Mk",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 12,
+      "stok": 6,
+      "namaBarang": "ajaj",
+      "hargaJualBarang": 90,
+      "hargaBeliBarang": 45,
+      "kategori": "Mk",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     }
   ]
 }
