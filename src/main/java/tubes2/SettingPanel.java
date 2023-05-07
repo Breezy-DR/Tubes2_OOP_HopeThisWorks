@@ -157,16 +157,20 @@ public class SettingPanel extends JPanel implements ActionListener {
             path.showOpenDialog(null);
             File folderPath = new File(path.getSelectedFile().getAbsolutePath());
             pathText.setText(folderPath.toString());
+            DataStoreHub.setFilePath(pathText.getText());
             System.out.println(folderPath);
         }
         else if (e.getSource() == optionJSON) {
             selectedOption = "JSON";
+            DataStoreHub.setDataStore(new JSONDataStore());
         }
         else if (e.getSource() == optionXML) {
             selectedOption = "XML";
+            DataStoreHub.setDataStore(new XMLDataStore());
         }
         else if (e.getSource() == optionOBJ) {
             selectedOption = "OBJ";
+            DataStoreHub.setDataStore(new OBJDataStore());
         }
         else if (e.getSource() == pluginButton) {
             JFileChooser path = new JFileChooser();
