@@ -2,12 +2,66 @@
   "barangList": [
     {
       "idBarang": 1,
-      "stok": 12,
-      "namaBarang": "barang",
-      "hargaJualBarang": 10,
-      "hargaBeliBarang": 9,
-      "kategori": "tes",
-      "gambar": "gambar"
+      "stok": 4,
+      "namaBarang": "Halo",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 2,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 3,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 4,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 5,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 6,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
+    },
+    {
+      "idBarang": 7,
+      "stok": 4,
+      "namaBarang": "kki",
+      "hargaJualBarang": 100000,
+      "hargaBeliBarang": 200000,
+      "kategori": "Mkka",
+      "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     }
   ]
 }

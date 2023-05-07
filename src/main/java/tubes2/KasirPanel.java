@@ -61,6 +61,12 @@ public class KasirPanel extends JPanel implements ActionListener {
         
         JButton btnTambahBarang = new JButton("Tambah barang");
         btnTambahBarang.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnTambahBarang.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AddKasir add = new AddKasir();
+        		add.main();
+        	}
+        });
         
         model = new DefaultListModel();
         list = new JList(model);
