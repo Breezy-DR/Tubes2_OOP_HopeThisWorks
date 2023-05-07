@@ -1,6 +1,5 @@
 package tubes2;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +12,8 @@ public class SettingPanel extends JPanel implements ActionListener {
     private final JRadioButton optionXML;
     private final JRadioButton optionOBJ;
     private final JTextArea pathText;
-    private JPanel panel3;
-    private JPanel centerPanel;
+    private final JPanel panel3;
+    private final JPanel subPanel3;
 
     public SettingPanel() {
         // Bagian Atas
@@ -107,13 +106,14 @@ public class SettingPanel extends JPanel implements ActionListener {
         JLabel pluginLabel = new JLabel("Plugin");
         pluginLabel.setForeground(Color.WHITE);
         pluginLabel.setFont(new Font(pluginLabel.getFont().getName(), pluginLabel.getFont().getStyle(), 15));
-        pluginLabel.setPreferredSize(new Dimension(500,20));
+        pluginLabel.setPreferredSize(new Dimension(100,20));
+        pluginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         // Tombol
         pluginButton = new JButton("Tambah Plugin");
         pluginButton.addActionListener(this);
         pluginButton.setFocusable(false);
         // Sub-panel 3
-        JPanel subPanel3 = new JPanel();
+        subPanel3 = new JPanel();
         subPanel3.setPreferredSize(new Dimension(100,35));
         subPanel3.setBackground(Color.LIGHT_GRAY);
         subPanel3.setLayout(new FlowLayout());
@@ -121,17 +121,18 @@ public class SettingPanel extends JPanel implements ActionListener {
         subPanel3.setOpaque(false);
         // Panel 3
         panel3 = new JPanel();
+        panel3.setPreferredSize(new Dimension(500, 300));
         panel3.setBounds(100,330, 500, 160);
         panel3.setBackground(Color.GRAY);
-        panel3.setLayout(new BorderLayout(0,15));
-        panel3.add(pluginLabel, BorderLayout.NORTH);
-        panel3.add(subPanel3, BorderLayout.SOUTH);
+        panel3.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 25));
+        panel3.add(pluginLabel);
+        panel3.add(subPanel3);
 
 
         // Center panel
-        centerPanel = new JPanel();
+        JPanel centerPanel = new JPanel();
         centerPanel.setPreferredSize(new Dimension(100,100));
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 75));
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 65));
         centerPanel.setBackground(Color.GRAY);
         centerPanel.add(panel1);
         centerPanel.add(panel2);
@@ -176,12 +177,10 @@ public class SettingPanel extends JPanel implements ActionListener {
                 object = JarClassLoader.loadJar(path);
                 Class pluginClass = Class.forName(object.toString().substring(6));
                 pluginInstance = pluginClass.newInstance();
-                JPanel panelTrial = ((SystemPlugin) pluginInstance).createPluginPanel();
-                panel3.add(panelTrial);
+                JPanel addedPanel = ((SystemPlugin) pluginInstance).createPluginPanel();
+                panel3.add(addedPanel);
+                panel3.add(subPanel3);
                 revalidate();
-
-//                centerPanel.add(panelTrial);
-//                add(centerPanel, BorderLayout.CENTER);
             } catch (Exception l) {
                 System.out.println("Caught exception : "+l);
             }

@@ -48,6 +48,7 @@ public class PluginSistem1 extends SystemPlugin implements ActionListener {
         subPanel1.add(optionDirham);
         // Panel 1
         JPanel panel1 = new JPanel();
+        panel1.setPreferredSize(new Dimension(500,50));
         panel1.setBounds(100, 190, 500, 65);
         panel1.setBackground(Color.gray);
         panel1.setLayout(new BorderLayout(0,10));
