@@ -42,4 +42,12 @@ public class BarangList implements Serializable {
             }
         }
     }
+    public void deleteBarang(int idBarang){
+        for (Barang b:this.barangList){
+            if (b.getIDBarang()==idBarang){
+                this.barangList.remove(b);
+                break;
+            }
+        }
+    }
 }

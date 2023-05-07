@@ -1,9 +1,11 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name = "kursListClass")
 public class KursList implements Serializable {
     private List<Kurs> kursList;
     public KursList(){

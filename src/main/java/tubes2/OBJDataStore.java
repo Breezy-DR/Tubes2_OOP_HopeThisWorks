@@ -94,6 +94,11 @@ public class OBJDataStore implements IDataStore{
     }
 
     @Override
+    public void deleteBarang(String filePath, int idBarang) {
+
+    }
+
+    @Override
     public Fee readFee(String filePath) {
         try(ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(filePath+"/fee.obj"))){
             Fee fee=(Fee) objectInputStream.readObject();

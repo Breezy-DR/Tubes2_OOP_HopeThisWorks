@@ -11,6 +11,7 @@ public interface IDataStore {
     public void updateCustomer(String filePath,Customer customer);
     public void addBarang(String filePath,Barang barang);
     public void updateBarang(String filePath,Barang barang);
+    public void deleteBarang(String filePath,int idBarang);
     public Fee readFee(String filePath);
     public void updateFee(String filePath,Fee fee);
     public KursList readKurs(String filePath);

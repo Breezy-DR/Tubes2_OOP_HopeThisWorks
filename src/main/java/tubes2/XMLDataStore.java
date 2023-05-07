@@ -118,6 +118,11 @@ public class XMLDataStore implements IDataStore {
         barangList.updateBarang(barang);
         this.writeBarang(filePath,barangList);
     }
+    public void deleteBarang(String filePath,int idBarang){
+        BarangList barangList=this.readBarang(filePath);
+        barangList.deleteBarang(idBarang);
+        this.writeBarang(filePath,barangList);
+    }
 
     @Override
     public Fee readFee(String filePath) {
@@ -149,12 +154,31 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public KursList readKurs(String filePath) {
+        try (FileReader reader=new FileReader(filePath+"/kurs.xml")){
+            Gson gson=new GsonBuilder()
+                    .registerTypeAdapter(Kurs.class,new KursDeserializer())
+                    .create();
+            JSONObject jsonObject=XML.toJSONObject(reader);
+            JsonObject root=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
+            JsonObject kursListClass=root.getAsJsonObject("kursListClass");
+            KursList kursList=gson.fromJson(kursListClass,new TypeToken<KursList>(){}.getType());
+            return kursList;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void writeKurs(String filePath, KursList kursList) {
-
+        try{
+            JAXBContext jaxbContext=JAXBContext.newInstance(KursList.class);
+            Marshaller marshaller=jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(kursList,new File(filePath+"/kurs.xml"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

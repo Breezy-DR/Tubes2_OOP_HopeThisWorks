@@ -1,7 +1,10 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Kurs implements Serializable {
     private String namaMataUang="idr";
     private float kursToIDR=1f;

@@ -97,6 +97,11 @@ public class JSONDataStore implements IDataStore{
     }
 
     @Override
+    public void deleteBarang(String filePath, int idBarang) {
+
+    }
+
+    @Override
     public Fee readFee(String filePath) {
         try(FileReader fileReader = new FileReader(filePath+"/fee.json")){
             Gson gson=new Gson();
