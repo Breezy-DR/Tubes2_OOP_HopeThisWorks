@@ -29,9 +29,15 @@ public class jsontest {
 //        barang.addStok(10);
 //        dataStore.updateBarang(barang);
 //        BarangList bl=dataStore.readBarang();
-        Fee fee=new Fee(0.5f,0.5f,0.5f);
-        DataStoreHub.updateFee(fee);
-        Fee fee1=DataStoreHub.readFee();
-        System.out.println(fee1.getDiscount());
+//        Fee fee=new Fee(0.5f,0.5f,0.5f);
+//        DataStoreHub.updateFee(fee);
+//        Fee fee1=DataStoreHub.readFee();
+//        System.out.println(fee1.getDiscount());
+        Kurs kurs=new Kurs();
+        KursList kursList=new KursList();
+        kursList.addKurs(kurs);
+        DataStoreHub.writeKurs(kursList);
+        KursList kursList1=DataStoreHub.readKurs();
+        System.out.println(kursList1.getKursList().get(0).getKursToIDR());
     }
 }

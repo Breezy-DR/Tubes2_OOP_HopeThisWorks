@@ -50,4 +50,20 @@ public class DataStoreHub {
     public static void addCustomer(Customer customer){
         dataStore.addCustomer(filePath,customer);
     }
+
+    public static KursList readKurs(){
+        return dataStore.readKurs(filePath);
+    }
+    public static void writeKurs(KursList kursList){
+        dataStore.writeKurs(filePath,kursList);
+    }
+    public static void updateKurs(Kurs kurs){
+        dataStore.updateKurs(filePath,kurs);
+    }
+    public static void addKurs(Kurs kurs){
+        dataStore.addKurs(filePath,kurs);
+    }
+    public static Kurs getKursByName(String namaMataUang){
+        return dataStore.getKursByName(filePath,namaMataUang);
+    }
 }

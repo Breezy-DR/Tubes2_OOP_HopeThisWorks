@@ -146,4 +146,29 @@ public class XMLDataStore implements IDataStore {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public KursList readKurs(String filePath) {
+        return null;
+    }
+
+    @Override
+    public void writeKurs(String filePath, KursList kursList) {
+
+    }
+
+    @Override
+    public void updateKurs(String filePath, Kurs kurs) {
+
+    }
+
+    @Override
+    public void addKurs(String filePath, Kurs kurs) {
+
+    }
+
+    @Override
+    public Kurs getKursByName(String filePath, String namaMataUang) {
+        return null;
+    }
 }

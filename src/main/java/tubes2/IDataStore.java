@@ -13,4 +13,10 @@ public interface IDataStore {
     public void updateBarang(String filePath,Barang barang);
     public Fee readFee(String filePath);
     public void updateFee(String filePath,Fee fee);
+    public KursList readKurs(String filePath);
+    public void writeKurs(String filePath,KursList kursList);
+    public void updateKurs(String filePath,Kurs kurs);
+    public void addKurs(String filePath,Kurs kurs);
+    public Kurs getKursByName(String filePath,String namaMataUang);
+
 }

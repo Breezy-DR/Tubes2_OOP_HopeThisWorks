@@ -119,4 +119,47 @@ public class JSONDataStore implements IDataStore{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public KursList readKurs(String filePath) {
+        try (FileReader reader=new FileReader(filePath+"/kurs.json")){
+            Gson gson=new GsonBuilder()
+                    .registerTypeAdapter(Kurs.class,new KursDeserializer())
+                    .create();
+            KursList kursList=gson.fromJson(reader,new TypeToken<KursList>(){}.getType());
+            return kursList;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @Override
+    public void writeKurs(String filePath,KursList kursList){
+        Gson gson=new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter fileWriter=new FileWriter(filePath+"/kurs.json")){
+            gson.toJson(kursList,fileWriter);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateKurs(String filePath, Kurs kurs) {
+        KursList kursList=this.readKurs(filePath);
+        kursList.updateKurs(kurs);
+        this.writeKurs(filePath,kursList);
+    }
+
+    @Override
+    public void addKurs(String filePath, Kurs kurs) {
+        KursList kursList=this.readKurs(filePath);
+        kursList.addKurs(kurs);
+        writeKurs(filePath,kursList);
+    }
+    @Override
+    public Kurs getKursByName(String filePath,String namaMataUang){
+        KursList kursList=this.readKurs(filePath);
+        return kursList.getKursByName(namaMataUang);
+    }
+
 }
