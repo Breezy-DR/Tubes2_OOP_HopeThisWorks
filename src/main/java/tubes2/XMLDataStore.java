@@ -117,4 +117,21 @@ public class XMLDataStore implements IDataStore {
         barangList.updateBarang(barang);
         this.writeBarang(filePath,barangList);
     }
+
+    @Override
+    public Fee readFee(String filePath) {
+        try (FileReader fileReader=new FileReader(filePath+"/fee.xml")){
+            JSONObject jsonObject=XML.toJSONObject(fileReader);
+            JsonObject jsonObject1=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
+            System.out.println(jsonObject1.toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void updateFee(String filePath, Fee fee) {
+
+    }
 }

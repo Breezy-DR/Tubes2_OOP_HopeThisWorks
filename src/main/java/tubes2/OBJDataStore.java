@@ -92,4 +92,14 @@ public class OBJDataStore implements IDataStore{
         barangList.updateBarang(barang);
         this.writeBarang(filePath,barangList);
     }
+
+    @Override
+    public Fee readFee(String filePath) {
+        return null;
+    }
+
+    @Override
+    public void updateFee(String filePath, Fee fee) {
+
+    }
 }

@@ -39,4 +39,15 @@ public class DataStoreHub {
     public static void updateBarang(Barang barang){
         dataStore.updateBarang(filePath,barang);
     }
+
+    public static Fee readFee(){
+        return dataStore.readFee(filePath);
+    }
+    public static void updateFee(Fee fee){
+        dataStore.updateFee(filePath,fee);
+    }
+
+    public static void addCustomer(Customer customer){
+        dataStore.addCustomer(filePath,customer);
+    }
 }

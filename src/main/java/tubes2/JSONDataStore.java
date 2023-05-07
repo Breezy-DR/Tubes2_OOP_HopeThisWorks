@@ -95,4 +95,28 @@ public class JSONDataStore implements IDataStore{
         barangList.updateBarang(barang);
         writeBarang(filePath,barangList);
     }
+
+    @Override
+    public Fee readFee(String filePath) {
+        try(FileReader fileReader = new FileReader(filePath+"/fee.json")){
+            Gson gson=new Gson();
+            Fee fee =gson.fromJson(fileReader,Fee.class);
+            return fee;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void updateFee(String filePath,Fee fee) {
+        try (FileWriter fileWriter=new FileWriter(filePath+"/fee.json")){
+            Gson gson=new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+            gson.toJson(fee,fileWriter);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

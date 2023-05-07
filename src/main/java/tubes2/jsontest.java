@@ -17,10 +17,10 @@ public class jsontest {
 //        cl.addCustomer(ucust);
 //        DataStoreHub.writeCustomer(cl);
 //        DataStoreHub.updateCustomer(registered2);
-        IDataStore xmlDataStore=new XMLDataStore();
-        DataStoreHub.setDataStore(xmlDataStore);
-        CustomerList cl=DataStoreHub.readCustomer();
-        System.out.println(cl.getCustomerList().get(0).getId());
+//        IDataStore xmlDataStore=new XMLDataStore();
+//        DataStoreHub.setDataStore(xmlDataStore);
+//        CustomerList cl=DataStoreHub.readCustomer();
+//        System.out.println(cl.getCustomerList().get(0).getId());
 //        Barang barang=new Barang(1,2,"barang",10,9,"tes","gambar");
 //        BarangList bl=new BarangList();
 //        bl.addBarang(barang);
@@ -29,5 +29,9 @@ public class jsontest {
 //        barang.addStok(10);
 //        dataStore.updateBarang(barang);
 //        BarangList bl=dataStore.readBarang();
+        Fee fee=new Fee(0.5f,0.5f,0.5f);
+        DataStoreHub.updateFee(fee);
+        Fee fee1=DataStoreHub.readFee();
+        System.out.println(fee1.discount);
     }
 }
