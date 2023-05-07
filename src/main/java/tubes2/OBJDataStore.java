@@ -95,11 +95,25 @@ public class OBJDataStore implements IDataStore{
 
     @Override
     public Fee readFee(String filePath) {
+        try(ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(filePath+"/fee.obj"))){
+            Fee fee=(Fee) objectInputStream.readObject();
+            return fee;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void updateFee(String filePath, Fee fee) {
-
+        try {
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"/fee.obj");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(fee);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
