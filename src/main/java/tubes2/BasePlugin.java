@@ -2,11 +2,14 @@ package tubes2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BasePlugin {
     private static int pluginCount = 0;
     private String name;
     protected JPanel mainPanel;
+    protected DataStoreHub datastore = new DataStoreHub();
 
     public BasePlugin() {
         this.pluginCount++;
@@ -33,6 +36,25 @@ public abstract class BasePlugin {
     }
 
     public abstract JPanel createPluginPanel();
+
+    public Map<String, Integer> soldItems(){
+        Map<String, Integer> soldAmount = new HashMap<String, Integer>();
+        BarangList barangList = datastore.readBarang();
+        for(Barang b: barangList.getBarangList()){
+            soldAmount.put(b.getNamaBarang(),0);
+        }
+
+        CustomerList customerList = datastore.readCustomer();
+        for(Customer customer: customerList.getCustomerList()){
+            for(FixedBill bill: customer.getHistoriTransaksi()){
+                for(ElmtOfBill elmt: bill.getlistBelanja()){
+                    Integer freq = soldAmount.get(elmt.getNama());
+                    soldAmount.put(elmt.getNama(), freq + 1);
+                }
+            }
+        }
+        return soldAmount;
+    }
 }
 
 class BlankPage extends JPanel {
