@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -18,11 +21,13 @@ public class GudangPanel extends JPanel implements ActionListener {
     	
     	// Inisialisasi/retrieve data from datastore
     	BarangList listofBarang = DataStoreHub.readBarang();
-    	for (int i = 1; i < listofBarang.getBarangList().size(); i++)
-    	      model.addElement("ID: " + listofBarang.getBarang(i).getIDBarang()
+    	if (listofBarang.getBarangList().size() != 0) {
+    	for (int i = 0; i < listofBarang.getBarangList().size(); i++)
+    	      model.addElement("ID:" + listofBarang.getBarang(i).getIDBarang()
     	    		  + ". Nama barang:" + listofBarang.getBarang(i).getNamaBarang() +
     	    		  ", Stok: " + listofBarang.getBarang(i).getStok() +
     	    		  ", Harga jual: " + listofBarang.getBarang(i).getHargaJual());
+    	}
 
         // Judul
         JLabel title = new JLabel("Gudang");
@@ -126,7 +131,15 @@ public class GudangPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(selectedOption);
-    
+        int index = list.getSelectedIndex();
+        String x = (String) model.getElementAt(index);
+        x = x.substring(x.indexOf(":") + 1);
+        x = x.substring(0, x.indexOf("."));
+        int id = Integer.parseInt(x);
+        if (index != -1) {
+            model.remove(index);
+            DataStoreHub.deleteBarang(id);
+        }
     }
     
     public static void addProduct(String namabarang, int stok, int hargajual) {
@@ -138,11 +151,11 @@ public class GudangPanel extends JPanel implements ActionListener {
     	} else {
     		index = sizelist;
     	}
-    	String addition = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	String addition = "ID:" + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
     	model.addElement(addition);
     }
     public static void updateProduct(int index, String namabarang, int stok, int hargajual) {
-    	String update = "ID: " + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
+    	String update = "ID:" + index + ". Nama barang:" + namabarang + ", Stok: " + stok + ", Harga jual: " + hargajual;
     	model.setElementAt(update, index - 1);
     }
 }
