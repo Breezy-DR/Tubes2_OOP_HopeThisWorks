@@ -160,19 +160,14 @@ public class Menu extends JFrame implements ActionListener {
             tab.add("Riwayat", new RiwayatPanel());
         }
         else if (e.getSource() == tambahPlugin) {
-            JFileChooser path = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("jar", "jar", "JAR");
-            path.setFileFilter(filter);
-            path.setFileSelectionMode( JFileChooser.FILES_ONLY);
-            path.showOpenDialog(null);
-            File jarFile = new File(path.getSelectedFile().getAbsolutePath());
-            System.out.println(jarFile);
+            // Get jar file
+            String path = TambahPluginDialog.openJarFile();
 
             // Load jar
             Object object;
             Object pluginInstance;
             try {
-                object = JarClassLoader.loadJar(path.getSelectedFile().getAbsolutePath());
+                object = JarClassLoader.loadJar(path);
                 Class pluginClass = Class.forName(object.toString().substring(6));
                 pluginInstance = pluginClass.newInstance();
                 addPanel(((BasePlugin) pluginInstance).createPluginPanel(), "Plugin " + BasePlugin.getPluginCount());

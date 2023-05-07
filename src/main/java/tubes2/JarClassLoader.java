@@ -10,6 +10,7 @@ import java.util.jar.JarInputStream;
 
 
 public class JarClassLoader extends ClassLoader {
+    // Mengembalikan class pertama dari file jar
     public static Class<?> loadJar(String path) {
         try {
             return loadJarFile(path).get(0);
@@ -18,19 +19,17 @@ public class JarClassLoader extends ClassLoader {
         }
     }
 
+    // Mengambalikan semua nama class dari file jar
     private static ArrayList<String> getClassNamesFromJar(String path) throws Exception {
         JarInputStream jarFile = new JarInputStream(new FileInputStream(path));
         ArrayList<String> classNames = new ArrayList<>();
         try {
             JarEntry jar;
-
-            //Iterate through the contents of the jar file
             while (true) {
                 jar = jarFile.getNextJarEntry();
                 if (jar == null) {
                     break;
                 }
-                //Pick file that has the extension of .class
                 if ((jar.getName().endsWith(".class"))) {
                     String className = jar.getName().replaceAll("/", "\\.");
                     String myClass = className.substring(0, className.lastIndexOf('.'));
@@ -44,7 +43,7 @@ public class JarClassLoader extends ClassLoader {
     }
 
 
-    // get an arraylist of all the loaded classes in a jar file
+    // Mengembalikan List yang berisi class-class pada file jar
     private static ArrayList<Class> loadJarFile(String filePath) throws Exception {
         ArrayList<Class> availableClasses = new ArrayList<>();
         ArrayList<String> classNames = getClassNamesFromJar(filePath);
