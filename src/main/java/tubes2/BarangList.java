@@ -1,8 +1,10 @@
 package tubes2;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name = "barangListClass")
 public class BarangList {
     private List<Barang> barangList;
     public BarangList(){

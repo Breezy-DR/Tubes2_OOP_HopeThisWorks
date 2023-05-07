@@ -26,6 +26,7 @@ public class xmltest {
         dataStore.writeBarang(bl);
         barang.addStok(10);
         dataStore.updateBarang(barang);
-//        BarangList bl=dataStore.readBarang();
+        BarangList bl1=dataStore.readBarang();
+        System.out.println(bl1.getBarangList().get(0).getStok());
     }
 }

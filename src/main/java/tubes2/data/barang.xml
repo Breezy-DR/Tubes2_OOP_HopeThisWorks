@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<barangListClass>
+    <barangList>
+        <idBarang>1</idBarang>
+        <stok>2</stok>
+        <namaBarang>barang</namaBarang>
+        <hargaJualBarang>10</hargaJualBarang>
+        <hargaBeliBarang>9</hargaBeliBarang>
+        <kategori>tes</kategori>
+        <gambar>gambar</gambar>
+    </barangList>
+    <barangList>
+        <idBarang>1</idBarang>
+        <stok>2</stok>
+        <namaBarang>barang</namaBarang>
+        <hargaJualBarang>10</hargaJualBarang>
+        <hargaBeliBarang>9</hargaBeliBarang>
+        <kategori>tes</kategori>
+        <gambar>gambar</gambar>
+    </barangList>
+</barangListClass>

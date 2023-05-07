@@ -64,12 +64,34 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public BarangList readBarang() {
+        try (FileReader reader=new FileReader(this.getFilePath()+"/barang.xml")){
+            Gson gson=new GsonBuilder()
+                    .registerTypeAdapter(Barang.class,new BarangDeserializer())
+                    .create();
+            JSONObject jsonObject= XML.toJSONObject(reader);
+            JsonParser parser=new JsonParser();
+            JsonObject root=parser.parse(jsonObject.toString()).getAsJsonObject();
+//            System.out.println(root);
+            JsonObject baranglist=root.getAsJsonObject("barangListClass");
+//            System.out.println(customlist);
+            BarangList bl=gson.fromJson(baranglist,new TypeToken<BarangList>(){}.getType());
+            return bl;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void writeBarang(BarangList barangList) {
-
+        try{
+            JAXBContext jaxbContext=JAXBContext.newInstance(BarangList.class);
+            Marshaller marshaller=jaxbContext.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(barangList,new File(this.getFilePath()+"/barang.xml"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
