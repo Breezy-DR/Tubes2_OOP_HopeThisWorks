@@ -26,6 +26,15 @@
       "hargaBeliBarang": 100,
       "kategori": "tes",
       "gambar": "/home/suisei/Pictures/Screenshot from 2023-02-17 22-22-53.png"
+    },
+    {
+      "idBarang": 3,
+      "stok": 10,
+      "namaBarang": "papope",
+      "hargaJualBarang": 11111,
+      "hargaBeliBarang": 90000,
+      "kategori": "kekeke",
+      "gambar": "/home/suisei/Pictures/Screenshot from 2023-02-17 22-23-12.png"
     }
   ]
 }
