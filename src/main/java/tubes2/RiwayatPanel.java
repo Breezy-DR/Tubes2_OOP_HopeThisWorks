@@ -112,7 +112,8 @@ public class RiwayatPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
         if (e.getSource() == tampilkanRiwayatButton) {
-            HistoriTransaksiSplitPane.main(selectedID);
+            // HistoriTransaksiSplitPane.main(selectedID);
+            HistoriTransaksiList.main(selectedID);
         }
     }
 }

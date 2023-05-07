@@ -95,10 +95,10 @@ public class HistoriTransaksiSplitPane extends JPanel implements ListSelectionLi
     //Listens to the list
     public void valueChanged(ListSelectionEvent e) {
         JList<Integer> list = (JList<Integer>)e.getSource();
-        updateTable(priceList[list.getSelectedIndex()]);
+        updateTable(list.getSelectedIndex());
     }
     
-    //Renders the selected image
+    //Set new table
     protected void updateTable (int index) {
         table = new JTable(new MyTableModel(listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(index).getlistBelanja()));
     }
