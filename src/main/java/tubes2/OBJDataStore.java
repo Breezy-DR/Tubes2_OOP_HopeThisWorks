@@ -124,11 +124,25 @@ public class OBJDataStore implements IDataStore{
 
     @Override
     public KursList readKurs(String filePath) {
+        try(ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(filePath+"/customer.obj"))){
+            KursList kursList=(KursList) objectInputStream.readObject();
+            return kursList;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void writeKurs(String filePath, KursList kursList) {
-
+        try {
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath+"/customer.obj");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(kursList);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
