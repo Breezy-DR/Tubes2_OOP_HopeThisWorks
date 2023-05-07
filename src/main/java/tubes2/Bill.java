@@ -16,6 +16,9 @@ public class Bill {
     public void tambahBarang(Barang barang, int jumlah) {
         this.listBelanja.add(new ElmtOfBill(barang.getNamaBarang(), jumlah));
     }
+    public void tambahBarang(String namaBarang,int jumlah,int harga){
+        this.listBelanja.add(new ElmtOfBill(namaBarang,jumlah,harga));
+    }
 
     public void hapusBarang(int idx) {
         this.listBelanja.remove(idx);
