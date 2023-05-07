@@ -28,12 +28,12 @@ public class XMLDataStore implements IDataStore {
                     .registerTypeAdapter(Customer.class,new CustomerDeserializer())
                     .create();
             JSONObject jsonObject= XML.toJSONObject(reader);
-//            JsonParser parser=new JsonParser();
             JsonObject root=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
-//            System.out.println(root);
+            System.out.println(root.toString());
             JsonObject customlist=root.getAsJsonObject("customerListClass");
-//            System.out.println(customlist);
+            System.out.println(customlist.toString());
             CustomerList cl=gson.fromJson(customlist,new TypeToken<CustomerList>(){}.getType());
+            cl.removeDummy();
             return cl;
         } catch (Exception e){
             e.printStackTrace();
@@ -50,7 +50,9 @@ public class XMLDataStore implements IDataStore {
 
     @Override
     public void writeCustomer(String filePath,CustomerList customerList) {
+//        customerList.setCustomerList(customerList.getCustomerList().add(0,new));
         try{
+            customerList.insertDummy();
             JAXBContext jaxbContext=JAXBContext.newInstance(CustomerList.class);
             Marshaller marshaller=jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
@@ -73,6 +75,7 @@ public class XMLDataStore implements IDataStore {
             JsonObject baranglist=root.getAsJsonObject("barangListClass");
 //            System.out.println(customlist);
             BarangList bl=gson.fromJson(baranglist,new TypeToken<BarangList>(){}.getType());
+            bl.removeDummy();
             return bl;
         } catch (Exception e){
             e.printStackTrace();
@@ -83,6 +86,7 @@ public class XMLDataStore implements IDataStore {
     @Override
     public void writeBarang(String filePath,BarangList barangList) {
         try{
+            barangList.insertDummy();
             JAXBContext jaxbContext=JAXBContext.newInstance(BarangList.class);
             Marshaller marshaller=jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
@@ -161,7 +165,9 @@ public class XMLDataStore implements IDataStore {
             JSONObject jsonObject=XML.toJSONObject(reader);
             JsonObject root=JsonParser.parseString(jsonObject.toString()).getAsJsonObject();
             JsonObject kursListClass=root.getAsJsonObject("kursListClass");
+            System.out.println(root.toString());
             KursList kursList=gson.fromJson(kursListClass,new TypeToken<KursList>(){}.getType());
+            kursList.removeDummy();
             return kursList;
         } catch (Exception e){
             e.printStackTrace();
@@ -172,6 +178,7 @@ public class XMLDataStore implements IDataStore {
     @Override
     public void writeKurs(String filePath, KursList kursList) {
         try{
+            kursList.insertDummy();
             JAXBContext jaxbContext=JAXBContext.newInstance(KursList.class);
             Marshaller marshaller=jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
