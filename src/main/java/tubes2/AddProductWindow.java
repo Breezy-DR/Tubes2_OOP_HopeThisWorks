@@ -21,7 +21,22 @@ public class AddProductWindow implements ActionListener {
 
 	private JFrame frame;
 	private JButton pathButton;
+	private JButton submit;
 	private JTextArea pathText;
+	private JTextArea stoktext;
+	private JTextArea namatext;
+	private JTextArea hargabelitext;
+	private JTextArea hargajualtext;
+	private JTextArea kategoritext;
+	private String gambartext;
+
+	
+	private int stok;
+	private String NamaBarang;
+	private int hargabeli;
+	private int hargajual;
+	private String kategori;
+	private String gambar;
 
 	/**
 	 * Launch the application.
@@ -55,9 +70,9 @@ public class AddProductWindow implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(26, 67, 271, 37);
-		frame.getContentPane().add(textArea);
+		stoktext = new JTextArea();
+		stoktext.setBounds(26, 67, 271, 37);
+		frame.getContentPane().add(stoktext);
 		
 		JLabel lblNewLabel = new JLabel("Stok");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -69,50 +84,47 @@ public class AddProductWindow implements ActionListener {
 		lblNamaBarang.setBounds(26, 144, 203, 37);
 		frame.getContentPane().add(lblNamaBarang);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(26, 182, 271, 37);
-		frame.getContentPane().add(textArea_1);
+		namatext = new JTextArea();
+		namatext.setBounds(26, 182, 271, 37);
+		frame.getContentPane().add(namatext);
 		
 		JLabel lblHargaBeli = new JLabel("Harga Beli");
 		lblHargaBeli.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblHargaBeli.setBounds(26, 262, 203, 37);
 		frame.getContentPane().add(lblHargaBeli);
 		
-		JTextArea textArea_1_1 = new JTextArea();
-		textArea_1_1.setBounds(26, 300, 271, 37);
-		frame.getContentPane().add(textArea_1_1);
+		hargabelitext = new JTextArea();
+		hargabelitext.setBounds(26, 300, 271, 37);
+		frame.getContentPane().add(hargabelitext);
 		
 		JLabel lblHargaJual = new JLabel("Harga Jual");
 		lblHargaJual.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblHargaJual.setBounds(331, 29, 203, 37);
 		frame.getContentPane().add(lblHargaJual);
 		
-		JTextArea textArea_1_2 = new JTextArea();
-		textArea_1_2.setBounds(331, 67, 271, 37);
-		frame.getContentPane().add(textArea_1_2);
+		hargajualtext = new JTextArea();
+		hargajualtext.setBounds(331, 67, 271, 37);
+		frame.getContentPane().add(hargajualtext);
 		
 		JLabel lblKategori = new JLabel("Kategori");
 		lblKategori.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblKategori.setBounds(331, 144, 203, 37);
 		frame.getContentPane().add(lblKategori);
 		
-		JTextArea textArea_1_2_1 = new JTextArea();
-		textArea_1_2_1.setBounds(331, 182, 271, 37);
-		frame.getContentPane().add(textArea_1_2_1);
+		kategoritext = new JTextArea();
+		kategoritext.setBounds(331, 182, 271, 37);
+		frame.getContentPane().add(kategoritext);
 		
 		JLabel lblGambar = new JLabel("Gambar");
 		lblGambar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblGambar.setBounds(331, 262, 203, 37);
 		frame.getContentPane().add(lblGambar);
 		
-		JButton btnNewButton = new JButton("Submit");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(230, 387, 183, 61);
-		frame.getContentPane().add(btnNewButton);
+		submit = new JButton("Submit");
+		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		submit.addActionListener(this);
+		submit.setBounds(230, 387, 183, 61);
+		frame.getContentPane().add(submit);
 		
 		pathButton = new JButton("Pilih Gambar");
 		pathButton.setFocusable(false);
@@ -135,8 +147,43 @@ public class AddProductWindow implements ActionListener {
             path.showOpenDialog(null);
             File folderPath = new File(path.getSelectedFile().getAbsolutePath());
             pathText.setText(folderPath.toString());
+            gambartext = folderPath.toString();
             System.out.println(folderPath);
         }
+        if (e.getSource() == submit) {
+        	stok = Integer.parseInt(stoktext.getText());
+        	NamaBarang = namatext.getText();
+        	hargabeli = Integer.parseInt(hargabelitext.getText());
+        	hargajual = Integer.parseInt(hargajualtext.getText());
+        	kategori = kategoritext.getText();
+        	gambar = gambartext;
+        	
+        }
 	}
+	
+	public int getstok() {
+		return this.stok;
+	}
+	
+	public String getNamaBarang() {
+		return NamaBarang;
+	}
+	
+	public int gethargabeli() {
+		return hargabeli;
+	}
+	
+	public int gethargajual() {
+		return hargajual;
+	}
+	
+	public String getKategori() {
+		return kategori;
+	}
+	
+	public String getgambar() {
+		return gambar;
+	}
+
 
 }

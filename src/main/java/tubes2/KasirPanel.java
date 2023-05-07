@@ -65,32 +65,29 @@ public class KasirPanel extends JPanel implements ActionListener {
         textDaftarProduk.setForeground(new Color(255, 255, 255));
         textDaftarProduk.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JButton btnSaveBill = new JButton("Save bill");
-        btnSaveBill.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        
         JButton btnSaveBill_1 = new JButton("Save Bill");
         btnSaveBill_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        
+        JButton btnTambahBarang = new JButton("Tambah barang");
+        btnTambahBarang.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         
         GroupLayout gl_centerPanel = new GroupLayout(centerPanel);
         gl_centerPanel.setHorizontalGroup(
         	gl_centerPanel.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
-        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
+        			.addGroup(gl_centerPanel.createParallelGroup(Alignment.TRAILING)
         				.addGroup(gl_centerPanel.createSequentialGroup()
-        					.addGroup(gl_centerPanel.createParallelGroup(Alignment.TRAILING)
-        						.addGroup(gl_centerPanel.createSequentialGroup()
-        							.addContainerGap()
-        							.addComponent(btnSaveBill, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(gl_centerPanel.createSequentialGroup()
-        							.addGap(53)
-        							.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-        							.addGap(316)))
-        					.addGap(22)
+        					.addGap(53)
+        					.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+        					.addGap(338)
         					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_centerPanel.createSequentialGroup()
         					.addContainerGap(538, Short.MAX_VALUE)
-        					.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)))
+        					.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_centerPanel.createSequentialGroup()
+        					.addContainerGap(554, Short.MAX_VALUE)
+        					.addComponent(btnTambahBarang, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         gl_centerPanel.setVerticalGroup(
@@ -103,11 +100,11 @@ public class KasirPanel extends JPanel implements ActionListener {
         				.addGroup(gl_centerPanel.createSequentialGroup()
         					.addGap(54)
         					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(433)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnTambahBarang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        			.addGap(387)
         			.addComponent(btnSaveBill_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-        			.addGap(66)
-        			.addComponent(btnSaveBill, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-        			.addGap(30))
+        			.addGap(122))
         );
         centerPanel.setLayout(gl_centerPanel);
 	}
