@@ -1,10 +1,7 @@
 package tubes2;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import java.util.*;
 
 public class HistoriTransaksiList {
     private final CustomerList listCustomer = DataStoreHub.readCustomer();
@@ -42,12 +39,6 @@ public class HistoriTransaksiList {
             }
             currTransaksi = currTransaksi + 1;
         }
-
-        // for(int i = 0; i < numOfTransaksiListElmt; i++) {
-        //     for (int j = 0; j < listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getlistBelanja().size(); j++) {
-        //         totalTransaksi[i] = listCustomer.getCustomerByID(customerID).getHistoriTransaksi().get(i).getlistBelanja().get(j).getHargaTotal();
-        //     }    
-        // }
         JList<Object> list = new JList<Object>(historiTransaksi);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
