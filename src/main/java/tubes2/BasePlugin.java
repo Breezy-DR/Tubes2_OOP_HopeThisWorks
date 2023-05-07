@@ -38,6 +38,7 @@ public abstract class BasePlugin {
     public abstract JPanel createPluginPanel();
 
     public Map<String, Integer> soldItems(){
+        datastore = new DataStoreHub();
         Map<String, Integer> soldAmount = new HashMap<String, Integer>();
         BarangList barangList = datastore.readBarang();
         for(Barang b: barangList.getBarangList()){
@@ -49,7 +50,7 @@ public abstract class BasePlugin {
             for(FixedBill bill: customer.getHistoriTransaksi()){
                 for(ElmtOfBill elmt: bill.getlistBelanja()){
                     Integer freq = soldAmount.get(elmt.getNama());
-                    soldAmount.put(elmt.getNama(), freq + 1);
+                    soldAmount.put(elmt.getNama(), freq + elmt.getJumlah());
                 }
             }
         }

@@ -1,42 +1,13 @@
 {
   "customerList": [
     {
-      "vip": false,
-      "nama": "tes",
-      "nomorTelepon": "no",
-      "poin": 0,
-      "aktif": true,
       "id": 1,
       "historiTransaksi": [
         {
           "listBelanja": [
             {
-              "barang": "barang",
-              "jumlahBarang": 1
-            },
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            }
-          ]
-        },
-        {
-          "listBelanja": [
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            },
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            }
-          ]
-        },
-        {
-          "listBelanja": [
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
+              "barang": "papope",
+              "jumlahBarang": 2
             },
             {
               "barang": "barang",
@@ -47,42 +18,13 @@
       ]
     },
     {
-      "vip": true,
-      "nama": "testes",
-      "nomorTelepon": "123",
-      "poin": 0,
-      "aktif": true,
       "id": 2,
       "historiTransaksi": [
         {
           "listBelanja": [
             {
-              "barang": "barang",
-              "jumlahBarang": 1
-            },
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            }
-          ]
-        },
-        {
-          "listBelanja": [
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            },
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
-            }
-          ]
-        },
-        {
-          "listBelanja": [
-            {
-              "barang": "barang",
-              "jumlahBarang": 1
+              "barang": "tesdarigui",
+              "jumlahBarang": 3
             },
             {
               "barang": "barang",
