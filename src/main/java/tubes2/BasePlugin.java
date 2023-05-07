@@ -3,9 +3,18 @@ package tubes2;
 import javax.swing.*;
 import java.awt.*;
 
-public class BasePlugin {
+public abstract class BasePlugin {
+    private static int pluginCount = 0;
     private String name;
     protected JPanel mainPanel;
+
+    public BasePlugin() {
+        this.pluginCount++;
+    }
+
+    public static int getPluginCount() {
+        return pluginCount;
+    }
 
     public String getName() {
         return name;
@@ -19,15 +28,11 @@ public class BasePlugin {
         this.name = name;
     }
 
-    public JPanel createBlankPage() {
-        return new BlankPage("Plugin 1");
+    public JPanel createBlankPage(String pageTitle) {
+        return new BlankPage(pageTitle);
     }
 
-    public JPanel createPluginPanel() {
-        this.mainPanel = createBlankPage();
-        return mainPanel;
-    }
-
+    public abstract JPanel createPluginPanel();
 }
 
 class BlankPage extends JPanel {
