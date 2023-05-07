@@ -17,6 +17,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
     private JTextArea kuantitas;
     private JButton addBelanjaButton;
     private JButton saveBillButton;
+    private JButton deleteBillButton;
     public KasirPanelNew(){
         // Judul
         JLabel title = new JLabel("Kasir");
@@ -87,7 +88,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         kuantitas.setBorder(BorderFactory.createEmptyBorder(7, 7,7,7));
         // Sub-Panel 1
         JPanel subPanel1 = new JPanel();
-        subPanel1.setPreferredSize(new Dimension(300,10));
+        subPanel1.setPreferredSize(new Dimension(300,30));
         subPanel1.setBackground(Color.gray);
         subPanel1.setLayout(new BorderLayout());
         subPanel1.add(kuantitas, BorderLayout.CENTER);
@@ -174,17 +175,22 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         addBelanjaButton = new JButton("Tambah Belanja");
         addBelanjaButton.setFocusable(false);
         addBelanjaButton.addActionListener(this);
-        addBelanjaButton.setPreferredSize(new Dimension(300, 35));
+        addBelanjaButton.setPreferredSize(new Dimension(300, 30));
 
         saveBillButton = new JButton("Checkout");
         saveBillButton.setFocusable(false);
         saveBillButton.addActionListener(this);
-        saveBillButton.setPreferredSize(new Dimension(300, 35));
+        saveBillButton.setPreferredSize(new Dimension(300, 30));
+
+        deleteBillButton = new JButton("Hapus belanja");
+        deleteBillButton.setFocusable(false);
+        deleteBillButton.addActionListener(this);
+        deleteBillButton.setPreferredSize(new Dimension(300, 30));
 
         JPanel fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.LIGHT_GRAY);
         fieldPanel.setPreferredSize(new Dimension(500,570));
-        fieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 45));
+        fieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 20));
 //        fieldPanel.add(panelAkun);
 //        fieldPanel.add(panel1);
         fieldPanel.add(panel3);
@@ -194,6 +200,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         fieldPanel.add(panel2);
         fieldPanel.add(addBelanjaButton);
         fieldPanel.add(saveBillButton);
+        fieldPanel.add(deleteBillButton);
 
 
 
@@ -273,6 +280,9 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
                     }
                 }
             }
+        } else if (actionEvent.getSource().equals(deleteBillButton)){
+            model.removeAllElements();
+            bill.clearBill();
         }
     }
 

@@ -29,4 +29,8 @@ public class Bill {
         this.listBelanja.get(idx).setJumlahBarang(jumlah);
     }
 
+    public void clearBill(){
+        this.listBelanja.clear();
+    }
+
 }
