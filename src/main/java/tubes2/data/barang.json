@@ -17,6 +17,15 @@
       "hargaBeliBarang": 9,
       "kategori": "tes",
       "gambar": "gambar"
+    },
+    {
+      "idBarang": 2,
+      "stok": 10,
+      "namaBarang": "tesdarigui",
+      "hargaJualBarang": 9,
+      "hargaBeliBarang": 100,
+      "kategori": "tes",
+      "gambar": "/home/suisei/Pictures/Screenshot from 2023-02-17 22-22-53.png"
     }
   ]
 }

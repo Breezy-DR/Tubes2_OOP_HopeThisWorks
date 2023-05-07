@@ -15,8 +15,12 @@ public class jsontest {
 //        Customer registered2=new RegisteredCustomer(2, ucust.getHistoriTransaksi(),true,"testes","123",0,true);
 //        cl.addCustomer(customer);
 //        cl.addCustomer(ucust);
-//        dataStore.writeCustomer(cl);
-//        dataStore.updateCustomer(registered2);
+//        DataStoreHub.writeCustomer(cl);
+//        DataStoreHub.updateCustomer(registered2);
+        IDataStore xmlDataStore=new XMLDataStore();
+        DataStoreHub.setDataStore(xmlDataStore);
+        CustomerList cl=DataStoreHub.readCustomer();
+        System.out.println(cl.getCustomerList().get(0).getId());
 //        Barang barang=new Barang(1,2,"barang",10,9,"tes","gambar");
 //        BarangList bl=new BarangList();
 //        bl.addBarang(barang);

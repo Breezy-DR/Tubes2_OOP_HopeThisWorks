@@ -1,5 +1,7 @@
 package tubes2;
 
+import javax.xml.crypto.Data;
+
 public class objtest {
     public static void main(String[] args){
 //        IDataStore dataStore=new OBJDataStore();
@@ -29,5 +31,12 @@ public class objtest {
 //        BarangList bl1=dataStore.readBarang();
 //        System.out.println(bl1.getBarangList().get(0).getNamaBarang());
 //        System.out.println(bl1.getBarangList().get(0).getStok());
+        IDataStore objDataStore=new OBJDataStore();
+        DataStoreHub.setDataStore(objDataStore);
+        BarangList barangList=DataStoreHub.readBarang();
+        DataStoreHub.setFilePath("src/main/java/tubes2");
+        IDataStore jsonDataStore=new JSONDataStore();
+        DataStoreHub.setDataStore(jsonDataStore);
+        DataStoreHub.writeBarang(barangList);
     }
 }

@@ -157,7 +157,11 @@ public class AddProductWindow implements ActionListener {
         	hargajual = Integer.parseInt(hargajualtext.getText());
         	kategori = kategoritext.getText();
         	gambar = gambartext;
-        	
+			IDataStore objDataStore=new OBJDataStore();
+			DataStoreHub.setDataStore(objDataStore);
+        	DataStoreHub.addBarang(
+					new Barang(DataStoreHub.readBarang().getBarangList().size(),
+							stok,NamaBarang,hargabeli,hargajual,kategori,gambar));
         }
 	}
 	
