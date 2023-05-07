@@ -15,11 +15,11 @@ import java.io.FileReader;
 
 public class XMLDataStore implements IDataStore {
 
-    @Override
-    public Customer getCustomer(String filePath,int id) {
-        CustomerList customerList=this.readCustomer(filePath);
-        return customerList.getCustomerByID(id);
-    }
+//    @Override
+//    public Customer getCustomer(String filePath,int id) {
+//        CustomerList customerList=this.readCustomer(filePath);
+//        return customerList.getCustomerByID(id);
+//    }
 
     @Override
     public CustomerList readCustomer(String filePath) {
@@ -41,12 +41,12 @@ public class XMLDataStore implements IDataStore {
         return null;
     }
 
-    @Override
-    public void addCustomer(String filePath,Customer customer) {
-        CustomerList cl=this.readCustomer(filePath);
-        cl.addCustomer(customer);
-        this.writeCustomer(filePath,cl);
-    }
+//    @Override
+//    public void addCustomer(String filePath,Customer customer) {
+//        CustomerList cl=this.readCustomer(filePath);
+//        cl.addCustomer(customer);
+//        this.writeCustomer(filePath,cl);
+//    }
 
     @Override
     public void writeCustomer(String filePath,CustomerList customerList) {
@@ -92,37 +92,37 @@ public class XMLDataStore implements IDataStore {
         }
     }
 
-    @Override
-    public Barang getBarang(String filePath,int idBarang) {
-        BarangList barangList=this.readBarang(filePath);
-        return barangList.getBarang(idBarang);
-    }
+//    @Override
+//    public Barang getBarang(String filePath,int idBarang) {
+//        BarangList barangList=this.readBarang(filePath);
+//        return barangList.getBarang(idBarang);
+//    }
 
-    @Override
-    public void updateCustomer(String filePath,Customer customer) {
-        CustomerList customerList=this.readCustomer(filePath);
-        customerList.updateCustomer(customer);
-        this.writeCustomer(filePath,customerList);
-    }
+//    @Override
+//    public void updateCustomer(String filePath,Customer customer) {
+//        CustomerList customerList=this.readCustomer(filePath);
+//        customerList.updateCustomer(customer);
+//        this.writeCustomer(filePath,customerList);
+//    }
 
-    @Override
-    public void addBarang(String filePath,Barang barang) {
-        BarangList barangList=this.readBarang(filePath);
-        barangList.addBarang(barang);
-        this.writeBarang(filePath,barangList);
-    }
+//    @Override
+//    public void addBarang(String filePath,Barang barang) {
+//        BarangList barangList=this.readBarang(filePath);
+//        barangList.addBarang(barang);
+//        this.writeBarang(filePath,barangList);
+//    }
 
-    @Override
-    public void updateBarang(String filePath,Barang barang) {
-        BarangList barangList=this.readBarang(filePath);
-        barangList.updateBarang(barang);
-        this.writeBarang(filePath,barangList);
-    }
-    public void deleteBarang(String filePath,int idBarang){
-        BarangList barangList=this.readBarang(filePath);
-        barangList.deleteBarang(idBarang);
-        this.writeBarang(filePath,barangList);
-    }
+//    @Override
+//    public void updateBarang(String filePath,Barang barang) {
+//        BarangList barangList=this.readBarang(filePath);
+//        barangList.updateBarang(barang);
+//        this.writeBarang(filePath,barangList);
+//    }
+//    public void deleteBarang(String filePath,int idBarang){
+//        BarangList barangList=this.readBarang(filePath);
+//        barangList.deleteBarang(idBarang);
+//        this.writeBarang(filePath,barangList);
+//    }
 
     @Override
     public Fee readFee(String filePath) {
@@ -179,20 +179,5 @@ public class XMLDataStore implements IDataStore {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void updateKurs(String filePath, Kurs kurs) {
-
-    }
-
-    @Override
-    public void addKurs(String filePath, Kurs kurs) {
-
-    }
-
-    @Override
-    public Kurs getKursByName(String filePath, String namaMataUang) {
-        return null;
     }
 }

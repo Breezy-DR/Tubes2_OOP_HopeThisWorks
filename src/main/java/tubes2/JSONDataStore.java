@@ -32,24 +32,24 @@ public class JSONDataStore implements IDataStore{
         }
     }
 
-    @Override
-    public Customer getCustomer(String filePath,int id) {
-        CustomerList customerList=readCustomer(filePath);
-        return customerList.getCustomerByID(id);
-    }
-
-    public void addCustomer(String filePath,Customer customer){
-        CustomerList customerList=readCustomer(filePath);
-        customerList.addCustomer(customer);
-        writeCustomer(filePath,customerList);
-    }
-
-    @Override
-    public void updateCustomer(String filePath,Customer customer) {
-        CustomerList customerList=readCustomer(filePath);
-        customerList.updateCustomer(customer);
-        writeCustomer(filePath,customerList);
-    }
+//    @Override
+//    public Customer getCustomer(String filePath,int id) {
+//        CustomerList customerList=readCustomer(filePath);
+//        return customerList.getCustomerByID(id);
+//    }
+//
+//    public void addCustomer(String filePath,Customer customer){
+//        CustomerList customerList=readCustomer(filePath);
+//        customerList.addCustomer(customer);
+//        writeCustomer(filePath,customerList);
+//    }
+//
+//    @Override
+//    public void updateCustomer(String filePath,Customer customer) {
+//        CustomerList customerList=readCustomer(filePath);
+//        customerList.updateCustomer(customer);
+//        writeCustomer(filePath,customerList);
+//    }
 
     @Override
     public BarangList readBarang(String filePath) {
@@ -76,30 +76,30 @@ public class JSONDataStore implements IDataStore{
         }
     }
 
-    @Override
-    public Barang getBarang(String filePath,int idBarang) {
-        BarangList barangList=readBarang(filePath);
-        return barangList.getBarang(idBarang);
-    }
+//    @Override
+//    public Barang getBarang(String filePath,int idBarang) {
+//        BarangList barangList=readBarang(filePath);
+//        return barangList.getBarang(idBarang);
+//    }
+//
+//    @Override
+//    public void addBarang(String filePath,Barang barang) {
+//        BarangList barangList=readBarang(filePath);
+//        barangList.addBarang(barang);
+//        writeBarang(filePath,barangList);
+//    }
 
-    @Override
-    public void addBarang(String filePath,Barang barang) {
-        BarangList barangList=readBarang(filePath);
-        barangList.addBarang(barang);
-        writeBarang(filePath,barangList);
-    }
+//    @Override
+//    public void updateBarang(String filePath,Barang barang) {
+//        BarangList barangList=readBarang(filePath);
+//        barangList.updateBarang(barang);
+//        writeBarang(filePath,barangList);
+//    }
 
-    @Override
-    public void updateBarang(String filePath,Barang barang) {
-        BarangList barangList=readBarang(filePath);
-        barangList.updateBarang(barang);
-        writeBarang(filePath,barangList);
-    }
-
-    @Override
-    public void deleteBarang(String filePath, int idBarang) {
-
-    }
+//    @Override
+//    public void deleteBarang(String filePath, int idBarang) {
+//
+//    }
 
     @Override
     public Fee readFee(String filePath) {
@@ -148,23 +148,23 @@ public class JSONDataStore implements IDataStore{
         }
     }
 
-    @Override
-    public void updateKurs(String filePath, Kurs kurs) {
-        KursList kursList=this.readKurs(filePath);
-        kursList.updateKurs(kurs);
-        this.writeKurs(filePath,kursList);
-    }
-
-    @Override
-    public void addKurs(String filePath, Kurs kurs) {
-        KursList kursList=this.readKurs(filePath);
-        kursList.addKurs(kurs);
-        writeKurs(filePath,kursList);
-    }
-    @Override
-    public Kurs getKursByName(String filePath,String namaMataUang){
-        KursList kursList=this.readKurs(filePath);
-        return kursList.getKursByName(namaMataUang);
-    }
+//    @Override
+//    public void updateKurs(String filePath, Kurs kurs) {
+//        KursList kursList=this.readKurs(filePath);
+//        kursList.updateKurs(kurs);
+//        this.writeKurs(filePath,kursList);
+//    }
+//
+//    @Override
+//    public void addKurs(String filePath, Kurs kurs) {
+//        KursList kursList=this.readKurs(filePath);
+//        kursList.addKurs(kurs);
+//        writeKurs(filePath,kursList);
+//    }
+//    @Override
+//    public Kurs getKursByName(String filePath,String namaMataUang){
+//        KursList kursList=this.readKurs(filePath);
+//        return kursList.getKursByName(namaMataUang);
+//    }
 
 }
