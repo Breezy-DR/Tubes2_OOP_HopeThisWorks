@@ -4,9 +4,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ElmtOfBill {
+public class ElmtOfBill implements Serializable {
     @XmlElement
     private String barang;
     @XmlElement

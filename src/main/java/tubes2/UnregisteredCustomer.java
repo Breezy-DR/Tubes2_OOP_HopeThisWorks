@@ -1,11 +1,12 @@
 package tubes2;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 @XmlAccessorType(XmlAccessType.FIELD)
-public class UnregisteredCustomer extends Customer {
+public class UnregisteredCustomer extends Customer implements Serializable {
     private static int unregisteredCustomerCount = 0;
     public UnregisteredCustomer() {
         super(++unregisteredCustomerCount);

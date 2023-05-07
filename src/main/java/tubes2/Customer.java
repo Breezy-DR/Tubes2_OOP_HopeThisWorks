@@ -1,11 +1,12 @@
 package tubes2;
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({RegisteredCustomer.class,UnregisteredCustomer.class})
-public abstract class Customer {
+public abstract class Customer implements Serializable {
     @XmlElement
     private final int id;
 //    @XmlElementWrapper(name = "historiTransaksi")

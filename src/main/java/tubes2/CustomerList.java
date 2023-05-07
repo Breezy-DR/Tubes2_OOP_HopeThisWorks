@@ -1,11 +1,12 @@
 package tubes2;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "customerListClass")
-public class CustomerList {
+public class CustomerList implements Serializable {
     private List<Customer> customerList;
 
     public CustomerList(){
