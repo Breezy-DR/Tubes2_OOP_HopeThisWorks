@@ -21,13 +21,17 @@ public class GudangPanel extends JPanel implements ActionListener {
     	
     	// Inisialisasi/retrieve data from datastore
     	BarangList listofBarang = DataStoreHub.readBarang();
-    	if (listofBarang.getBarangList().size() != 0) {
-    	for (int i = 0; i < listofBarang.getBarangList().size(); i++)
-    	      model.addElement("ID:" + listofBarang.getBarang(i).getIDBarang()
-    	    		  + ". Nama barang:" + listofBarang.getBarang(i).getNamaBarang() +
-    	    		  ", Stok: " + listofBarang.getBarang(i).getStok() +
-    	    		  ", Harga jual: " + listofBarang.getBarang(i).getHargaJual());
-    	}
+//    	if (listofBarang.getBarangList().size() != 0) {
+//    	for (int i = 0; i < listofBarang.getBarangList().size(); i++)
+//    	      model.addElement("ID:" + listofBarang.getBarang(i).getIDBarang()
+//    	    		  + ". Nama barang:" + listofBarang.getBarang(i).getNamaBarang() +
+//    	    		  ", Stok: " + listofBarang.getBarang(i).getStok() +
+//    	    		  ", Harga jual: " + listofBarang.getBarang(i).getHargaJual());
+//    	}
+        for (Barang b :
+                listofBarang.getBarangList()) {
+            model.addElement("ID: " + b.getIDBarang()+". \nNama barang: "+b.getNamaBarang());
+        }
 
         // Judul
         JLabel title = new JLabel("Gudang");

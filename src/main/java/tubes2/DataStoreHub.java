@@ -1,5 +1,10 @@
 package tubes2;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class DataStoreHub {
     private static String filePath="src/main/java/tubes2/data";
     private static IDataStore dataStore=new JSONDataStore();
@@ -82,5 +87,25 @@ public class DataStoreHub {
     public static Kurs getKursByName(String namaMataUang){
         KursList kursList=dataStore.readKurs(filePath);
         return kursList.getKursByName(namaMataUang);
+    }
+    public static void saveJarPath(String jarPath){
+        try {
+            FileOutputStream fileOutputStream=new FileOutputStream(System.getProperty("user.dir")+"/path.obj");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(jarPath);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static String getJarPath(){
+        try(ObjectInputStream objectInputStream=new ObjectInputStream(new FileInputStream(System.getProperty("user.dir")+"/path.obj"))){
+            String jarPath=(String) objectInputStream.readObject();
+            return jarPath;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

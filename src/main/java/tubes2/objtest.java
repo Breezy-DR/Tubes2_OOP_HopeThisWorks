@@ -1,6 +1,5 @@
 package tubes2;
 
-import javax.xml.crypto.Data;
 
 public class objtest {
     public static void main(String[] args){
@@ -38,10 +37,12 @@ public class objtest {
 //        IDataStore jsonDataStore=new JSONDataStore();
 //        DataStoreHub.setDataStore(jsonDataStore);
 //        DataStoreHub.writeBarang(barangList);
-        DataStoreHub.setDataStore(new OBJDataStore());
-        Fee fee=new Fee(0.5f,0.5f,0.5f);
-        DataStoreHub.updateFee(fee);
-        Fee fee1=DataStoreHub.readFee();
-        System.out.println(fee1.getDiscount());
+//        DataStoreHub.setDataStore(new OBJDataStore());
+//        Fee fee=new Fee(0.5f,0.5f,0.5f);
+//        DataStoreHub.updateFee(fee);
+//        Fee fee1=DataStoreHub.readFee();
+//        System.out.println(fee1.getDiscount());
+        DataStoreHub.saveJarPath("src/main/java/tubes2");
+        System.out.println(DataStoreHub.getJarPath());
     }
 }
