@@ -1,14 +1,18 @@
 package plugin;
 
+import org.jfree.chart.labels.PieSectionLabelGenerator;
 import tubes2.*;
 import tubes2.Barang;
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.*;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 import org.jfree.chart.ChartFactory;
@@ -24,6 +28,12 @@ public class PluginChart2 extends BasePlugin{
 
     private static JFreeChart createChart( String titles, PieDataset dataset, boolean legend, boolean tooltips, boolean urls ) {
         JFreeChart chart = ChartFactory.createPieChart(titles, dataset, legend, tooltips, urls);
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSimpleLabels(true);
+
+        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
+                "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+        plot.setLabelGenerator(gen);
         return chart;
     }
     public JPanel createPluginPanel(){

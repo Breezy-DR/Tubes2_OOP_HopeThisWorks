@@ -7,7 +7,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UnregisteredCustomer extends Customer implements Serializable {
-    private static int unregisteredCustomerCount = 0;
+    private static int unregisteredCustomerCount = countUnregistered();
+
+    public static int countUnregistered(){
+        int count = 0;
+        DataStoreHub datastore = new DataStoreHub();
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof UnregisteredCustomer){
+                count++;
+            }
+        }
+
+        return  count;
+    }
     public UnregisteredCustomer() {
         super(++unregisteredCustomerCount);
     }

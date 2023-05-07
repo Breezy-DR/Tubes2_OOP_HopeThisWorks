@@ -6,14 +6,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeaktivasiPanel extends JPanel implements ActionListener {
+public class DeaktivasiPanel extends JPanel implements ActionListener, Runnable {
     private final JComboBox<Integer> opsiAkun;
     private final JTextArea statusText;
     private final JButton aktivasiButton;
     private final JButton deaktivasiButton;
     private List<RegisteredCustomer> listAkun = new ArrayList<>();
+    private DataStoreHub datastore = new DataStoreHub();
 
     public DeaktivasiPanel() {
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof RegisteredCustomer){
+                listAkun.add((RegisteredCustomer) customer);
+            }
+        }
+
         // Bagian Atas
         // Judul
         JLabel title = new JLabel("Aktivasi/Deaktivasi Akun");
@@ -41,18 +48,23 @@ public class DeaktivasiPanel extends JPanel implements ActionListener {
         idLabel.setFont(new Font(pilihAkunLabel.getFont().getName(), pilihAkunLabel.getFont().getStyle(), 15));
         // Opsi Akun
         /* ----------------------- DUMMY ----------------------- */
-        UnregisteredCustomer a = new UnregisteredCustomer();
-        UnregisteredCustomer b = new UnregisteredCustomer();
-        UnregisteredCustomer c = new UnregisteredCustomer();
-        a.pesan(new FixedBill(), 10);
-        b.pesan(new FixedBill(), 10);
-        c.pesan(new FixedBill(), 10);
-        RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
-        RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
-        listAkun.add(d);
-        listAkun.add(e);
+//        UnregisteredCustomer a = new UnregisteredCustomer();
+//        UnregisteredCustomer b = new UnregisteredCustomer();
+//        UnregisteredCustomer c = new UnregisteredCustomer();
+//        a.pesan(new FixedBill(), 10);
+//        b.pesan(new FixedBill(), 10);
+//        c.pesan(new FixedBill(), 10);
+//        RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
+//        RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
+//        listAkun.add(d);
+//        listAkun.add(e);
         /* ----------------------------------------------------- */
-        Integer[] opsi = {d.getId(), e.getId()};
+//        Integer[] opsi = {d.getId(), e.getId()};
+        Integer[] opsi = new Integer[listAkun.size()];
+        for(int i = 0; i < listAkun.size(); i++){
+            opsi[i] = listAkun.get(i).getId();
+        }
+
         opsiAkun = new JComboBox<>(opsi);
         opsiAkun.addActionListener(this);
         opsiAkun.setFocusable(false);
@@ -145,38 +157,87 @@ public class DeaktivasiPanel extends JPanel implements ActionListener {
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
+
+        setDeactivation();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int selectedIndex  = opsiAkun.getSelectedIndex();
-        if (e.getSource() == opsiAkun) {
-            // To Do implement pilih akun
-            // pilih akun meng-set status keaktifan sesuai akun
-            if (listAkun.get(selectedIndex).isAktif()) {
-                statusText.setText("Aktif");
+        if(opsiAkun.getItemAt(opsiAkun.getSelectedIndex()) == null){
+            System.out.println("DeactivatePanel Null!");
+        }else{
+            int selectedIndex  = opsiAkun.getSelectedIndex();
+            if (e.getSource() == opsiAkun) {
+                // To Do implement pilih akun
+                // pilih akun meng-set status keaktifan sesuai akun
+                if (listAkun.get(selectedIndex).isAktif()) {
+                    statusText.setText("Aktif");
+                    aktivasiButton.setEnabled(false);
+                    deaktivasiButton.setEnabled(true);
+                }
+                else {
+                    statusText.setText("Tidak Aktif");
+                    aktivasiButton.setEnabled(true);
+                    deaktivasiButton.setEnabled(false);
+                }
+            }
+            else if (e.getSource() == aktivasiButton) {
                 aktivasiButton.setEnabled(false);
                 deaktivasiButton.setEnabled(true);
+                statusText.setText("Aktif");
+                // To DO implement set status akun true ke database
+                listAkun.get(selectedIndex).aktivasiAkun();
+                datastore.updateCustomer(listAkun.get(selectedIndex));
             }
-            else {
-                statusText.setText("Tidak Aktif");
+            else if (e.getSource() == deaktivasiButton) {
                 aktivasiButton.setEnabled(true);
                 deaktivasiButton.setEnabled(false);
+                statusText.setText("Tidak Aktif");
+                // To DO implement set status akun false ke database
+                listAkun.get(selectedIndex).deaktivasiAkun();
+                datastore.updateCustomer(listAkun.get(selectedIndex));
             }
         }
-        else if (e.getSource() == aktivasiButton) {
-            aktivasiButton.setEnabled(false);
-            deaktivasiButton.setEnabled(true);
-            statusText.setText("Aktif");
-            // To DO implement set status akun true ke database
-            listAkun.get(selectedIndex).aktivasiAkun();
+    }
+
+    public void setDeactivation() {
+        Thread registration = new Thread(this);
+        registration.start();
+    }
+
+    public void refreshDeactivationPanel(){
+        datastore = new DataStoreHub();
+        listAkun.clear();
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof RegisteredCustomer){
+                listAkun.add((RegisteredCustomer) customer);
+            }
         }
-        else if (e.getSource() == deaktivasiButton) {
-            aktivasiButton.setEnabled(true);
-            deaktivasiButton.setEnabled(false);
-            statusText.setText("Tidak Aktif");
-            // To DO implement set status akun false ke database
-            listAkun.get(selectedIndex).deaktivasiAkun();
+
+        opsiAkun.removeAllItems();
+        Integer[] opsi = new Integer[listAkun.size()];
+        int count = 0;
+        for(int i = 0; i < listAkun.size(); i++){
+            // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
+            opsiAkun.addItem(listAkun.get(i).getId());
+            //opsi[count] = customers.getCustomerList().get(i).getId();
+            count++;
+
+        }
+    }
+
+
+    @Override
+    public void run() {
+        while (true) {
+            refreshDeactivationPanel();
+
+            //System.out.println("OVERRIDE");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

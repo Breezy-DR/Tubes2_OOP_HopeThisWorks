@@ -9,13 +9,25 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RegisteredCustomer extends Customer implements Serializable {
-    private static int registeredCustomerCount = 0;
+    private static int registeredCustomerCount = countRegistered();
     private boolean vip; // jika vip == true, maka termasuk vip dan jika vip == false maka termasuk member
     private String nama;
     private String nomorTelepon;
     private int poin;
     @XmlElement
     private boolean aktif;
+
+    public static int countRegistered(){
+        int count = 0;
+        DataStoreHub datastore = new DataStoreHub();
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof RegisteredCustomer){
+                count++;
+            }
+        }
+
+        return  count;
+    }
 
     public RegisteredCustomer(String nama, String nomorTelepon, FixedBill transaksiTerakhir) {
         super(++registeredCustomerCount);

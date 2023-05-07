@@ -1,11 +1,6 @@
 {
   "customerList": [
     {
-      "vip": false,
-      "nama": "tes",
-      "nomorTelepon": "no",
-      "poin": 0,
-      "aktif": true,
       "id": 1,
       "historiTransaksi": [
         {
@@ -21,7 +16,12 @@
               "hargaTotal": 1000
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "historiTransaksi": [
         {
           "listBelanja": [
             {

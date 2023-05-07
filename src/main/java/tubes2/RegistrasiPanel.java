@@ -3,18 +3,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
-public class RegistrasiPanel extends JPanel implements ActionListener{
+public class RegistrasiPanel extends JPanel implements ActionListener, Runnable{
     private final JTextArea namaText;
     private final JTextArea nomorTeleponText;
-    private final JComboBox<Integer> opsiAkun;
+    private JComboBox<Integer> opsiAkun;
     private final JButton saveButton;
     private final JComboBox<String> status;
-    private final DataStoreHub dataStore = new DataStoreHub();
+    private DataStoreHub dataStore = new DataStoreHub();
 
-    private final CustomerList customers = dataStore.readCustomer();
+    private CustomerList customers = dataStore.readCustomer();
 
     public RegistrasiPanel(){
+        // DUMMY
+//        UnregisteredCustomer dummy = new UnregisteredCustomer(1, customers.getCustomerList().get(0).getHistoriTransaksi());
+//        dataStore.addCustomer(dummy);
+
         // Judul
         JLabel title = new JLabel("Daftar Akun");
         title.setForeground(Color.WHITE);
@@ -49,14 +54,17 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
                 // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
                 if(customers.getCustomerList().get(i) instanceof UnregisteredCustomer && customers.getCustomerList().get(i).getHistoriTransaksi().size() >= 1){
                     count++;
+
+
                 }
             }
+            //System.out.println("Eligible customer: " + count);
 
             opsi = new Integer[count];
             count = 0;
             for(int i = 0; i < customers.getCustomerList().size(); i++){
                 // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
-                if(customers.getCustomerList().get(i) instanceof UnregisteredCustomer && customers.getCustomerList().get(i).getHistoriTransaksi().size() >= 1){
+                if(customers.getCustomerList().get(i) instanceof UnregisteredCustomer){
                     opsi[count] = customers.getCustomerList().get(i).getId();
                     count++;
                 }
@@ -161,7 +169,7 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
 
         JPanel fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.LIGHT_GRAY);
-        fieldPanel.setPreferredSize(new Dimension(500,500));
+        fieldPanel.setPreferredSize(new Dimension(500,570));
         fieldPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 45));
         fieldPanel.add(panelAkun);
         fieldPanel.add(panel1);
@@ -184,6 +192,9 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
+        setResgistration();
+
+
 
         /* ----------------------- DUMMY ----------------------- */
         //UnregisteredCustomer a = new UnregisteredCustomer();
@@ -193,18 +204,78 @@ public class RegistrasiPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
-        if (e.getSource() == saveButton) {
-            // TO DO implement save field
-            RegisteredCustomer member = new RegisteredCustomer(namaText.getText(), nomorTeleponText.getText(), dataStore.getCustomer(selectedID).getHistoriTransaksi().get(0));
-            if(status.getSelectedIndex()==0){
-                member.setMember();
-            }else{
-                member.setVIP();
+        if(opsiAkun.getItemAt(opsiAkun.getSelectedIndex()) == null){
+            System.out.println("ITS NULL");
+        }else{
+            int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
+            if (e.getSource() == saveButton) {
+                // TO DO implement save field
+                System.out.println("Saved!");
+                RegisteredCustomer member = new RegisteredCustomer(namaText.getText(), nomorTeleponText.getText(), dataStore.getCustomer(selectedID).getHistoriTransaksi().get(0));
+                if(status.getSelectedIndex()==0){
+                    member.setMember();
+                }else{
+                    member.setVIP();
+                }
+//            customers.addCustomer(member);
+//            customers.getCustomerList().remove(customers.getCustomerByID(selectedID));
+                dataStore.updateCustomer(member);
+
+                // Reset
+                namaText.setText("");
+                nomorTeleponText.setText("");
+                dataStore = new DataStoreHub();
+                customers = dataStore.readCustomer();
+
             }
-            customers.addCustomer(member);
-            customers.getCustomerList().remove(customers.getCustomerByID(selectedID));
-            dataStore.writeCustomer(customers);
+        }
+
+    }
+
+    public void setResgistration() {
+        Thread registration = new Thread(this);
+        registration.start();
+    }
+
+    public void refreshRegistrationPanel(){
+        dataStore = new DataStoreHub();
+        customers = dataStore.readCustomer();
+        opsiAkun.removeAllItems();
+        int count = 0;
+        for(int i = 0; i < customers.getCustomerList().size(); i++){
+            // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
+            if(customers.getCustomerList().get(i) instanceof UnregisteredCustomer && customers.getCustomerList().get(i).getHistoriTransaksi().size() >= 1){
+                count++;
+
+
+            }
+        }
+        System.out.println("Eligible customer: " + count);
+
+        Integer[] opsi = new Integer[count];
+        count = 0;
+        for(int i = 0; i < customers.getCustomerList().size(); i++){
+            // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
+            if(customers.getCustomerList().get(i) instanceof UnregisteredCustomer){
+                opsiAkun.addItem(customers.getCustomerList().get(i).getId());
+                //opsi[count] = customers.getCustomerList().get(i).getId();
+                count++;
+            }
+        }
+    }
+
+
+    @Override
+    public void run() {
+        while (true) {
+            refreshRegistrationPanel();
+
+            //System.out.println("OVERRIDE");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

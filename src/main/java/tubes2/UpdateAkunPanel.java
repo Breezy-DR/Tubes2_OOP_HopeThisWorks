@@ -6,15 +6,22 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpdateAkunPanel extends JPanel implements ActionListener {
+public class UpdateAkunPanel extends JPanel implements ActionListener, Runnable {
     private final JTextArea namaText;
     private final JTextArea nomorTeleponText;
     private final JComboBox<Integer> opsiAkun;
     private final JComboBox<String> status;
     private final JButton saveButton;
     private List<RegisteredCustomer> listAkun = new ArrayList<>();
+    private DataStoreHub datastore = new DataStoreHub();
 
     public UpdateAkunPanel() {
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof RegisteredCustomer){
+                listAkun.add((RegisteredCustomer) customer);
+            }
+        }
+
         // Bagian Atas
         // Judul
         JLabel title = new JLabel("Update Akun");
@@ -42,18 +49,23 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         idLabel.setFont(new Font(idLabel.getFont().getName(), idLabel.getFont().getStyle(), 15));
         // Opsi Akun
         /* ----------------------- DUMMY ----------------------- */
-        UnregisteredCustomer a = new UnregisteredCustomer();
-        UnregisteredCustomer b = new UnregisteredCustomer();
-        UnregisteredCustomer c = new UnregisteredCustomer();
-        a.pesan(new FixedBill(), 10);
-        b.pesan(new FixedBill(), 10);
-        c.pesan(new FixedBill(), 10);
-        RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
-        RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
-        listAkun.add(d);
-        listAkun.add(e);
+//        UnregisteredCustomer a = new UnregisteredCustomer();
+//        UnregisteredCustomer b = new UnregisteredCustomer();
+//        UnregisteredCustomer c = new UnregisteredCustomer();
+//        a.pesan(new FixedBill(), 10);
+//        b.pesan(new FixedBill(), 10);
+//        c.pesan(new FixedBill(), 10);
+//        RegisteredCustomer d = a.daftarMember("Kiki", "082848950");
+//        RegisteredCustomer e = b.daftarVIP("Kaka", "084637020");
+//        listAkun.add(d);
+//        listAkun.add(e);
         /* ----------------------------------------------------- */
-        Integer[] opsi = {d.getId(), e.getId()};
+//        Integer[] opsi = {d.getId(), e.getId()};
+        Integer[] opsi = new Integer[listAkun.size()];
+        for(int i = 0; i < listAkun.size(); i++){
+            opsi[i] = listAkun.get(i).getId();
+        }
+
         opsiAkun = new JComboBox<>(opsi);
         opsiAkun.addActionListener(this);
         opsiAkun.setFocusable(false);
@@ -177,32 +189,82 @@ public class UpdateAkunPanel extends JPanel implements ActionListener {
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
+
+        setUpdateAkun();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int selectedIndex  = opsiAkun.getSelectedIndex();
-        if (e.getSource() == opsiAkun) {
-            // To Do implement pilih akun
-            // pilih akun meng-set fied sesuai akun
-            namaText.setText(listAkun.get(selectedIndex).getNama());
-            nomorTeleponText.setText(listAkun.get(selectedIndex).getNomorTelepon());
-            if (listAkun.get(selectedIndex).isVIP()) {
-                status.setSelectedIndex(1);
+        if(opsiAkun.getItemAt(opsiAkun.getSelectedIndex()) == null){
+            System.out.println("updatePanel Null!");
+        }else{
+            int selectedIndex  = opsiAkun.getSelectedIndex();
+            if (e.getSource() == opsiAkun) {
+                // To Do implement pilih akun
+                // pilih akun meng-set fied sesuai akun
+                namaText.setText(listAkun.get(selectedIndex).getNama());
+                nomorTeleponText.setText(listAkun.get(selectedIndex).getNomorTelepon());
+                if (listAkun.get(selectedIndex).isVIP()) {
+                    status.setSelectedIndex(1);
+                }
+                else {
+                    status.setSelectedIndex(0);
+                }
             }
-            else {
-                status.setSelectedIndex(0);
+            else if (e.getSource() == saveButton) {
+                // TO DO implement save field
+                listAkun.get(selectedIndex).setNama(namaText.getText());
+                listAkun.get(selectedIndex).setNomorTelepon(nomorTeleponText.getText());
+                if (status.getSelectedIndex() == 0) {
+                    listAkun.get(selectedIndex).setMember();
+                }
+                else {
+                    listAkun.get(selectedIndex).setVIP();
+                }
+                datastore.updateCustomer(listAkun.get(selectedIndex));
+
+                namaText.setText("");
+                nomorTeleponText.setText("");
+                refreshUpdatePanel();
             }
         }
-        else if (e.getSource() == saveButton) {
-            // TO DO implement save field
-            listAkun.get(selectedIndex).setNama(namaText.getText());
-            listAkun.get(selectedIndex).setNomorTelepon(nomorTeleponText.getText());
-            if (status.getSelectedIndex() == 0) {
-                listAkun.get(selectedIndex).setMember();
+    }
+
+    public void setUpdateAkun() {
+        Thread update = new Thread(this);
+        update.start();
+    }
+
+    public void refreshUpdatePanel(){
+        datastore = new DataStoreHub();
+        listAkun.clear();
+        for(Customer customer: datastore.readCustomer().getCustomerList()){
+            if(customer instanceof RegisteredCustomer){
+                listAkun.add((RegisteredCustomer) customer);
             }
-            else {
-                listAkun.get(selectedIndex).setVIP();
+        }
+
+        opsiAkun.removeAllItems();
+        Integer[] opsi = new Integer[listAkun.size()];
+        int count = 0;
+        for(int i = 0; i < listAkun.size(); i++){
+            // Hanya unregistered customer yang pernah transaksi minimal sekali yang ditampilkan
+            opsiAkun.addItem(listAkun.get(i).getId());
+            //opsi[count] = customers.getCustomerList().get(i).getId();
+            count++;
+
+        }
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            //refreshUpdatePanel();
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

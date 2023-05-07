@@ -4,23 +4,49 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
+import org.jfree.data.statistics.StatisticalCategoryDataset;
 import tubes2.BasePlugin;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.Map;
 
 public class PluginChart1 extends BasePlugin implements ActionListener {
     private JButton lineChartButton;
     private JButton barChartButton;
     private JPanel chartPanel;
     private CardLayout cardLayout;
+
+    private static CategoryDataset createCategoryDataset(Map<String, Integer> dataSource) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(Map.Entry<String, Integer> entry: dataSource.entrySet()){
+            dataset.addValue(entry.getValue(), entry.getKey(), "");
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        return dataset;
+    }
+
+    private static StatisticalCategoryDataset createStatisticalCategoryDataset(Map<String, Integer> dataSource) {
+        DefaultStatisticalCategoryDataset dataset = new DefaultStatisticalCategoryDataset();
+        for(Map.Entry<String, Integer> entry: dataSource.entrySet()){
+            dataset.add((int)entry.getValue(), 0.2, "serie", entry.getKey());
+        }
+        return dataset;
+    }
 
     @Override
     public JPanel createPluginPanel() {
@@ -31,14 +57,14 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         lineChartLabel.setFont(new Font(lineChartLabel.getFont().getName(), lineChartLabel.getFont().getStyle(), 15));
         lineChartLabel.setPreferredSize(new Dimension(500,20));
         // Line Chart
-        JPanel lineChart = createLineChart();
+        JFreeChart lineChart = createLineChart("Chart", null, null, createStatisticalCategoryDataset(soldItems()), PlotOrientation.VERTICAL, false, true, true);
         // Panel 1
         JPanel panel1 = new JPanel();
         panel1.setBounds(100, 50, 500, 65);
         panel1.setBackground(Color.gray);
         panel1.setLayout(new BorderLayout(0,10));
         panel1.add(lineChartLabel, BorderLayout.NORTH);
-        panel1.add(lineChart);
+        panel1.add(new ChartPanel(lineChart));
 
 
         // Bagian Bar Chart
@@ -48,15 +74,14 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         barChartLabel.setFont(new Font(barChartLabel.getFont().getName(), barChartLabel.getFont().getStyle(), 15));
         barChartLabel.setPreferredSize(new Dimension(500,20));
         // Bar Chart
-        JPanel barChart = createBarChart();
+        JFreeChart barChart = createBarChart("Jumlah Barang Terjual", "", "Jumlah", createCategoryDataset(soldItems()), PlotOrientation.VERTICAL, true, true, false);
         // Panel 2
         JPanel panel2 = new JPanel();
         panel2.setBounds(100, 50, 500, 65);
         panel2.setBackground(Color.gray);
         panel2.setLayout(new BorderLayout(0,10));
         panel2.add(barChartLabel, BorderLayout.NORTH);
-        panel2.add(barChart);
-
+        panel2.add(new ChartPanel( barChart ));
 
         // Chart Container
         cardLayout = new CardLayout();
@@ -108,24 +133,16 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
         return this.mainPanel;
     }
 
-    private JPanel createBarChart() {
-        DefaultCategoryDataset dataset;
-        JFreeChart chart;
-        ChartPanel chartPanel;
-
-        dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(20, "Barang 1", "2022");
-        dataset.addValue(21, "Barang 2", "2022");
-        dataset.addValue(19, "Barang 3", "2022");
-
-        chart = ChartFactory.createBarChart("Top 3 Barang 2022", "", "Buah", dataset, PlotOrientation.VERTICAL, true, true, false);
-
-        chartPanel = new ChartPanel(chart);
-        return chartPanel;
+    private static JFreeChart createBarChart(String title, String categoryAxisLabel, String valueAxisLabel, CategoryDataset dataset, PlotOrientation orientation, boolean legend, boolean tooltips, boolean urls) {
+        JFreeChart chart = ChartFactory.createBarChart(title, categoryAxisLabel, valueAxisLabel, dataset, orientation, legend, tooltips, urls);
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        return chart;
     }
 
-    private JPanel createLineChart() {
+    private JFreeChart createLineChart(String title, String categoryAxisLabel, String valueAxisLabel, CategoryDataset dataset, PlotOrientation orientation, boolean legend, boolean tooltips, boolean urls) {
         JFreeChart chart;
         ChartPanel chartPanel;
 
@@ -142,19 +159,12 @@ public class PluginChart1 extends BasePlugin implements ActionListener {
 //        p.setRangeGridlinePaint(Color.blue);
 //        p.setRangeGridlinesVisible(true);
 
-        DefaultStatisticalCategoryDataset dataset = new DefaultStatisticalCategoryDataset();
-        dataset.add(20, 0.2, "serie", "A");
-        dataset.add(21, 0.2, "serie", "B");
-        dataset.add(19, 0.2, "serie", "C");
-
-        chart = ChartFactory.createLineChart("Chart", null, null, dataset, PlotOrientation.VERTICAL, false, true, true);
+        chart = ChartFactory.createLineChart(title, categoryAxisLabel, valueAxisLabel, dataset, orientation, legend, tooltips, urls);
         LineAndShapeRenderer renderer = new LineAndShapeRenderer(true, false);
         chart.getCategoryPlot().setRenderer(renderer);
         renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}", NumberFormat.getNumberInstance()));
         renderer.setBaseItemLabelsVisible(true);
-
-        chartPanel = new ChartPanel(chart);
-        return chartPanel;
+        return chart;
     }
 
     @Override
