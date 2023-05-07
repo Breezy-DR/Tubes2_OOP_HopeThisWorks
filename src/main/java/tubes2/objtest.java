@@ -27,6 +27,7 @@ public class objtest {
         barang.addStok(10);
         dataStore.updateBarang(barang);
         BarangList bl1=dataStore.readBarang();
+        System.out.println(bl1.getBarangList().get(0).getNamaBarang());
 //        System.out.println(bl1.getBarangList().get(0).getStok());
     }
 }

@@ -3,9 +3,10 @@ package tubes2;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Barang {
+public class Barang implements Serializable {
     private int idBarang;
     private int stok;
     private String namaBarang;

@@ -1,11 +1,12 @@
 package tubes2;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement(name = "barangListClass")
-public class BarangList {
+public class BarangList implements Serializable {
     private List<Barang> barangList;
     public BarangList(){
         this.barangList=new ArrayList<>();
