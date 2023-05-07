@@ -53,7 +53,7 @@ public class RemoveProductWindow implements ActionListener {
 	}
 	
 	private void initialize() {
-		frame = new JFrame("Update Produk");
+		frame = new JFrame("Delete Produk");
 		frame.setBounds(100, 100, 471, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
