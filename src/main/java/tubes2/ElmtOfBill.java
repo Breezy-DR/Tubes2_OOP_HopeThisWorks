@@ -12,9 +12,12 @@ public class ElmtOfBill implements Serializable {
     private String barang;
     @XmlElement
     private int jumlahBarang;
+
+    private int hargaTotal;
     ElmtOfBill(String barang, int jumlahBarang) {
         this.barang = barang;
         this.jumlahBarang = jumlahBarang;
+        //TODO: initialize this.hargaTotal
     }
     public void setNama(String nama) {
         this.barang = nama;
@@ -27,5 +30,8 @@ public class ElmtOfBill implements Serializable {
     }
     public int getJumlah() {
         return this.jumlahBarang;
+    }
+    public int getHargaTotal() {
+        return this.hargaTotal;
     }
 }
