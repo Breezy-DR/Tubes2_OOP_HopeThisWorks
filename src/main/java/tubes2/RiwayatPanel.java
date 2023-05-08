@@ -3,8 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RiwayatPanel extends JPanel implements ActionListener {
     private final JComboBox<Integer> opsiAkun;
@@ -141,12 +139,18 @@ public class RiwayatPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int selectedID  = opsiAkun.getItemAt(opsiAkun.getSelectedIndex());
         if (e.getSource() == tampilkanRiwayatButton) {
-            // HistoriTransaksiSplitPane.main(selectedID);
             HistoriTransaksiList.main(selectedID);
         }
         else if(e.getSource() == printButton) {
             try {
                 PDFPrinter.printLaporanPenjualan(listCustomer, "src/main/java/tubes2/data", "Laporan Penjualan.pdf");
+                JFrame messageFrame = new JFrame("Message");
+                messageFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        JOptionPane.showMessageDialog(messageFrame, "Laporan Penjualan.pdf berhasil diprint pada folder src/main/java/tubes2/data.");
+                    }
+                });
             }
             catch (Exception exc) {
                 exc.printStackTrace();
