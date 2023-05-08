@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -43,14 +45,30 @@ public class KasirPanel extends JPanel implements ActionListener {
         add(topPanel, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         
-        JButton customerButton = new JButton("Tambah customer");
-        customerButton.setFont(new Font(customerButton.getFont().getName(), customerButton.getFont().getStyle(), 15));
-        customerButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		AddCustomerWindow add = new AddCustomerWindow();
-        		add.main();
-        	}
-        });
+//        JButton customerButton = new JButton("Tambah customer");
+//        customerButton.setFont(new Font(customerButton.getFont().getName(), customerButton.getFont().getStyle(), 15));
+//        customerButton.addActionListener(new ActionListener() {
+//        	public void actionPerformed(ActionEvent e) {
+//        		AddCustomerWindow add = new AddCustomerWindow();
+//        		add.main();
+//        	}
+//        });
+        JLabel textPilihCustomer=new JLabel("Pilih customer");
+        List<String> custName=new ArrayList<>();
+        custName.add("Guest");
+        CustomerList customerList=DataStoreHub.readCustomer();
+        for (Customer c :
+                customerList.getCustomerList()) {
+            if (c instanceof RegisteredCustomer) {
+                RegisteredCustomer temp=(RegisteredCustomer) c;
+                custName.add(temp.getNama());
+            }
+        }
+        String[] nama=custName.toArray(new String[custName.size()]);
+        JComboBox<String> opsiAkun=new JComboBox<String>(nama);
+        opsiAkun.addActionListener(this);
+        opsiAkun.setFocusable(false);
+        opsiAkun.addActionListener(this);
         
         JLabel textDaftarProduk = new JLabel("Daftar Pembelian");
         textDaftarProduk.setForeground(new Color(255, 255, 255));
@@ -87,6 +105,7 @@ public class KasirPanel extends JPanel implements ActionListener {
         			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_centerPanel.createSequentialGroup()
         					.addComponent(textDaftarProduk, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                .addComponent(opsiAkun,GroupLayout.PREFERRED_SIZE,163,Short.MAX_VALUE)
         					.addGap(338))
         				.addGroup(gl_centerPanel.createSequentialGroup()
         					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE)
@@ -94,7 +113,7 @@ public class KasirPanel extends JPanel implements ActionListener {
         			.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
         				.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
         				.addGroup(gl_centerPanel.createParallelGroup(Alignment.TRAILING)
-        					.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(textPilihCustomer, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
         					.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING, false)
         						.addComponent(btnSaveBill_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(btnTambahBarang, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))))
@@ -104,8 +123,10 @@ public class KasirPanel extends JPanel implements ActionListener {
         	gl_centerPanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_centerPanel.createSequentialGroup()
         			.addGap(54)
-        			.addComponent(customerButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(textPilihCustomer, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(opsiAkun,GroupLayout.PREFERRED_SIZE,40,GroupLayout.PREFERRED_SIZE)
+                        .addGap(30)
         			.addComponent(btnTambahBarang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
         			.addGap(27)
         			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)

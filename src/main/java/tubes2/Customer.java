@@ -36,4 +36,11 @@ public abstract class Customer implements Serializable {
     }
 
     public abstract void pesan(FixedBill historiTransaksi, int hargaTotal);
+    public void applyDiscount(float discountRatio){
+
+        for (FixedBill fixedBill :
+             this.historiTransaksi) {
+            fixedBill.applyDiscount(discountRatio);
+        }
+    }
 }

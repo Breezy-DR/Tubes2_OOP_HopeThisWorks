@@ -89,6 +89,9 @@ public class RegisteredCustomer extends Customer implements Serializable {
     public void setMember() {
         this.vip = false;
     }
+    public void setPoin(int poin){
+        this.poin=poin;
+    }
 
     @Override
     public void pesan(FixedBill historiTransaksi, int hargaTotal) {

@@ -40,4 +40,7 @@ public class ElmtOfBill implements Serializable {
     public int getHargaTotal() {
         return this.hargaTotal;
     }
+    public void applyDiscount(float discountRatio){
+        this.hargaTotal=(int) (this.hargaTotal*discountRatio);
+    }
 }

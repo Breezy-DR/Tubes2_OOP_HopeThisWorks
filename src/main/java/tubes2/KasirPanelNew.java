@@ -292,6 +292,10 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
                     if (customer instanceof RegisteredCustomer){
                         RegisteredCustomer temp=(RegisteredCustomer) customer;
                         if (selectedAccount.equals(temp.getNama())){
+                            if (temp.isVIP()){
+                                temp.applyDiscount(0.1f);
+                            }
+                            temp.setPoin(temp.getPoin()+(int)(newFixedBill.getTotalTransaksi()));
                             target=temp;
                             target.addHistoriTransaksi(newFixedBill);
                             DataStoreHub.updateCustomer(target);

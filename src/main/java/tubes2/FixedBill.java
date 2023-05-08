@@ -37,4 +37,10 @@ public class FixedBill implements Serializable {
         }
         return totalTransaksi;
     }
+    public void applyDiscount(float discountRatio){
+        for (ElmtOfBill e :
+                this.listBelanja) {
+            e.applyDiscount(discountRatio);
+        }
+    }
 }
