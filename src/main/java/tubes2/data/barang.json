@@ -3,64 +3,64 @@
     {
       "idBarang": 1,
       "stok": 4,
-      "namaBarang": "Halo",
+      "namaBarang": "Ayam",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Makanan",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 2,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Lemonade",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Minuman",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 3,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Pizza",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Makanan",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 4,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Kopi",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Minuman",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 5,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Teh",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Minuman",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 6,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Croissant",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Makanan",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     },
     {
       "idBarang": 7,
       "stok": 4,
-      "namaBarang": "kki",
+      "namaBarang": "Ramen",
       "hargaJualBarang": 100000,
       "hargaBeliBarang": 200000,
-      "kategori": "Mkka",
+      "kategori": "Makanan",
       "gambar": "C:\\Users\\USER\\OneDrive\\Documents\\492210.jpg"
     }
   ]
