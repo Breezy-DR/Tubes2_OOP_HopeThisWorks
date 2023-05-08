@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 public class PDFPrinter implements Runnable {
     public static void printFixedBill(FixedBill fixedBill, String filePath,String fileName) throws IOException,DocumentException {
+        waitPrint();
         Document document=new Document();
         PdfWriter.getInstance(document, new FileOutputStream(filePath+"/"+fileName));
         document.open();
