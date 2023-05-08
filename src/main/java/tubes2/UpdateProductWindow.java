@@ -171,10 +171,10 @@ public class UpdateProductWindow implements ActionListener {
         	kategori = kategoritext.getText();
         	gambar = gambartext;
 //        	GudangPanel.updateProduct(index, NamaBarang, stok, hargajual);
-			GudangPanel.refreshList();
         	DataStoreHub.updateBarang(
 					new Barang(index,
 							stok,NamaBarang,hargabeli,hargajual,kategori,gambar));
+			GudangPanel.refreshList();
        }
 
 
