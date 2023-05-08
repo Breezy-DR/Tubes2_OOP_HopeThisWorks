@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 
 public class PluginSistem1 extends SystemPlugin implements ActionListener {
     private JRadioButton optionRupiah;
@@ -61,13 +62,58 @@ public class PluginSistem1 extends SystemPlugin implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == optionRupiah) {
-            System.out.println("Rupiah");
+            try {
+                Class target = Class.forName("tubes2.Kurs");
+                Field kurs = target.getDeclaredField("kursToIDR");
+                kurs.setAccessible(true);
+                Kurs rc = new Kurs();
+                kurs.set(rc, 1);
+                rc.setNamaMataUang("idr");
+                System.out.println(rc.getKurs());
+                System.out.println(rc.getNamaMataUang());
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            } catch (NoSuchFieldException ex) {
+                throw new RuntimeException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         else if (e.getSource() == optionDolar) {
-            System.out.println("Dolar");
+            try {
+                Class target = Class.forName("tubes2.Kurs");
+                Field kurs = target.getDeclaredField("kursToIDR");
+                kurs.setAccessible(true);
+                Kurs rc = new Kurs();
+                kurs.set(rc, 14690);
+                rc.setNamaMataUang("dolar");
+                System.out.println(rc.getKurs());
+                System.out.println(rc.getNamaMataUang());
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            } catch (NoSuchFieldException ex) {
+                throw new RuntimeException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         else if (e.getSource() == optionDirham) {
-            System.out.println("Dirham");
+            try {
+                Class target = Class.forName("tubes2.Kurs");
+                Field kurs = target.getDeclaredField("kursToIDR");
+                kurs.setAccessible(true);
+                Kurs rc = new Kurs();
+                kurs.set(rc, 4000);
+                rc.setNamaMataUang("dolar");
+                System.out.println(rc.getKurs());
+                System.out.println(rc.getNamaMataUang());
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            } catch (NoSuchFieldException ex) {
+                throw new RuntimeException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }

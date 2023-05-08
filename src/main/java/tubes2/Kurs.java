@@ -6,12 +6,16 @@ import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kurs implements Serializable {
-    private String namaMataUang="idr";
-    private float kursToIDR=1f;
+    private static String namaMataUang="idr";
+    private static float kursToIDR=1f;
     public Kurs(){}
     public Kurs(String namaMataUang,float kursToIDR){
         this.namaMataUang=namaMataUang;
         this.kursToIDR=kursToIDR;
+    }
+
+    public float getKurs() {
+        return this.kursToIDR;
     }
 
     public float getKursToIDR() {

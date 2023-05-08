@@ -93,25 +93,25 @@ public class RiwayatPanel extends JPanel implements ActionListener {
         fieldPanel.add(panelAkun);
         fieldPanel.add(panel1);
 
-        // Bagian print
+        // Bagian Print
         // Label
         JLabel printLabel = new JLabel("Print Laporan Penjualan");
         printLabel.setForeground(Color.WHITE);
         printLabel.setFont(new Font(printLabel.getFont().getName(), printLabel.getFont().getStyle(), 15));
         printLabel.setPreferredSize(new Dimension(300,20));
         printLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        // Tombol
+        // Tombol Print
         printButton = new JButton("Print");
         printButton.addActionListener(this);
         printButton.setFocusable(false);
-        // Sub-panel 3
+        // Sub-panel 2
         JPanel subPanel2 = new JPanel();
         subPanel2.setPreferredSize(new Dimension(100,35));
         subPanel2.setBackground(Color.LIGHT_GRAY);
         subPanel2.setLayout(new FlowLayout());
         subPanel2.add(printButton);
         subPanel2.setOpaque(false);
-        // Panel 3
+        // Panel 2
         JPanel panel2 = new JPanel();
         panel2.setPreferredSize(new Dimension(500, 300));
         panel2.setBounds(100,330, 500, 160);
