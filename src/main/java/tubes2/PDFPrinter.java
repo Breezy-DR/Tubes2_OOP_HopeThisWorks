@@ -5,8 +5,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
-public class PDFPrinter {
+public class PDFPrinter implements Runnable {
     public static void printFixedBill(FixedBill fixedBill, String filePath,String fileName) throws IOException,DocumentException {
         Document document=new Document();
         PdfWriter.getInstance(document, new FileOutputStream(filePath+"/"+fileName));
@@ -19,7 +20,9 @@ public class PDFPrinter {
         }
         document.close();
     }
+
     public static void printLaporanPenjualan(CustomerList customerList,String filePath,String fileName)throws IOException,DocumentException{
+        waitPrint();
         Document document=new Document();
         PdfWriter.getInstance(document,new FileOutputStream(filePath+"/"+fileName));
         document.open();
@@ -45,5 +48,20 @@ public class PDFPrinter {
             }
         }
         document.close();
+    }
+
+    public static void waitPrint() {
+        Thread waitThread = new Thread(new PDFPrinter());
+        waitThread.start();
+    }
+
+
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
