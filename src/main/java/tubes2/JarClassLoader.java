@@ -45,19 +45,20 @@ public class JarClassLoader extends ClassLoader {
 
     // Mengembalikan List yang berisi class-class pada file jar
     private static ArrayList<Class> loadJarFile(String filePath) throws Exception {
-        ArrayList<Class> availableClasses = new ArrayList<>();
+        ArrayList<Class> classesInJar = new ArrayList<>();
         ArrayList<String> classNames = getClassNamesFromJar(filePath);
-        File f = new File(filePath);
+        File jarFile = new File(filePath);
 
 
-        URLClassLoader classLoader = new URLClassLoader(new URL[]{f.toURI().toURL()});
+        URLClassLoader classLoader = new URLClassLoader(new URL[]{jarFile.toURI().toURL()});
         for (String className : classNames) {
             try {
+                // Meload class sesuai dengan nama class yang ada di list classNames. Semua plugin yang diload harus merupakan package plugin
                 Class cc = classLoader.loadClass("plugin."+className);
-                availableClasses.add(cc);
+                classesInJar.add(cc);
             } catch (ClassNotFoundException e) {
             }
         }
-        return availableClasses;
+        return classesInJar;
     }
 }
