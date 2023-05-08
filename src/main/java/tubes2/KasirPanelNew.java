@@ -258,6 +258,17 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         } else if (actionEvent.getSource().equals(saveBillButton)){
             System.out.println("saved");
             FixedBill newFixedBill=new FixedBill(bill);
+            BarangList barangList=DataStoreHub.readBarang();
+            for (ElmtOfBill e :
+                    newFixedBill.getlistBelanja()) {
+                for (Barang b :
+                        barangList.getBarangList()) {
+                    if (e.getNama().equals(b.getNamaBarang())){
+                        b.addStok(-e.getJumlah());
+                        DataStoreHub.updateBarang(b);
+                    }
+                }
+            }
             CustomerList customerList=DataStoreHub.readCustomer();
             String selectedAccount=(String) opsiAkun.getSelectedItem();
             List<FixedBill> fixedBillList=new ArrayList<>();
