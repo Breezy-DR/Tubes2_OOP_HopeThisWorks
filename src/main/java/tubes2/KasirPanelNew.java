@@ -128,7 +128,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
 //        panel2.add(nomorTeleponLabel, BorderLayout.NORTH);
         panel2.add(subPanel2, BorderLayout.NORTH);
         panel2.add(totalHargaLabel,BorderLayout.CENTER);
-        panel2.add(harga,BorderLayout.CENTER);
+        panel2.add(harga,BorderLayout.SOUTH);
 
         // Bagian Status (Member/VIP)
         // Label
