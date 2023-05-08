@@ -54,8 +54,7 @@ public class HistoriTransaksiSplitPane extends JPanel implements ListSelectionLi
 
         //Provide a preferred size for the split pane.
         splitPane.setPreferredSize(new Dimension(400, 200));
-        updateTable(priceList[list.getSelectedIndex()]);
-
+        updateTable(list.getSelectedIndex());
     }
 
     class MyTableModel extends AbstractTableModel {
