@@ -18,6 +18,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
     private JButton addBelanjaButton;
     private JButton saveBillButton;
     private JButton deleteBillButton;
+//    private JButton cetakBillButton;
     private JLabel harga=new JLabel();
     public KasirPanelNew(){
         harga.setText("0");
@@ -194,6 +195,11 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         deleteBillButton.addActionListener(this);
         deleteBillButton.setPreferredSize(new Dimension(300, 30));
 
+//        cetakBillButton = new JButton("Cetak Bill");
+//        cetakBillButton.setFocusable(false);
+//        cetakBillButton.addActionListener(this);
+//        cetakBillButton.setPreferredSize(new Dimension(300, 30));
+
         JPanel fieldPanel = new JPanel();
         fieldPanel.setBackground(Color.LIGHT_GRAY);
         fieldPanel.setPreferredSize(new Dimension(500,570));
@@ -208,6 +214,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         fieldPanel.add(addBelanjaButton);
         fieldPanel.add(saveBillButton);
         fieldPanel.add(deleteBillButton);
+//        fieldPanel.add(cetakBillButton);
 
 
 
@@ -299,6 +306,11 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
                             target=temp;
                             target.addHistoriTransaksi(newFixedBill);
                             DataStoreHub.updateCustomer(target);
+                            try {
+                                PDFPrinter.printFixedBill(temp.getHistoriTransaksi().get(temp.getHistoriTransaksi().size()-1), DataStoreHub.getFilePath(),selectedAccount+".pdf");
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            }
                             break;
                         }
                     }
