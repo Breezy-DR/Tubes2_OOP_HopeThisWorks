@@ -146,7 +146,7 @@ public class RiwayatPanel extends JPanel implements ActionListener {
         }
         else if(e.getSource() == printButton) {
             try {
-                PDFPrinter.printLaporanPenjualan(listCustomer, "src/main/java/tubes2/data", "Laporan Penjualan.pdf");
+                PDFPrinter.printLaporanPenjualan(listCustomer, DataStoreHub.getFilePath(), "Laporan Penjualan.pdf");
             }
             catch (Exception exc) {
                 exc.printStackTrace();
