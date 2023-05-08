@@ -20,7 +20,7 @@ public class MainPanel extends JPanel {
 
         // Logo
         JLabel logo = new JLabel();
-        ImageIcon icon = new ImageIcon("src/main/java/tubes2/logo.png");
+        ImageIcon icon = new ImageIcon("logo.png");
         Image newimg = icon.getImage().getScaledInstance(240, 240,  java.awt.Image.SCALE_SMOOTH);
         ImageIcon newImageIcon = new ImageIcon(newimg);
         logo.setIcon(newImageIcon);

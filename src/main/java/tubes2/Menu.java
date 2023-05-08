@@ -28,7 +28,7 @@ public class Menu extends JFrame implements ActionListener {
 
     public Menu() {
         // Icon
-        ImageIcon icon = new ImageIcon("src/main/java/tubes2/logo.png");
+        ImageIcon icon = new ImageIcon("logo.png");
 
 
         // Menu bar
