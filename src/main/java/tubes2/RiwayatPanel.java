@@ -9,6 +9,7 @@ import java.util.List;
 public class RiwayatPanel extends JPanel implements ActionListener {
     private final JComboBox<Integer> opsiAkun;
     private final JButton tampilkanRiwayatButton;
+    private final JButton printButton;
     private final CustomerList listCustomer = DataStoreHub.readCustomer();
 
     public RiwayatPanel() {
@@ -94,12 +95,40 @@ public class RiwayatPanel extends JPanel implements ActionListener {
         fieldPanel.add(panelAkun);
         fieldPanel.add(panel1);
 
+        // Bagian print
+        // Label
+        JLabel printLabel = new JLabel("Print Laporan Penjualan");
+        printLabel.setForeground(Color.WHITE);
+        printLabel.setFont(new Font(printLabel.getFont().getName(), printLabel.getFont().getStyle(), 15));
+        printLabel.setPreferredSize(new Dimension(300,20));
+        printLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        // Tombol
+        printButton = new JButton("Print");
+        printButton.addActionListener(this);
+        printButton.setFocusable(false);
+        // Sub-panel 3
+        JPanel subPanel2 = new JPanel();
+        subPanel2.setPreferredSize(new Dimension(100,35));
+        subPanel2.setBackground(Color.LIGHT_GRAY);
+        subPanel2.setLayout(new FlowLayout());
+        subPanel2.add(printButton);
+        subPanel2.setOpaque(false);
+        // Panel 3
+        JPanel panel2 = new JPanel();
+        panel2.setPreferredSize(new Dimension(500, 300));
+        panel2.setBounds(100,330, 500, 160);
+        panel2.setBackground(Color.GRAY);
+        panel2.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 25));
+        panel2.add(printLabel);
+        panel2.add(subPanel2);
+
         // Center panel
         JPanel centerPanel = new JPanel();
         centerPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 75));
         centerPanel.setBackground(Color.GRAY);
         centerPanel.add(fieldPanel);
+        centerPanel.add(panel2);
 
         // Main Panel
         setPreferredSize(new Dimension(800,800));
@@ -114,6 +143,14 @@ public class RiwayatPanel extends JPanel implements ActionListener {
         if (e.getSource() == tampilkanRiwayatButton) {
             // HistoriTransaksiSplitPane.main(selectedID);
             HistoriTransaksiList.main(selectedID);
+        }
+        else if(e.getSource() == printButton) {
+            try {
+                PDFPrinter.printLaporanPenjualan(listCustomer, "src/main/java/tubes2/data", "Laporan Penjualan.pdf");
+            }
+            catch (Exception exc) {
+                exc.printStackTrace();
+            }
         }
     }
 }
