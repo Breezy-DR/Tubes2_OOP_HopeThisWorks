@@ -20,7 +20,7 @@ public class ClockPanel extends JPanel implements Runnable {
 
 
         // Time
-        timeFormat = new SimpleDateFormat("HH:mm");
+        timeFormat = new SimpleDateFormat("HH:mm:ss");
         timeLabel = new JLabel();
         timeLabel.setPreferredSize(new Dimension(100,100));
         timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
