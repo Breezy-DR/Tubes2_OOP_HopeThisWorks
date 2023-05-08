@@ -6,47 +6,57 @@
         {
           "listBelanja": [
             {
-              "barang": "barang",
+              "barang": "Pizza",
               "jumlahBarang": 1,
-              "hargaTotal": 1000
+              "hargaTotal": 100000
             },
             {
-              "barang": "barang",
-              "jumlahBarang": 1,
-              "hargaTotal": 1000
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "historiTransaksi": [
-        {
-          "listBelanja": [
-            {
-              "barang": "barang",
-              "jumlahBarang": 1,
-              "hargaTotal": 1000
-            },
-            {
-              "barang": "barang",
-              "jumlahBarang": 1,
-              "hargaTotal": 1000
+              "barang": "Lemonade",
+              "jumlahBarang": 2,
+              "hargaTotal": 200000
             }
           ]
         },
         {
           "listBelanja": [
             {
-              "barang": "barang",
-              "jumlahBarang": 1,
-              "hargaTotal": 1000
+              "barang": "Croissant",
+              "jumlahBarang": 3,
+              "hargaTotal": 300000
             },
             {
-              "barang": "barang",
+              "barang": "Teh",
               "jumlahBarang": 1,
-              "hargaTotal": 1000
+              "hargaTotal": 100000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "vip": false,
+      "nama": "Haidar",
+      "nomorTelepon": "08122222222",
+      "poin": 0,
+      "aktif": true,
+      "id": 1,
+      "historiTransaksi": [
+        {
+          "listBelanja": [
+            {
+              "barang": "Ramen",
+              "jumlahBarang": 2,
+              "hargaTotal": 200000
+            },
+            {
+              "barang": "Lemonade",
+              "jumlahBarang": 1,
+              "hargaTotal": 100000
+            },
+            {
+              "barang": "Kopi",
+              "jumlahBarang": 1,
+              "hargaTotal": 100000
             }
           ]
         }
