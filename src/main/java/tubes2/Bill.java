@@ -32,5 +32,13 @@ public class Bill {
     public void clearBill(){
         this.listBelanja.clear();
     }
+    public Integer totalHargaBill(){
 
+        Integer sum=0;
+        for (ElmtOfBill e :
+                this.listBelanja) {
+            sum+=e.getHargaTotal();
+        }
+        return sum;
+    }
 }

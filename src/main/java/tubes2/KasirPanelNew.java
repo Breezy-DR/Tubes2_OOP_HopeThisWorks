@@ -18,7 +18,9 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
     private JButton addBelanjaButton;
     private JButton saveBillButton;
     private JButton deleteBillButton;
+    private JLabel harga=new JLabel();
     public KasirPanelNew(){
+        harga.setText("0");
         // Judul
         JLabel title = new JLabel("Kasir");
         title.setForeground(Color.WHITE);
@@ -102,9 +104,9 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
 
         // Bagian Nomor Telepon
         // Label
-        JLabel nomorTeleponLabel = new JLabel("Nomor Telepon");
-        nomorTeleponLabel.setFont(new Font(nomorTeleponLabel.getFont().getName(), nomorTeleponLabel.getFont().getStyle(), 15));
-        nomorTeleponLabel.setPreferredSize(new Dimension(300,15));
+        JLabel totalHargaLabel = new JLabel("Total Harga=");
+        totalHargaLabel.setFont(new Font(totalHargaLabel.getFont().getName(), totalHargaLabel.getFont().getStyle(), 15));
+        totalHargaLabel.setPreferredSize(new Dimension(300,15));
         // Text
         JTextArea nomorTeleponText = new JTextArea();
         nomorTeleponText.setBorder(BorderFactory.createEmptyBorder(7, 7, 7, 7));
@@ -115,13 +117,18 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         subPanel2.setBackground(Color.gray);
         subPanel2.setLayout(new BorderLayout());
         subPanel2.add(scrollPane, BorderLayout.CENTER);
+//        subPanel2.add(totalHargaLabel);
+//        subPanel2.add(harga);
+
         // Panel 2
         JPanel panel2 = new JPanel();
         panel2.setOpaque(false);
         panel2.setBackground(Color.gray);
         panel2.setLayout(new BorderLayout(0,10));
 //        panel2.add(nomorTeleponLabel, BorderLayout.NORTH);
-        panel2.add(subPanel2, BorderLayout.SOUTH);
+        panel2.add(subPanel2, BorderLayout.NORTH);
+        panel2.add(totalHargaLabel,BorderLayout.CENTER);
+        panel2.add(harga,BorderLayout.CENTER);
 
         // Bagian Status (Member/VIP)
         // Label
@@ -253,8 +260,10 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
                     target=b;
                 }
             }
-            model.addElement("nama Barang: "+namaBarang+"jumlah: "+jumlahBarang+"\n harga: "+jumlahBarang*target.getHargaJual());
+            Integer hargaTotal=jumlahBarang*target.getHargaJual();
+            model.addElement("nama Barang: "+namaBarang+"jumlah: "+jumlahBarang+"\n harga: "+hargaTotal);
             bill.tambahBarang(namaBarang,jumlahBarang,jumlahBarang*target.getHargaJual());
+            harga.setText(this.bill.totalHargaBill().toString());
         } else if (actionEvent.getSource().equals(saveBillButton)){
             System.out.println("saved");
             FixedBill newFixedBill=new FixedBill(bill);
@@ -294,6 +303,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
         } else if (actionEvent.getSource().equals(deleteBillButton)){
             model.removeAllElements();
             bill.clearBill();
+            harga.setText(bill.totalHargaBill().toString());
         }
     }
 
