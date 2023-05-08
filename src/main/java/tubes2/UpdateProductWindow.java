@@ -170,10 +170,11 @@ public class UpdateProductWindow implements ActionListener {
         	hargajual = Integer.parseInt(hargajualtext.getText());
         	kategori = kategoritext.getText();
         	gambar = gambartext;
-        	GudangPanel.updateProduct(index, NamaBarang, stok, hargajual);
+//        	GudangPanel.updateProduct(index, NamaBarang, stok, hargajual);
         	DataStoreHub.updateBarang(
 					new Barang(index,
 							stok,NamaBarang,hargabeli,hargajual,kategori,gambar));
+			GudangPanel.refreshList();
        }
 
 
