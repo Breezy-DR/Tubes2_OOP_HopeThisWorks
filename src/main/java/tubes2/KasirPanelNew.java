@@ -12,6 +12,7 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
     public static DefaultListModel model = new DefaultListModel();
     public static JList list = new JList(model);
     private Bill bill=new Bill();
+    private JFrame frame=new JFrame("warning");
     private JComboBox<String> opsiAkun;
     private JComboBox<String> opsiBarang;
     private JTextArea kuantitas;
@@ -280,6 +281,10 @@ public class KasirPanelNew extends JPanel implements ActionListener,Runnable {
                 for (Barang b :
                         barangList.getBarangList()) {
                     if (e.getNama().equals(b.getNamaBarang())){
+                        if (b.getStok()<e.getJumlah()){
+                            JOptionPane.showMessageDialog(frame, "stok habis");
+                            return;
+                        }
                         b.addStok(-e.getJumlah());
                         DataStoreHub.updateBarang(b);
                     }
